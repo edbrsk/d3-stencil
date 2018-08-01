@@ -6,16 +6,13 @@ These D3 components have been built with [Stencil](https://github.com/ionic-team
 # Usage
 
   ## Install
-
-  **Has not been done yet**
   
   You can use these components in any framework *(Angular, React, Vue, etc.)* or if you want without any those.
 
-  - Run `npm install d3-stencil --save` or import from [CDN](https://d3-stencil.com)
-  - Put a script tag similar to this in the head of your index.JSX
+  - Run `npm i d3-stencil` or put a script tag similar to this in the head of your index.
 
   ``` HTML
-  <script src='node_modules/d3-stencil/dist/d3-stencil.js'></script> 
+  <script src='https://unpkg.com/d3-stencil@0.0.1/dist/d3-stencil.js'></script>
   ```
 
   - Then you can use the element anywhere in your template, JSX, JSX, etc.
