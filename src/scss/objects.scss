@@ -1,0 +1,24 @@
+.o-layout {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+
+  &--chart {
+    width: 100%;
+
+    .is--vertical & {
+        width: 90%;
+    }
+  }
+
+  &--slot {
+    width: 100%;
+
+    .is--vertical & {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

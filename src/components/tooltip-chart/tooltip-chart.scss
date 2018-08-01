@@ -1,0 +1,22 @@
+tooltip-chart {
+  .tooltip {
+    position: absolute;
+    padding: 0.5rem;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, .7);
+    font: 0.75rem sans-serif;
+    color: #FFF;
+    border: 0.125rem solid #FFF;
+    box-shadow: 0.4375rem 0.375rem 0.75rem -0.3125rem rgba(0, 0, 0, .2);
+    border-radius: 0.5rem 0.5rem 0.5rem 0;
+    pointer-events: none;
+  }
+
+  .square {
+    display: inline-block;
+    background-color: rgb(65, 76, 225);
+    width: 0.625rem;
+    height: 0.625rem;
+    margin: 0 0.3125rem;
+  }
+}

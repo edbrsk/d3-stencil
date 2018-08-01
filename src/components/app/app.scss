@@ -1,0 +1,37 @@
+my-app {
+  header {
+    background: #5851ff;
+    color: white;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0.125rem 0.3125rem 0 rgba(0, 0, 0, 0.26);
+
+    h1 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 0 0.75rem;
+    }
+
+    a {
+      color: #ffffff;
+      margin: .4rem;
+      text-decoration: none;
+    }
+  }
+  main {
+    margin: 6.25rem;
+
+    .progress-bar {
+      svg {
+        border: 1px solid lightgrey;
+      }
+    }
+
+    .example {
+      margin: 6.25rem 0;
+      max-height: 50vh;
+      overflow-y: scroll;
+    }
+  }
+}

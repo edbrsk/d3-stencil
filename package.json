@@ -1,0 +1,61 @@
+{
+  "name": "d3-stencil",
+  "private": false,
+  "version": "0.0.1",
+  "description": "Components of Graphs build with StencilJS & D3.js",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "module": "dist/esm/index.js",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "stencil build --prerender",
+    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\"",
+    "serve": "stencil-dev-server",
+    "start": "npm run dev",
+    "test": "jest --no-cache",
+    "test.watch": "jest --watch --no-cache",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json"
+  },
+  "dependencies": {
+    "d3": "^5.5.0",
+    "object-assign-deep": "^0.4.0"
+  },
+  "devDependencies": {
+    "@stencil/core": "latest",
+    "@stencil/dev-server": "latest",
+    "@stencil/router": "^0.2.5",
+    "@stencil/sass": "^0.1.0",
+    "@stencil/utils": "latest",
+    "@types/jest": "^23.3.1",
+    "jest": "^23.4.2",
+    "prettier": "^1.14.0",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.14.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edgarordonez/d3-stencil.git"
+  },
+  "author": "Edgar Ordóñez Rodríguez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edgarordonez/d3-stencil"
+  },
+  "homepage": "https://github.com/edgarordonez/d3-stencil",
+  "jest": {
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ]
+  }
+}

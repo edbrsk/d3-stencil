@@ -1,0 +1,18 @@
+bcg-matrix-chart {
+  .quadrants,
+  .grid {
+    line {
+      stroke: lightgrey;
+      stroke-opacity: 0.7;
+      shape-rendering: crispEdges;
+    }
+
+    path {
+      stroke-width: 0;
+    }
+  }
+
+  .bubble text {
+    cursor: default;
+  }
+}

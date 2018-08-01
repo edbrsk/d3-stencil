@@ -1,0 +1,42 @@
+line-chart {
+  .axis {
+
+    text {
+      font: 0.65rem sans-serif;
+    }
+
+    &-label {
+      text-anchor: middle;
+      font: 1rem sans-serif;
+    }
+  }
+
+  .grid {
+    line {
+      stroke: lightgrey;
+      stroke-opacity: 0.7;
+      shape-rendering: crispEdges;
+    }
+
+    path {
+      stroke-width: 0;
+    }
+  }
+
+  .line-group {
+    transition: opacity .5s linear;
+
+    &__inactive {
+      opacity: 0;
+    }
+
+    .line {
+      fill: none;
+      stroke-width: 3;
+    }
+
+    .dot {
+      stroke: #FFFFFF;
+    }
+  }
+}
