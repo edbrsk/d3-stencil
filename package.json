@@ -1,8 +1,14 @@
 {
   "name": "d3-stencil",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Components of Graphs build with StencilJS & D3.js",
+  "keywords": [
+    "Stencil",
+    "D3.js",
+    "Web Components",
+    "Graphs"
+  ],
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
@@ -30,6 +36,7 @@
     "@stencil/sass": "^0.1.0",
     "@stencil/utils": "latest",
     "@types/jest": "^23.3.1",
+    "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.4.2",
     "prettier": "^1.14.0",
     "tslint": "^5.11.0",
@@ -57,5 +64,10 @@
       "json",
       "jsx"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
