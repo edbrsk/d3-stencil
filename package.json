@@ -17,14 +17,15 @@
     "dist/"
   ],
   "scripts": {
-    "build": "stencil build --prerender",
+    "start": "npm run dev",
     "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\"",
     "serve": "stencil-dev-server",
-    "start": "npm run dev",
+    "lint": "tslint-config-prettier-check ./tslint.json",
     "test": "jest --no-cache",
     "test.watch": "jest --watch --no-cache",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "sonar": "node sonar-project.js"
+    "sonar": "node sonar-properties.js",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "build": "stencil build --prerender"
   },
   "dependencies": {
     "d3": "^5.7.0",
@@ -37,6 +38,7 @@
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
     "@types/jest": "^23.3.9",
+    "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "dependency-cruiser": "^4.6.1",
     "jest": "^23.6.0",
