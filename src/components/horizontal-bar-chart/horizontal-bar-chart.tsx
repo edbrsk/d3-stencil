@@ -4,19 +4,19 @@ import { select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { scaleBand, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { IGraph, IGraphData } from './../../interfaces';
-import { Resize } from './../../decorators';
+import { IGraph, IGraphData } from '@d3-stencil/interfaces';
+import { Resize } from '@d3-stencil/decorators';
 import {
   initTooltipIfExists,
   formatter,
   circularFind,
-  initLegendIfExists
-} from './../../utils';
-import { DEFAULT_GRAPH_DATA_BAR } from './../../shared';
+  initLegendIfExists,
+} from '@d3-stencil/utils';
+import { DEFAULT_GRAPH_DATA_BAR } from '@d3-stencil/shared';
 
 @Component({
   tag: 'horizontal-bar-chart',
-  styleUrl: 'horizontal-bar-chart.scss'
+  styleUrl: 'horizontal-bar-chart.scss',
 })
 export class HorizontalBarChart implements IGraph {
   @Prop() graphData: IGraphData;
@@ -35,7 +35,7 @@ export class HorizontalBarChart implements IGraph {
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
-      this.graphData
+      this.graphData,
     );
   }
 
@@ -47,12 +47,12 @@ export class HorizontalBarChart implements IGraph {
       this.graphDataMerged.barChartOptions.margin.bottom;
     this.tooltipEl = initTooltipIfExists(
       this.horizontalBarChartEl,
-      'tooltip'
+      'tooltip',
     ).component;
     this.legendEl = initLegendIfExists(
       this.horizontalBarChartEl,
       'legend',
-      this.eventsLegend.bind(this)
+      this.eventsLegend.bind(this),
     ).component;
     this.drawChart();
   }
@@ -61,7 +61,7 @@ export class HorizontalBarChart implements IGraph {
   updateGraphData(graphData: IGraphData) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
-      graphData
+      graphData,
     );
     this.drawChart();
   }
@@ -85,8 +85,8 @@ export class HorizontalBarChart implements IGraph {
       this.y = scaleBand()
         .domain(
           originalGraphData.map(
-            (_, index) => this.graphDataMerged.labels[index]
-          )
+            (_, index) => this.graphDataMerged.labels[index],
+          ),
         )
         .range([this.height, 0])
         .padding(0.1);
@@ -112,7 +112,7 @@ export class HorizontalBarChart implements IGraph {
         'transform',
         `translate(${this.graphDataMerged.barChartOptions.margin.left}, ${
           this.graphDataMerged.barChartOptions.margin.top
-        })`
+        })`,
       );
   }
 
@@ -127,9 +127,9 @@ export class HorizontalBarChart implements IGraph {
             formatter(
               this.graphDataMerged.barChartOptions.axis.x.format,
               data,
-              this.graphDataMerged.barChartOptions.axis.x.currency
-            )
-          )
+              this.graphDataMerged.barChartOptions.axis.x.currency,
+            ),
+          ),
         );
     }
 
@@ -149,7 +149,7 @@ export class HorizontalBarChart implements IGraph {
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat('')
+            .tickFormat(''),
         );
     }
 
@@ -160,7 +160,7 @@ export class HorizontalBarChart implements IGraph {
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat('')
+            .tickFormat(''),
         );
     }
   }
@@ -180,10 +180,10 @@ export class HorizontalBarChart implements IGraph {
       .attr('y', (_, index) => this.y(this.graphDataMerged.labels[index]))
       .attr('width', data => this.x(data))
       .attr('fill', (_, index) =>
-        circularFind(this.graphDataMerged.colors, index)
+        circularFind(this.graphDataMerged.colors, index),
       )
       .on('mousemove', (data, index) =>
-        this.eventsTooltip({ data, index, isToShow: true })
+        this.eventsTooltip({ data, index, isToShow: true }),
       )
       .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
   }
@@ -191,7 +191,7 @@ export class HorizontalBarChart implements IGraph {
   eventsTooltip({
     data,
     index,
-    isToShow
+    isToShow,
   }: {
     data?: any;
     index?: number;
@@ -202,9 +202,9 @@ export class HorizontalBarChart implements IGraph {
         `${formatter(
           this.graphDataMerged.barChartOptions.axis.x.format,
           data,
-          this.graphDataMerged.barChartOptions.axis.x.currency
+          this.graphDataMerged.barChartOptions.axis.x.currency,
         )} <br/> ${this.graphDataMerged.labels[index]}`,
-        [event.pageX, event.pageY]
+        [event.pageX, event.pageY],
       );
     };
 

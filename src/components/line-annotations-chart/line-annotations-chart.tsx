@@ -2,13 +2,13 @@ import { Component, Element, Prop, Method, Listen } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { select, event } from 'd3-selection';
 import { scaleOrdinal } from 'd3-scale';
-import { Resize } from './../../decorators';
-import { IGraph, IGraphData } from './../../interfaces';
-import { DEFAULT_GRAPH_DATA_LINE } from './../../shared';
+import { Resize } from '@d3-stencil/decorators';
+import { IGraph, IGraphData } from '@d3-stencil/interfaces';
+import { DEFAULT_GRAPH_DATA_LINE } from '@d3-stencil/shared';
 
 @Component({
   tag: 'line-annotations-chart',
-  styleUrl: 'line-annotations-chart.scss'
+  styleUrl: 'line-annotations-chart.scss',
 })
 export class LineAnnotationsChart implements IGraph {
   @Prop() graphData: IGraphData;
@@ -29,7 +29,7 @@ export class LineAnnotationsChart implements IGraph {
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      this.graphData
+      this.graphData,
     );
   }
 
@@ -37,7 +37,7 @@ export class LineAnnotationsChart implements IGraph {
   updateGraphData(graphData: IGraphData) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      graphData
+      graphData,
     );
     this.lineChartEl.updateGraphData(this.graphDataMerged);
     this.drawChart();
@@ -45,7 +45,7 @@ export class LineAnnotationsChart implements IGraph {
 
   lineChartAreReady() {
     this.lineChartEl = this.lineAnnotationsChartEl.getElementsByTagName(
-      'line-chart'
+      'line-chart',
     )[0];
     this.svg = select(this.lineChartEl.getElementsByTagName('svg')[0]);
     this.height =
@@ -55,7 +55,7 @@ export class LineAnnotationsChart implements IGraph {
     this.svg.style(
       'height',
       this.svg.node().getBoundingClientRect().height +
-        this.graphDataMerged.lineAnnotationsChartOptions.increaseHeight
+        this.graphDataMerged.lineAnnotationsChartOptions.increaseHeight,
     );
     this.drawChart();
   }
@@ -72,7 +72,7 @@ export class LineAnnotationsChart implements IGraph {
       const originalGraphData: any = this.graphDataMerged.data;
       const allDataValues = originalGraphData.reduce(
         (acc: number[], data: any[]) => (acc = [...acc, ...data]),
-        []
+        [],
       );
 
       this.x = scaleOrdinal()
@@ -80,8 +80,8 @@ export class LineAnnotationsChart implements IGraph {
         .range(
           allDataValues.map(
             (_, index) =>
-              index * (this.width / (originalGraphData[0].length - 1))
-          )
+              index * (this.width / (originalGraphData[0].length - 1)),
+          ),
         );
 
       this.repositionXAxis();
@@ -91,14 +91,14 @@ export class LineAnnotationsChart implements IGraph {
 
   hasData(): boolean | Error {
     return this.graphDataMerged.lineAnnotationsChartOptions.hasDataMethod(
-      this.graphDataMerged
+      this.graphDataMerged,
     );
   }
 
   reSetRoot() {
     this.root = select(
       this.lineAnnotationsChartEl.getElementsByTagName('line-chart')[0]
-        .children[0]
+        .children[0],
     );
     this.annotationsGroup ? this.annotationsGroup.remove() : null;
   }
@@ -108,7 +108,7 @@ export class LineAnnotationsChart implements IGraph {
       .selectAll('.x text')
       .attr(
         'dy',
-        this.graphDataMerged.lineAnnotationsChartOptions.tickSeparation
+        this.graphDataMerged.lineAnnotationsChartOptions.tickSeparation,
       );
 
     this.root.selectAll('.x.axis-label').attr('dy', '1em');
@@ -140,14 +140,12 @@ export class LineAnnotationsChart implements IGraph {
       .attr('x', -7)
       .attr('width', data => (data.length > 1 ? 20 : 17))
       .attr('height', data => (data.length > 1 ? 20 : 17))
-      .attr(
-        'xlink:href',
-        data =>
-          data.length > 1
-            ? this.graphDataMerged.lineAnnotationsChartOptions
-                .imagePathSomeAnnotations
-            : this.graphDataMerged.lineAnnotationsChartOptions
-                .imagePathSomeAnnotations
+      .attr('xlink:href', data =>
+        data.length > 1
+          ? this.graphDataMerged.lineAnnotationsChartOptions
+              .imagePathSomeAnnotations
+          : this.graphDataMerged.lineAnnotationsChartOptions
+              .imagePathSomeAnnotations,
       )
       .on('mouseover', () => this.strokedashAnnotations(true))
       .on('mouseleave', () => this.strokedashAnnotations(false));
@@ -158,7 +156,7 @@ export class LineAnnotationsChart implements IGraph {
       .nodeValue;
     const stylesGuideLineAnnotation = {
       style: ['style', 'stroke: #0283B0; stroke-width: 3'],
-      strokeDasharray: ['stroke-dasharray', '5,5']
+      strokeDasharray: ['stroke-dasharray', '5,5'],
     };
 
     if (isMouseOver) {
@@ -172,11 +170,11 @@ export class LineAnnotationsChart implements IGraph {
         .attr('y2', this.height)
         .attr(
           stylesGuideLineAnnotation.style[0],
-          stylesGuideLineAnnotation.style[1]
+          stylesGuideLineAnnotation.style[1],
         )
         .attr(
           stylesGuideLineAnnotation.strokeDasharray[0],
-          stylesGuideLineAnnotation.strokeDasharray[1]
+          stylesGuideLineAnnotation.strokeDasharray[1],
         );
     } else {
       this.root.select('.strokedash').remove();

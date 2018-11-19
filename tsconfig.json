@@ -1,25 +1,27 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": "src",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "paths": {
+      "@d3-stencil/decorators": ["src/decorators/index"],
+      "@d3-stencil/interfaces": ["src/interfaces/index"],
+      "@d3-stencil/interfaces/*": ["src/interfaces/*"],
+      "@d3-stencil/shared": ["src/shared/index"],
+      "@d3-stencil/utils": ["src/utils/index"]
+    }
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["./**/*", "types/jsx.d.ts"],
+  "exclude": ["docs", "node_modules"]
 }

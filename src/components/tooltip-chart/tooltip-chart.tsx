@@ -4,7 +4,7 @@ import { transition } from 'd3-transition';
 
 @Component({
   tag: 'tooltip-chart',
-  styleUrl: 'tooltip-chart.scss'
+  styleUrl: 'tooltip-chart.scss',
 })
 export class TooltipChart {
   @Prop() align: string = 'center';
