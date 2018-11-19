@@ -4,8 +4,6 @@ import { Formats } from '@d3-stencil/shared';
 export const formatter = (
   type: FORMATS,
   data: number | string,
-  currency: string = null
+  currency?: string,
 ): string | number =>
-  type === FORMATS.CURRENCY
-    ? Formats[type](data, currency)
-    : Formats[type](data);
+  type === 'CURRENCY' ? Formats[type](data, currency) : Formats[type](data);

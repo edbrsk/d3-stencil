@@ -1,5 +1,5 @@
 import { Component } from '@stencil/core';
-import { IGraphData, Formats, LegendData } from '@d3-stencil/interfaces';
+import { IGraphData, LegendData } from '@d3-stencil/interfaces';
 
 @Component({
   tag: 'my-app',
@@ -9,8 +9,8 @@ export class App {
   GRAPH_DATA_PIE: IGraphData = {
     labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
     pieChartOptions: {
-      labelFormat: Formats.ANY,
-      dataFormat: Formats.GROUPED_THOUSANDS_TWO_DIGITS,
+      labelFormat: 'ANY',
+      dataFormat: 'GROUPED_THOUSANDS_TWO_DIGITS',
     },
     styles: {
       width: '100%',
@@ -51,7 +51,7 @@ export class App {
     barChartOptions: {
       axis: {
         x: {
-          format: Formats.CURRENCY,
+          format: 'CURRENCY',
         },
       },
       margin: {
@@ -133,11 +133,11 @@ export class App {
     lineChartOptions: {
       axis: {
         x: {
-          format: Formats.DAY_AND_MONTH,
+          format: 'DAY_AND_MONTH',
           label: 'Days',
         },
         y: {
-          format: Formats.GROUPED_TWO_DIGITS,
+          format: 'GROUPED_TWO_DIGITS',
           label: 'Quantity',
         },
       },
@@ -173,10 +173,10 @@ export class App {
     lineChartOptions: {
       axis: {
         x: {
-          format: Formats.DAY_AND_MONTH,
+          format: 'DAY_AND_MONTH',
         },
         y: {
-          format: Formats.GROUPED_TWO_DIGITS,
+          format: 'GROUPED_TWO_DIGITS',
         },
       },
       margin: {
@@ -213,11 +213,11 @@ export class App {
     bcgMatrixChartOption: {
       axis: {
         y: {
-          format: Formats.PERCENTAGE,
+          format: 'PERCENTAGE',
         },
       },
       value: {
-        format: Formats.GROUPED_TWO_DIGITS,
+        format: 'GROUPED_TWO_DIGITS',
       },
       margin: {
         top: 20,

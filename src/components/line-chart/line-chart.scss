@@ -1,6 +1,5 @@
 line-chart {
   .axis {
-
     text {
       font: 0.65rem sans-serif;
     }
@@ -24,7 +23,7 @@ line-chart {
   }
 
   .line-group {
-    transition: opacity .5s linear;
+    transition: opacity 0.5s linear;
 
     &__inactive {
       opacity: 0;
@@ -36,7 +35,7 @@ line-chart {
     }
 
     .dot {
-      stroke: #FFFFFF;
+      stroke: #ffffff;
     }
   }
 }

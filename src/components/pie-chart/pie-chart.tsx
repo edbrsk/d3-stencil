@@ -46,6 +46,7 @@ export class PieChart implements IGraph {
       'legend',
       this.eventsLegend.bind(this),
     ).component;
+
     this.drawChart();
   }
 
@@ -55,6 +56,7 @@ export class PieChart implements IGraph {
       { ...DEFAULT_GRAPH_DATA_PIE },
       graphData,
     );
+
     this.drawChart();
   }
 

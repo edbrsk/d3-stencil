@@ -100,7 +100,10 @@ export class LineAnnotationsChart implements IGraph {
       this.lineAnnotationsChartEl.getElementsByTagName('line-chart')[0]
         .children[0],
     );
-    this.annotationsGroup ? this.annotationsGroup.remove() : null;
+
+    if (this.annotationsGroup) {
+      this.annotationsGroup.remove();
+    }
   }
 
   repositionXAxis() {

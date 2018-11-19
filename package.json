@@ -24,7 +24,7 @@
     "build": "stencil build",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "lint": "yarn tslint",
+    "lint": "yarn tslint --project tsconfig.json --fix",
     "sonar": "node sonar-properties.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
