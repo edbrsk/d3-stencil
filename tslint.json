@@ -9,6 +9,18 @@
       "check-format",
       "allow-leading-underscore"
     ],
+    "no-shadowed-variable": [
+      true,
+      {
+        "class": true,
+        "enum": true,
+        "function": true,
+        "interface": false,
+        "namespace": true,
+        "typeAlias": false,
+        "typeParameter": false
+      }
+    ],
     "no-submodule-imports": [
       true,
       "@stencil/core/testing",

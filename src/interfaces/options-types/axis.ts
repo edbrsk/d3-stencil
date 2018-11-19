@@ -1,17 +1,17 @@
-import { FormatsType } from './../formats';
+import { Formats } from './../formats';
 
 export type Axis = Partial<{
   x: Partial<{
     visible: boolean;
     gridVisible: boolean;
-    format: FormatsType;
+    format: Formats;
     label: string;
     currency: string;
   }>;
   y: Partial<{
     visible: boolean;
     gridVisible: boolean;
-    format: FormatsType;
+    format: Formats;
     label: string;
     currency: string;
   }>;

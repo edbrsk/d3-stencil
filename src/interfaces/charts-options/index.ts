@@ -9,5 +9,5 @@ export {
   BarChartOptions,
   LineChartOptions,
   BcgMatrixChartOptions,
-  ILineAnnotationsChartOptions
+  ILineAnnotationsChartOptions,
 };

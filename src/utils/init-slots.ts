@@ -1,10 +1,10 @@
 export const initTooltipIfExists = (
   chartElement: HTMLElement,
-  key: string
-): { element; component } => {
+  key: string,
+): { element: any; component: any } => {
   const tooltip = {
     element: chartElement.getElementsByClassName(key)[0],
-    component: null
+    component: null,
   };
 
   if (tooltip.element) {
@@ -18,11 +18,11 @@ export const initTooltipIfExists = (
 export const initLegendIfExists = (
   chartElement: HTMLElement,
   key: string,
-  callback: () => any
-): { element; component } => {
+  callback: () => any,
+): { element: any; component: any } => {
   const legend = {
     element: chartElement.getElementsByClassName(key)[0],
-    component: null
+    component: null,
   };
 
   if (legend.element) {
