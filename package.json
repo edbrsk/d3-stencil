@@ -3,12 +3,15 @@
   "private": false,
   "version": "0.0.2",
   "description": "Components of Graphs build with StencilJS & D3.js",
+  "homepage": "https://github.com/edgarordonez/d3-stencil",
   "keywords": [
     "Stencil",
     "D3.js",
     "Web Components",
     "Graphs"
   ],
+  "author": "Edgar Ordóñez Rodríguez",
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
@@ -17,15 +20,13 @@
     "dist/"
   ],
   "scripts": {
-    "start": "npm run dev",
-    "dev": "sd concurrent \"stencil build --dev --watch\" \"stencil-dev-server\"",
-    "serve": "stencil-dev-server",
-    "lint": "tslint-config-prettier-check ./tslint.json",
-    "test": "jest --no-cache",
-    "test.watch": "jest --watch --no-cache",
+    "start": "stencil build --dev --watch --serve",
+    "build": "stencil build",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "lint": "yarn tslint",
     "sonar": "node sonar-properties.js",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "build": "stencil build --prerender"
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "d3": "^5.7.0",
@@ -37,26 +38,23 @@
     "@stencil/router": "^0.3.1",
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
+    "@types/d3": "^5.0.1",
     "@types/jest": "^23.3.9",
     "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
-    "dependency-cruiser": "^4.6.1",
     "jest": "^23.6.0",
-    "prettier": "^1.14.3",
+    "prettier": "^1.15.2",
     "sonarqube-scanner": "^2.1.2",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0"
+    "tslint-config-prettier": "^1.16.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edgarordonez/d3-stencil.git"
   },
-  "author": "Edgar Ordóñez Rodríguez",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/edgarordonez/d3-stencil"
   },
-  "homepage": "https://github.com/edgarordonez/d3-stencil",
   "jest": {
     "transform": {
       "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"

@@ -1,13 +1,13 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { select, event } from 'd3-selection';
-import { LegendData } from './../../interfaces';
-import { circularFind } from './../../utils';
-import { DEFAULT_LEGEND_DATA } from './../../shared';
+import { LegendData } from '@d3-stencil/interfaces';
+import { circularFind } from '@d3-stencil/utils';
+import { DEFAULT_LEGEND_DATA } from '@d3-stencil/shared';
 
 @Component({
   tag: 'legend-chart',
-  styleUrl: 'legend-chart.scss'
+  styleUrl: 'legend-chart.scss',
 })
 export class LegendChart {
   @Prop() legendData: LegendData;
@@ -20,7 +20,7 @@ export class LegendChart {
   componentWillLoad(): void {
     this.legendDataMerged = objectAssignDeep(
       { ...DEFAULT_LEGEND_DATA },
-      this.legendData
+      this.legendData,
     );
   }
 
@@ -50,13 +50,13 @@ export class LegendChart {
       .attr('cy', 5)
       .attr('r', 7)
       .style('fill', (_, index) =>
-        circularFind(this.legendDataMerged.colors, index)
+        circularFind(this.legendDataMerged.colors, index),
       )
       .style('stroke', (_, index) =>
-        circularFind(this.legendDataMerged.colors, index)
+        circularFind(this.legendDataMerged.colors, index),
       )
       .on('click', (data: string, index: number) =>
-        this.handleOnClick(data, index)
+        this.handleOnClick(data, index),
       );
 
     horizontalLegendGroup
@@ -66,7 +66,7 @@ export class LegendChart {
       .text(data => data);
 
     horizontalLegendGroup.attr('transform', (_, index) =>
-      this.makeTransformTranslate(horizontalLegendGroup, index)
+      this.makeTransformTranslate(horizontalLegendGroup, index),
     );
   }
 
@@ -79,7 +79,7 @@ export class LegendChart {
       .attr('class', 'legend')
       .attr(
         'transform',
-        (_, index: number) => `translate(0, ${index * offset})`
+        (_, index: number) => `translate(0, ${index * offset})`,
       );
 
     legend
@@ -88,13 +88,13 @@ export class LegendChart {
       .attr('cy', 10)
       .attr('r', 7)
       .style('fill', (_, index: number) =>
-        circularFind(this.legendDataMerged.colors, index)
+        circularFind(this.legendDataMerged.colors, index),
       )
       .style('stroke', (_, index) =>
-        circularFind(this.legendDataMerged.colors, index)
+        circularFind(this.legendDataMerged.colors, index),
       )
       .on('click', (data: string, index: number) =>
-        this.handleOnClick(data, index)
+        this.handleOnClick(data, index),
       );
 
     legend
@@ -107,7 +107,7 @@ export class LegendChart {
   makeTransformTranslate(
     group: any,
     index: number,
-    offset: number = 20
+    offset: number = 20,
   ): string {
     const TY: number = 5;
     let TX: number = 0;

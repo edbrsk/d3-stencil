@@ -2,19 +2,19 @@ import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { select, event } from 'd3-selection';
 import { arc, pie } from 'd3-shape';
-import { IGraph, IGraphData } from './../../interfaces';
-import { Resize } from './../../decorators';
+import { IGraph, IGraphData } from '@d3-stencil/interfaces';
+import { Resize } from '@d3-stencil/decorators';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
-  circularFind
-} from './../../utils';
-import { DEFAULT_GRAPH_DATA_PIE } from './../../shared';
+  circularFind,
+} from '@d3-stencil/utils';
+import { DEFAULT_GRAPH_DATA_PIE } from '@d3-stencil/shared';
 
 @Component({
   tag: 'pie-chart',
-  styleUrl: 'pie-chart.scss'
+  styleUrl: 'pie-chart.scss',
 })
 export class PieChart implements IGraph {
   @Prop() graphData: IGraphData;
@@ -33,7 +33,7 @@ export class PieChart implements IGraph {
   componentWillLoad(): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_PIE },
-      this.graphData
+      this.graphData,
     );
   }
 
@@ -44,7 +44,7 @@ export class PieChart implements IGraph {
     this.legendEl = initLegendIfExists(
       this.pieChartEl,
       'legend',
-      this.eventsLegend.bind(this)
+      this.eventsLegend.bind(this),
     ).component;
     this.drawChart();
   }
@@ -53,7 +53,7 @@ export class PieChart implements IGraph {
   updateGraphData(graphData: IGraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_PIE },
-      graphData
+      graphData,
     );
     this.drawChart();
   }
@@ -74,7 +74,7 @@ export class PieChart implements IGraph {
         .data(
           pie()
             .sort(null)
-            .value(data => data)(this.graphDataMerged.data[0])
+            .value((data: number) => data)(this.graphDataMerged.data[0]),
         )
         .enter()
         .append('g')
@@ -85,7 +85,7 @@ export class PieChart implements IGraph {
         .attr('d', circularArc)
         .attr('stroke', '#FFF')
         .attr('fill', (_, index) =>
-          circularFind(this.graphDataMerged.colors, index)
+          circularFind(this.graphDataMerged.colors, index),
         )
         .on('mousemove', data => this.eventsTooltip({ data, isToShow: true }))
         .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
@@ -121,8 +121,8 @@ export class PieChart implements IGraph {
         formatter(
           this.graphDataMerged.pieChartOptions.labelFormat,
           this.graphDataMerged.labels[index],
-          this.graphDataMerged.pieChartOptions.currency
-        )
+          this.graphDataMerged.pieChartOptions.currency,
+        ),
       );
   }
 
@@ -132,14 +132,14 @@ export class PieChart implements IGraph {
         `${formatter(
           this.graphDataMerged.pieChartOptions.dataFormat,
           data.data,
-          this.graphDataMerged.pieChartOptions.currency
+          this.graphDataMerged.pieChartOptions.currency,
         )} <br/>
         ${formatter(
           this.graphDataMerged.pieChartOptions.labelFormat,
           this.graphDataMerged.labels[data.index],
-          this.graphDataMerged.pieChartOptions.currency
+          this.graphDataMerged.pieChartOptions.currency,
         )}`,
-        [event.pageX, event.pageY]
+        [event.pageX, event.pageY],
       );
     };
 
@@ -170,7 +170,7 @@ export class PieChart implements IGraph {
     }
   }
 
-  render(): JSX.Element {
+  render() {
     return (
       <div class="o-layout is--vertical">
         <div class="o-layout--chart">

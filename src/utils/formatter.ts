@@ -1,5 +1,5 @@
-import { Formats as FORMATS } from './../interfaces';
-import { Formats } from './../shared';
+import { Formats as FORMATS } from '@d3-stencil/interfaces';
+import { Formats } from '@d3-stencil/shared';
 
 export const formatter = (
   type: FORMATS,
