@@ -38,7 +38,6 @@
     "@stencil/router": "^0.3.1",
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
-    "@types/d3": "^5.0.1",
     "@types/jest": "^23.3.9",
     "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
