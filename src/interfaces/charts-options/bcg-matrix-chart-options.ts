@@ -1,11 +1,11 @@
 import { Axis, Margin } from './../options-types';
-import { FormatsType } from './../formats';
+import { Formats } from './../formats';
 
 export type BcgMatrixChartOptions = Partial<{
   axis: Axis;
   quadrants: boolean;
   value: Partial<{
-    format: FormatsType;
+    format: Formats;
     currency: string;
   }>;
   margin: Margin;

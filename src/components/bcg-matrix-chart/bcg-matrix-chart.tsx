@@ -276,6 +276,7 @@ export class BGCMatrixChart implements IGraph {
   }
 
   eventsLegend(data: { label: string; index: number }) {
+    /* tslint:disable-next-line no-console */
     console.log(data);
   }
 

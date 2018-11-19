@@ -93,7 +93,7 @@ export class LineChart implements IGraph {
 
       const originalGraphData: any = this.graphDataMerged.data;
       const allDataValues = originalGraphData.reduce(
-        (acc: number[], data: any[]) => (acc = [...acc, ...data]),
+        (acc: number[], data: any[]) => [...acc, ...data],
         [],
       );
 
@@ -105,7 +105,7 @@ export class LineChart implements IGraph {
         .domain(allDataValues)
         .range(
           allDataValues.map(
-            (_:any, index: number) =>
+            (_, index: number) =>
               index * (this.width / (originalGraphData[0].length - 1)),
           ),
         );

@@ -6,7 +6,7 @@ import { initTooltipIfExists, initLegendIfExists } from './init-slots';
 import {
   hasDataIsNotempty,
   hasDataValidOnAnnotationsChart,
-  hasDataBCGMatrixIsNotEmpty
+  hasDataBCGMatrixIsNotEmpty,
 } from './has-data';
 
 export {
@@ -16,5 +16,5 @@ export {
   initLegendIfExists,
   hasDataIsNotempty,
   hasDataValidOnAnnotationsChart,
-  hasDataBCGMatrixIsNotEmpty
+  hasDataBCGMatrixIsNotEmpty,
 };

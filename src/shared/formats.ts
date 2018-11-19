@@ -1,20 +1,26 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
-import { Formats as FORMATS } from '@d3-stencil/interfaces';
+import { Formats } from '@d3-stencil/interfaces';
 
-const formats: { [format: string]: (data: any, CURRENCY?: string) => any } = {
-  [FORMATS.PERCENTAGE]: data => format('.0%')(data),
-  [FORMATS.GROUPED_TWO_DIGITS]: data => format('.2s')(data),
-  [FORMATS.GROUPED_THOUSANDS_TWO_DIGITS]: data => format(',.2r')(data),
-  [FORMATS.CURRENCY]: (data, CURRENCY) =>
+const formats: {
+  [format in Formats]: (
+    data: string | number,
+    CURRENCY?: string,
+  ) => string | number
+} = {
+  ['PERCENTAGE']: (data: number) => format('.0%')(data),
+  ['GROUPED_TWO_DIGITS']: (data: number) => format('.2s')(data),
+  ['GROUPED_THOUSANDS_TWO_DIGITS']: (data: number) => format(',.2r')(data),
+  ['CURRENCY']: (data: number, CURRENCY: string) =>
     data.toLocaleString(navigator.language, {
       style: 'currency',
       currency: CURRENCY,
     }),
-  [FORMATS.SHORT_MONTH]: data => timeFormat('%b')(new Date(data * 1000)),
-  [FORMATS.LARGE_MONTH]: data => timeFormat('%B')(new Date(data * 1000)),
-  [FORMATS.DAY_AND_MONTH]: data => timeFormat('%b %d')(new Date(data * 1000)),
-  [FORMATS.ANY]: data => data,
+  ['SHORT_MONTH']: (data: number) => timeFormat('%b')(new Date(data * 1000)),
+  ['LARGE_MONTH']: (data: number) => timeFormat('%B')(new Date(data * 1000)),
+  ['DAY_AND_MONTH']: (data: number) =>
+    timeFormat('%b %d')(new Date(data * 1000)),
+  ['ANY']: (data: string | number) => data,
 };
 
 export { formats as Formats };

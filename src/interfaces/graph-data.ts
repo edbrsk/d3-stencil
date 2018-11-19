@@ -6,7 +6,7 @@ import {
   BarChartOptions,
   LineChartOptions,
   ILineAnnotationsChartOptions,
-  BcgMatrixChartOptions
+  BcgMatrixChartOptions,
 } from './charts-options';
 
 export interface IGraphData {

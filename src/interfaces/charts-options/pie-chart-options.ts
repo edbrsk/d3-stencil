@@ -1,7 +1,7 @@
-import { FormatsType } from './../formats';
+import { Formats } from './../formats';
 
 export type PieChartOptions = Partial<{
-  labelFormat: FormatsType;
-  dataFormat: FormatsType;
+  labelFormat: Formats;
+  dataFormat: Formats;
   currency: string;
 }>;

@@ -1,4 +1,4 @@
-import { IGraphData, Formats, LegendData } from '@d3-stencil/interfaces';
+import { IGraphData, LegendData } from '@d3-stencil/interfaces';
 import {
   hasDataIsNotempty,
   hasDataBCGMatrixIsNotEmpty,
@@ -8,8 +8,8 @@ import {
 export const DEFAULT_GRAPH_DATA_PIE: IGraphData = {
   labels: [],
   pieChartOptions: {
-    labelFormat: Formats.ANY,
-    dataFormat: Formats.ANY,
+    labelFormat: 'ANY',
+    dataFormat: 'ANY',
     currency: 'EUR',
   },
   styles: {
@@ -30,13 +30,13 @@ export const DEFAULT_GRAPH_DATA_BAR: IGraphData = {
       x: {
         visible: true,
         gridVisible: true,
-        format: Formats.ANY,
+        format: 'ANY',
         currency: 'EUR',
       },
       y: {
         visible: true,
         gridVisible: true,
-        format: Formats.ANY,
+        format: 'ANY',
         currency: 'EUR',
       },
     },
@@ -65,14 +65,14 @@ export const DEFAULT_GRAPH_DATA_LINE: IGraphData = {
       x: {
         visible: true,
         gridVisible: true,
-        format: Formats.ANY,
+        format: 'ANY',
         label: '',
         currency: 'EUR',
       },
       y: {
         visible: true,
         gridVisible: true,
-        format: Formats.ANY,
+        format: 'ANY',
         label: '',
         currency: 'EUR',
       },
@@ -111,19 +111,19 @@ export const DEFAULT_GRAPH_DATA_BCG: IGraphData = {
       x: {
         visible: false,
         gridVisible: false,
-        format: Formats.ANY,
+        format: 'ANY',
         currency: 'EUR',
       },
       y: {
         visible: false,
         gridVisible: false,
-        format: Formats.ANY,
+        format: 'ANY',
         currency: 'EUR',
       },
     },
     quadrants: true,
     value: {
-      format: Formats.ANY,
+      format: 'ANY',
       currency: 'EUR',
     },
     margin: {
