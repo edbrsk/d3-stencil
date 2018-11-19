@@ -1,8 +1,8 @@
-import { IGraphMeta } from './../interfaces';
+import { IGraphMeta } from '@d3-stencil/interfaces';
 
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (
-    graphMeta: IGraphMeta
+    graphMeta: IGraphMeta,
   ): { labels: any[]; range: any[] } | null => {
     if (graph.axisData) {
       const labels = getResponsiveLabels(graphMeta);
@@ -10,8 +10,8 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
       return {
         labels,
         range: labels.map(
-          (_, index: number) => index * (graphMeta.width / (labels.length - 1))
-        )
+          (_, index: number) => index * (graphMeta.width / (labels.length - 1)),
+        ),
       };
     }
 
@@ -20,7 +20,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
 
   const getResponsiveLabels = (
     graphMeta: IGraphMeta,
-    margin: number = 70
+    margin: number = 70,
   ): any[] => {
     const separations: number = Math.floor(graphMeta.width / margin);
     const ticks: number =
@@ -29,13 +29,13 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
         : Math.ceil((graphMeta.graphData.labels.length - 1) / separations);
     const originalGraphLabels: any = graphMeta.graphData.labels;
     const labels: any[] = originalGraphLabels.filter(
-      (_, index: number) => index === 0 || index % ticks === 0
+      (_, index: number) => index === 0 || index % ticks === 0,
     );
 
     return labels.length <= 2
       ? [
           labels[0],
-          graphMeta.graphData.labels[graphMeta.graphData.labels.length - 1]
+          graphMeta.graphData.labels[graphMeta.graphData.labels.length - 1],
         ]
       : labels;
   };
@@ -43,7 +43,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   return (
     _target: any,
     _propertyKey: string,
-    descriptor: PropertyDescriptor
+    descriptor: PropertyDescriptor,
   ) => {
     const originalMethod: any = descriptor.value;
     let graphMeta: IGraphMeta;

@@ -1,18 +1,18 @@
-import { IGraphData, HasDataStrategy } from './../interfaces';
+import { IGraphData, HasDataStrategy } from '@d3-stencil/interfaces';
 
 const THROW_ERROR = (): Error => {
   throw new Error(`The data injected isn't valid.`);
 };
 
 export const hasDataIsNotempty: HasDataStrategy = (
-  graphDataMerged: IGraphData
+  graphDataMerged: IGraphData,
 ): boolean | Error =>
   graphDataMerged.data.length > 0 && graphDataMerged.labels.length >= 1
     ? true
     : THROW_ERROR();
 
 export const hasDataValidOnAnnotationsChart: HasDataStrategy = ({
-  lineAnnotationsChartOptions
+  lineAnnotationsChartOptions,
 }: IGraphData): boolean | Error => {
   if (
     !(
@@ -29,5 +29,5 @@ export const hasDataValidOnAnnotationsChart: HasDataStrategy = ({
 };
 
 export const hasDataBCGMatrixIsNotEmpty: HasDataStrategy = (
-  graphDataMerged: IGraphData
+  graphDataMerged: IGraphData,
 ): boolean | Error => (graphDataMerged.data.length > 0 ? true : THROW_ERROR());

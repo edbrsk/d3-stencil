@@ -5,19 +5,19 @@ import { max } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { pack, hierarchy } from 'd3-hierarchy';
-import { IGraph, IGraphData } from './../../interfaces';
-import { IBcgMatrix } from '../../interfaces/data-types';
-import { Resize } from './../../decorators';
+import { IBcgMatrix } from '@d3-stencil/interfaces/data-types';
+import { IGraph, IGraphData } from '@d3-stencil/interfaces';
+import { Resize } from '@d3-stencil/decorators';
 import {
   initTooltipIfExists,
   formatter,
-  initLegendIfExists
-} from './../../utils';
-import { DEFAULT_GRAPH_DATA_BCG } from './../../shared';
+  initLegendIfExists,
+} from '@d3-stencil/utils';
+import { DEFAULT_GRAPH_DATA_BCG } from '@d3-stencil/shared';
 
 @Component({
   tag: 'bcg-matrix-chart',
-  styleUrl: 'bcg-matrix-chart.scss'
+  styleUrl: 'bcg-matrix-chart.scss',
 })
 export class BGCMatrixChart implements IGraph {
   @Prop() graphData: IGraphData;
@@ -36,13 +36,13 @@ export class BGCMatrixChart implements IGraph {
     padding: 20,
     height: 15,
     fontSize: 13,
-    opacity: 0.8
+    opacity: 0.8,
   };
 
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BCG },
-      this.graphData
+      this.graphData,
     );
   }
 
@@ -54,12 +54,12 @@ export class BGCMatrixChart implements IGraph {
       this.graphDataMerged.bcgMatrixChartOption.margin.bottom;
     this.tooltipEl = initTooltipIfExists(
       this.bgcMatrixChartEl,
-      'tooltip'
+      'tooltip',
     ).component;
     this.legendEl = initLegendIfExists(
       this.bgcMatrixChartEl,
       'legend',
-      this.eventsLegend.bind(this)
+      this.eventsLegend.bind(this),
     ).component;
     this.dataSet.children = this.graphDataMerged.data;
     this.drawChart();
@@ -69,7 +69,7 @@ export class BGCMatrixChart implements IGraph {
   updateGraphData(graphData: IGraphData) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BCG },
-      graphData
+      graphData,
     );
     this.drawChart();
   }
@@ -87,15 +87,15 @@ export class BGCMatrixChart implements IGraph {
         .domain([
           0,
           Math.round(
-            max(this.graphDataMerged.data, (data: IBcgMatrix) => data.x_data)
-          )
+            max(this.graphDataMerged.data, (data: IBcgMatrix) => data.x_data),
+          ),
         ])
         .range([0, this.width]);
 
       this.y = scaleLinear()
         .domain([
           0,
-          max(this.graphDataMerged.data, (data: IBcgMatrix) => data.y_data)
+          max(this.graphDataMerged.data, (data: IBcgMatrix) => data.y_data),
         ])
         .range([this.height, 0]);
 
@@ -120,7 +120,7 @@ export class BGCMatrixChart implements IGraph {
         'transform',
         `translate(${this.graphDataMerged.bcgMatrixChartOption.margin.left}, ${
           this.graphDataMerged.bcgMatrixChartOption.margin.top
-        })`
+        })`,
       );
   }
 
@@ -142,9 +142,9 @@ export class BGCMatrixChart implements IGraph {
             formatter(
               this.graphDataMerged.bcgMatrixChartOption.axis.y.format,
               data,
-              this.graphDataMerged.bcgMatrixChartOption.axis.y.currency
-            )
-          )
+              this.graphDataMerged.bcgMatrixChartOption.axis.y.currency,
+            ),
+          ),
         );
     }
   }
@@ -157,7 +157,7 @@ export class BGCMatrixChart implements IGraph {
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat('')
+            .tickFormat(''),
         );
     }
 
@@ -168,7 +168,7 @@ export class BGCMatrixChart implements IGraph {
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat('')
+            .tickFormat(''),
         );
     }
   }
@@ -206,12 +206,12 @@ export class BGCMatrixChart implements IGraph {
         this.height -
           (this.graphDataMerged.bcgMatrixChartOption.margin.top +
             this.graphDataMerged.bcgMatrixChartOption.margin.bottom) *
-            2
+            2,
       ])
       .padding(1.5);
 
     const nodes = hierarchy(this.dataSet).sum(
-      (data: IBcgMatrix) => data.rel_size
+      (data: IBcgMatrix) => data.rel_size,
     );
 
     const node = this.root
@@ -224,7 +224,7 @@ export class BGCMatrixChart implements IGraph {
       .append('g')
       .attr('class', 'bubble')
       .on('mousemove', ({ data }) =>
-        this.eventsTooltip({ data, isToShow: true })
+        this.eventsTooltip({ data, isToShow: true }),
       )
       .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
 
@@ -245,7 +245,7 @@ export class BGCMatrixChart implements IGraph {
       .attr(
         'x',
         data =>
-          this.x(data.data.x_data) - data.r - this.bubbleOptions.padding / 2
+          this.x(data.data.x_data) - data.r - this.bubbleOptions.padding / 2,
       )
       .attr('y', data => this.y(data.data.y_data) - this.bubbleOptions.fontSize)
       .attr('stroke', ({ data }: { data: IBcgMatrix }) => data.color)

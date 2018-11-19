@@ -9,7 +9,14 @@
       "check-format",
       "allow-leading-underscore"
     ],
-    "no-submodule-imports": [true, "@stencil/core/testing"],
+    "no-submodule-imports": [
+      true,
+      "@stencil/core/testing",
+      "@d3-stencil/decorators",
+      "@d3-stencil/interfaces",
+      "@d3-stencil/shared",
+      "@d3-stencil/utils"
+    ],
     "no-implicit-dependencies": false
   },
   "extends": ["tslint:latest", "tslint-config-prettier"]
