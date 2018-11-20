@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: ~/d3-stencil
   docker:
-    - image: circleci/node:10.13.0
+    - image: circleci/node:latest-browsers
 
 whitelist: &whitelist
   paths:
