@@ -39,10 +39,12 @@
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
     "@types/jest": "^23.3.9",
+    "@types/puppeteer": "1.10.0",
     "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^23.6.0",
     "prettier": "^1.15.2",
+    "puppeteer": "1.8.0",
     "sonarqube-scanner": "^2.1.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.16.0"
