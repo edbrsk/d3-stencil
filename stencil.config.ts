@@ -10,6 +10,9 @@ export const config: Config = {
     }),
   ],
   testing: {
+    testEnvironmentOptions: {
+      userAgent: 'Agent/007',
+    },
     moduleNameMapper: {
       '@d3-stencil/decorators': '<rootDir>/src/decorators/index.ts',
       '@d3-stencil/interfaces': '<rootDir>/src/interfaces/index.ts',
