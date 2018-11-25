@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "d3": "^5.7.0",
+    "intl": "^1.2.5",
     "object-assign-deep": "^0.4.0"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
     "@stencil/router": "^0.3.1",
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
+    "@types/intl": "^1.2.0",
     "@types/jest": "^23.3.9",
     "@types/puppeteer": "1.10.0",
     "coveralls": "^3.0.2",
