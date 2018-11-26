@@ -22,7 +22,7 @@
   "scripts": {
     "start": "stencil build --dev --watch --serve",
     "build": "stencil build",
-    "test": "stencil test --spec --e2e",
+    "test": "stencil test --spec --e2e --coverage",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "lint": "yarn tslint --project tsconfig.json --fix",
     "sonar": "node sonar-properties.js",
