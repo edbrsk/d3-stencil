@@ -41,19 +41,19 @@ describe('formatter', () => {
     it('should return a string in EUR format', () => {
       const result = formatter('CURRENCY', inputs.currency, 'EUR');
 
-      expect(result).toEqual('€ 10.00');
+      expect(result).toEqual('€10.00');
     });
 
     it('should return a string in USD format', () => {
       const result = formatter('CURRENCY', inputs.currency, 'USD');
 
-      expect(result).toEqual('US$ 10.00');
+      expect(result).toEqual('$10.00');
     });
 
     it('should return a string in GBP format', () => {
       const result = formatter('CURRENCY', inputs.currency, 'GBP');
 
-      expect(result).toEqual('£ 10.00');
+      expect(result).toEqual('£10.00');
     });
   });
 
