@@ -5,9 +5,9 @@ import { currencyFormatter } from '@d3-stencil/utils';
 
 const formats: {
   [format in Formats]: (
-    data: string | number,
+    data: number | string | Date | { valueOf(): number },
     currency?: string,
-  ) => string | number
+  ) => string
 } = {
   ['PERCENTAGE']: (data: number) => format('.0%')(data),
   ['GROUPED_TWO_DIGITS']: (data: number) => format('.2s')(data),
@@ -18,7 +18,7 @@ const formats: {
   ['LARGE_MONTH']: (data: number) => timeFormat('%B')(new Date(data * 1000)),
   ['DAY_AND_MONTH']: (data: number) =>
     timeFormat('%b %d')(new Date(data * 1000)),
-  ['ANY']: (data: string | number) => data,
+  ['ANY']: (data: string | number) => `${data}`,
 };
 
 export { formats as Formats };
