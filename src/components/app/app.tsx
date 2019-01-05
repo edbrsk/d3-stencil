@@ -209,6 +209,7 @@ export class App {
     type: 'horizontal',
   };
 
+  /*
   GRAPH_DATA_BCG: IGraphData = {
     bcgMatrixChartOption: {
       axis: {
@@ -290,6 +291,7 @@ export class App {
       },
     ],
   };
+  */
 
   render() {
     return (
@@ -358,18 +360,6 @@ export class App {
             <pre class="language-tsx">
               <code class="language-tsx">
                 {JSON.stringify(this.GRAPH_DATA_LINE_ANNOTATION, null, 2)}
-              </code>
-            </pre>
-          </div>
-
-          <h1>BCG Matrix Chart:</h1>
-          <bcg-matrix-chart graphData={this.GRAPH_DATA_BCG}>
-            <tooltip-chart slot="tooltip" align={'left'} />
-          </bcg-matrix-chart>
-          <div class="example">
-            <pre class="language-tsx">
-              <code class="language-tsx">
-                {JSON.stringify(this.GRAPH_DATA_BCG, null, 2)}
               </code>
             </pre>
           </div>
