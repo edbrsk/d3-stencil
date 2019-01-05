@@ -3,5 +3,5 @@ export const circularFind = (
   index: number,
 ): string | number => {
   const remainder: number = index % array.length;
-  return array[remainder === 0 ? 0 : remainder];
+  return array[remainder];
 };
