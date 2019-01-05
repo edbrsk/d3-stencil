@@ -3,7 +3,7 @@ import { IGraphMeta } from '@d3-stencil/interfaces';
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (
     graphMeta: IGraphMeta,
-  ): { labels: any[]; range: any[] } | null => {
+  ): { labels: string[] | number[]; range: number[] } => {
     if (graph.axisData) {
       const labels = getResponsiveLabels(graphMeta);
 
@@ -14,22 +14,23 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
         ),
       };
     }
-
-    return null;
   };
 
   const getResponsiveLabels = (
     graphMeta: IGraphMeta,
     margin: number = 70,
   ): any[] => {
-    const separations: number = Math.floor(graphMeta.width / margin);
-    const ticks: number =
+    const separations = Math.floor(graphMeta.width / margin);
+
+    const ticks =
       separations > graphMeta.graphData.labels.length
         ? 1
         : Math.ceil((graphMeta.graphData.labels.length - 1) / separations);
-    const originalGraphLabels: any = graphMeta.graphData.labels;
-    const labels: any[] = originalGraphLabels.filter(
-      (_, index: number) => index === 0 || index % ticks === 0,
+
+    const originalGraphLabels: any[] = graphMeta.graphData.labels;
+
+    const labels = originalGraphLabels.filter(
+      (_: string | number, index: number) => index === 0 || index % ticks === 0,
     );
 
     return labels.length <= 2
@@ -45,9 +46,9 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
     _propertyKey: string,
     descriptor: PropertyDescriptor,
   ) => {
-    const originalMethod: any = descriptor.value;
+    const originalMethod = descriptor.value;
     let graphMeta: IGraphMeta;
-    let args: any;
+    let args: { labels: string[] | number[]; range: number[] };
 
     descriptor.value = function() {
       graphMeta = originalMethod.apply(this);
