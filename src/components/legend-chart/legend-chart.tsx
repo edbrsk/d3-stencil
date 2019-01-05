@@ -1,6 +1,6 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
-import { select, event } from 'd3-selection';
+import { Selection, select, event } from 'd3-selection';
 import { LegendData } from '@d3-stencil/interfaces';
 import { circularFind } from '@d3-stencil/utils';
 import { DEFAULT_LEGEND_DATA } from '@d3-stencil/shared';
@@ -12,12 +12,12 @@ import { DEFAULT_LEGEND_DATA } from '@d3-stencil/shared';
 export class LegendChart {
   @Prop() legendData: LegendData;
   @Element() legendEl: HTMLElement;
-  svg: any;
+  svg: Selection<Element, any, HTMLElement, any>;
   legendDataMerged: LegendData;
   labelLegendPosition: number = 0;
   _callOnClick: (data: { label: string; index: number }) => any;
 
-  componentWillLoad(): void {
+  componentWillLoad() {
     this.legendDataMerged = objectAssignDeep(
       { ...DEFAULT_LEGEND_DATA },
       this.legendData,
@@ -26,17 +26,20 @@ export class LegendChart {
 
   componentDidLoad() {
     this.svg = select(this.legendEl.getElementsByTagName('svg')[0]);
+
     this.legendDataMerged.type === 'horizontal'
       ? this.drawHorizontalLegend()
       : this.drawVerticalLegend();
   }
 
   @Method()
-  callOnClick(callOnClickChild) {
+  callOnClick(
+    callOnClickChild: (data: { label: string; index: number }) => any,
+  ): void {
     this._callOnClick = callOnClickChild;
   }
 
-  drawHorizontalLegend() {
+  drawHorizontalLegend(): void {
     const horizontalLegendGroup = this.svg
       .selectAll('.legend')
       .data(this.legendDataMerged.labels)
@@ -70,7 +73,7 @@ export class LegendChart {
     );
   }
 
-  drawVerticalLegend(offset: number = 20) {
+  drawVerticalLegend(offset: number = 20): void {
     const legend = this.svg
       .selectAll('.legend')
       .data(this.legendDataMerged.labels)
@@ -105,7 +108,7 @@ export class LegendChart {
   }
 
   makeTransformTranslate(
-    group: any,
+    group: Selection<SVGGElement, string, Element, any>,
     index: number,
     offset: number = 20,
   ): string {
@@ -116,22 +119,25 @@ export class LegendChart {
       this.labelLegendPosition = group.nodes()[index].getBBox().width + offset;
     } else {
       TX = this.labelLegendPosition;
+
       this.labelLegendPosition += group.nodes()[index].getBBox().width + offset;
     }
 
     return `translate(${TX}, ${TY})`;
   }
 
-  handleOnClick(label: string, index: number) {
+  handleOnClick(label: string, index: number): () => any {
     const circleElement = select(event.target);
     const textElement = select(event.target.nextSibling);
+
     circleElement.classed('is__inactive', !textElement.classed('is__inactive'));
+
     textElement.classed('is__inactive', !textElement.classed('is__inactive'));
 
     return this._callOnClick({ label, index });
   }
 
-  render(): JSX.Element {
+  render() {
     return <svg class="legend" style={this.legendDataMerged.styles} />;
   }
 }
