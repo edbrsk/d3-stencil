@@ -1,8 +1,8 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
-import { select, event } from 'd3-selection';
+import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
-import { scaleBand, scaleLinear } from 'd3-scale';
+import { ScaleBand, scaleBand, ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { IGraph, IGraphData } from '@d3-stencil/interfaces';
 import { Resize } from '@d3-stencil/decorators';
@@ -22,15 +22,14 @@ export class HorizontalBarChart implements IGraph {
   @Prop() graphData: IGraphData;
   @Element() horizontalBarChartEl: HTMLElement;
   graphDataMerged: IGraphData;
-  svg: any;
-  root: any;
-  data: any;
+  svg: Selection<SVGElement, any, HTMLElement, any>;
+  root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
   height: number;
-  x: any;
-  y: any;
-  tooltipEl: any;
-  legendEl: any;
+  x: ScaleLinear<number, number>;
+  y: ScaleBand<string>;
+  tooltipEl: HTMLTooltipChartElement;
+  legendEl: HTMLLegendChartElement;
 
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
@@ -41,42 +40,45 @@ export class HorizontalBarChart implements IGraph {
 
   componentDidLoad() {
     this.svg = select(this.horizontalBarChartEl.getElementsByTagName('svg')[0]);
+
     this.height =
       this.svg.node().getBoundingClientRect().height -
       this.graphDataMerged.barChartOptions.margin.top -
       this.graphDataMerged.barChartOptions.margin.bottom;
-    this.tooltipEl = initTooltipIfExists(
-      this.horizontalBarChartEl,
-      'tooltip',
-    ).component;
+
+    this.tooltipEl = initTooltipIfExists(this.horizontalBarChartEl);
+
     this.legendEl = initLegendIfExists(
       this.horizontalBarChartEl,
-      'legend',
       this.eventsLegend.bind(this),
-    ).component;
+    );
+
     this.drawChart();
   }
 
   @Method()
-  updateGraphData(graphData: IGraphData) {
+  updateGraphData(graphData: IGraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
       graphData,
     );
+
     this.drawChart();
   }
 
   @Resize()
-  drawChart() {
+  drawChart(): void {
     if (this.hasData()) {
       this.reSetRoot();
+
       this.width =
         this.svg.node().getBoundingClientRect().width -
         this.graphDataMerged.barChartOptions.margin.left -
         this.graphDataMerged.barChartOptions.margin.right;
 
-      const originalGraphData: any = this.graphDataMerged.data[0];
-      const maxValue = max(originalGraphData, data => data);
+      const originalGraphData: number[] = this.graphDataMerged.data[0];
+
+      const maxValue = max<number, number>(originalGraphData, data => data);
 
       this.x = scaleLinear()
         .domain([0, Math.ceil(maxValue / 100) * 100])
@@ -85,7 +87,7 @@ export class HorizontalBarChart implements IGraph {
       this.y = scaleBand()
         .domain(
           originalGraphData.map(
-            (_, index) => this.graphDataMerged.labels[index],
+            (_, index): string => `${this.graphDataMerged.labels[index]}`,
           ),
         )
         .range([this.height, 0])
@@ -101,7 +103,7 @@ export class HorizontalBarChart implements IGraph {
     return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
   }
 
-  reSetRoot() {
+  reSetRoot(): void {
     if (this.root) {
       this.root.remove();
     }
@@ -116,17 +118,17 @@ export class HorizontalBarChart implements IGraph {
       );
   }
 
-  drawAxis() {
+  drawAxis(): void {
     if (this.graphDataMerged.barChartOptions.axis.x.visible) {
       this.root
         .append('g')
         .attr('class', 'x axis')
         .attr('transform', `translate(0, ${this.height})`)
         .call(
-          axisBottom(this.x).tickFormat(data =>
+          axisBottom(this.x).tickFormat(domainValue =>
             formatter(
               this.graphDataMerged.barChartOptions.axis.x.format,
-              data,
+              domainValue,
               this.graphDataMerged.barChartOptions.axis.x.currency,
             ),
           ),
@@ -141,7 +143,7 @@ export class HorizontalBarChart implements IGraph {
     }
   }
 
-  drawGrid() {
+  drawGrid(): void {
     if (this.graphDataMerged.barChartOptions.axis.x.gridVisible) {
       this.root
         .append('g')
@@ -149,7 +151,7 @@ export class HorizontalBarChart implements IGraph {
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat(''),
+            .tickFormat(() => ''),
         );
     }
 
@@ -160,12 +162,12 @@ export class HorizontalBarChart implements IGraph {
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat(''),
+            .tickFormat(() => ''),
         );
     }
   }
 
-  drawBars() {
+  drawBars(): void {
     this.root
       .append('g')
       .attr('class', 'bar-group')
@@ -177,7 +179,7 @@ export class HorizontalBarChart implements IGraph {
       .attr('class', 'bar')
       .attr('x', 0)
       .attr('height', this.y.bandwidth())
-      .attr('y', (_, index) => this.y(this.graphDataMerged.labels[index]))
+      .attr('y', (_, index) => this.y(`${this.graphDataMerged.labels[index]}`))
       .attr('width', data => this.x(data))
       .attr('fill', (_, index) =>
         circularFind(this.graphDataMerged.colors, index),
@@ -193,10 +195,10 @@ export class HorizontalBarChart implements IGraph {
     index,
     isToShow,
   }: {
-    data?: any;
+    data?: number;
     index?: number;
     isToShow: boolean;
-  }) {
+  }): void {
     const toShow = () => {
       this.tooltipEl.show(
         `${formatter(

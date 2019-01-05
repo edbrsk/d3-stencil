@@ -1,5 +1,5 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
-import { select } from 'd3-selection';
+import { Selection, select } from 'd3-selection';
 import { transition } from 'd3-transition';
 
 @Component({
@@ -9,10 +9,10 @@ import { transition } from 'd3-transition';
 export class TooltipChart {
   @Prop() align: string = 'center';
   @Element() tooltipEl: HTMLElement;
-  _tooltip: any;
+  _tooltip: Selection<Element, any, any, any>;
 
   @Method()
-  tooltip(tooltip): void {
+  tooltip(tooltip: Element): void {
     this._tooltip = select(tooltip);
     this._tooltip.style('text-align', this.align);
   }
@@ -31,7 +31,7 @@ export class TooltipChart {
     this._tooltip.transition(transition().duration(500)).style('opacity', 0);
   }
 
-  render(): JSX.Element {
+  render() {
     return <div class="tooltip" />;
   }
 }

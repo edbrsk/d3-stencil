@@ -1,7 +1,7 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
-import { select, event } from 'd3-selection';
-import { arc, pie } from 'd3-shape';
+import { Selection, select, event } from 'd3-selection';
+import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
 import { IGraph, IGraphData } from '@d3-stencil/interfaces';
 import { Resize } from '@d3-stencil/decorators';
 import {
@@ -20,15 +20,20 @@ export class PieChart implements IGraph {
   @Prop() graphData: IGraphData;
   @Element() pieChartEl: HTMLElement;
   graphDataMerged: IGraphData;
-  svg: any;
-  root: any;
+  svg: Selection<SVGElement, any, HTMLElement, any>;
+  root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
   height: number;
   radius: number;
-  labelArc: any;
-  pie: any;
-  tooltipEl: any;
-  legendEl: any;
+  labelArc: Arc<this, any>;
+  pie: Selection<
+    SVGGElement,
+    PieArcDatum<number | { valueOf(): number }>,
+    SVGElement,
+    {}
+  >;
+  tooltipEl: HTMLTooltipChartElement;
+  legendEl: HTMLLegendChartElement;
 
   componentWillLoad(): void {
     this.graphDataMerged = objectAssignDeep(
@@ -38,14 +43,15 @@ export class PieChart implements IGraph {
   }
 
   componentDidLoad(): void {
-    this.svg = select(this.pieChartEl.getElementsByTagName('svg')[0]);
+    this.svg = select<SVGElement, any>(
+      this.pieChartEl.getElementsByTagName('svg')[0],
+    );
     this.height = this.svg.node().getBoundingClientRect().height;
-    this.tooltipEl = initTooltipIfExists(this.pieChartEl, 'tooltip').component;
+    this.tooltipEl = initTooltipIfExists(this.pieChartEl);
     this.legendEl = initLegendIfExists(
       this.pieChartEl,
-      'legend',
       this.eventsLegend.bind(this),
-    ).component;
+    );
 
     this.drawChart();
   }
@@ -65,9 +71,13 @@ export class PieChart implements IGraph {
     if (this.hasData()) {
       this.width = this.svg.node().getBoundingClientRect().width;
       this.radius = Math.min(this.width, this.height) / 2;
+
       this.reSetRoot();
 
-      const circularArc = arc()
+      const circularArc = arc<
+        SVGPathElement,
+        PieArcDatum<number | { valueOf(): number }>
+      >()
         .innerRadius(0)
         .outerRadius(this.radius);
 
@@ -86,10 +96,12 @@ export class PieChart implements IGraph {
         .append('path')
         .attr('d', circularArc)
         .attr('stroke', '#FFF')
-        .attr('fill', (_, index) =>
+        .attr('fill', (_, index: number) =>
           circularFind(this.graphDataMerged.colors, index),
         )
-        .on('mousemove', data => this.eventsTooltip({ data, isToShow: true }))
+        .on('mousemove', (data: PieArcDatum<number | { valueOf(): number }>) =>
+          this.eventsTooltip({ data, isToShow: true }),
+        )
         .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
 
       this.createLabels();
@@ -119,7 +131,7 @@ export class PieChart implements IGraph {
       .append('text')
       .attr('transform', data => `translate(${this.labelArc.centroid(data)})`)
       .attr('dy', '0.35em')
-      .text((_, index) =>
+      .text((_, index: number) =>
         formatter(
           this.graphDataMerged.pieChartOptions.labelFormat,
           this.graphDataMerged.labels[index],
@@ -128,8 +140,14 @@ export class PieChart implements IGraph {
       );
   }
 
-  eventsTooltip({ data, isToShow }: { data?: any; isToShow: boolean }): void {
-    const toShow = () => {
+  eventsTooltip({
+    data,
+    isToShow,
+  }: {
+    data?: { data: any; index: number };
+    isToShow: boolean;
+  }): void {
+    const toShow = (): void => {
       this.tooltipEl.show(
         `${formatter(
           this.graphDataMerged.pieChartOptions.dataFormat,
@@ -145,17 +163,16 @@ export class PieChart implements IGraph {
       );
     };
 
-    const toHide = () => this.tooltipEl.hide();
+    const toHide = (): void => this.tooltipEl.hide();
 
     if (this.tooltipEl) {
       isToShow ? toShow() : toHide();
     }
   }
 
-  eventsLegend(data: { label: any; index: number }) {
-    const currentLabels: any = this.graphDataMerged.labels;
-    const currentData: any = this.graphDataMerged.data[0];
-
+  eventsLegend(data: { label: string | number; index: number }): void {
+    const currentLabels: any[] = this.graphDataMerged.labels;
+    const currentData = this.graphDataMerged.data[0];
     const tempLabels = currentLabels.filter(label => label !== data.label);
     const tempData = currentData.filter((_, index) => index !== data.index);
 
@@ -163,11 +180,13 @@ export class PieChart implements IGraph {
       this.graphDataMerged.labels = this.graphData.labels;
       this.graphDataMerged.data = this.graphData.data;
       this.graphDataMerged.colors = this.graphData.colors;
+
       this.updateGraphData(this.graphDataMerged);
     } else {
       this.graphDataMerged.labels = tempLabels;
       this.graphDataMerged.data[0] = tempData;
       this.graphDataMerged.colors.splice(data.index, 1);
+
       this.updateGraphData(this.graphDataMerged);
     }
   }

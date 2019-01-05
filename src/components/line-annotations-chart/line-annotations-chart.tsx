@@ -1,7 +1,7 @@
 import { Component, Element, Prop, Method, Listen } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
-import { select, event } from 'd3-selection';
-import { scaleOrdinal } from 'd3-scale';
+import { Selection, select, event } from 'd3-selection';
+import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
 import { Resize } from '@d3-stencil/decorators';
 import { IGraph, IGraphData } from '@d3-stencil/interfaces';
 import { DEFAULT_GRAPH_DATA_LINE } from '@d3-stencil/shared';
@@ -14,13 +14,13 @@ export class LineAnnotationsChart implements IGraph {
   @Prop() graphData: IGraphData;
   @Element() lineAnnotationsChartEl: HTMLElement;
   graphDataMerged: IGraphData;
-  lineChartEl: any;
-  svg: any;
-  root: any;
-  x: any;
+  lineChartEl: HTMLLineChartElement;
+  svg: Selection<Element, any, HTMLLineChartElement, any>;
+  root: Selection<Element, any, HTMLLineChartElement, any>;
+  x: ScaleOrdinal<number, number>;
   width: number;
   height: number;
-  annotationsGroup: any;
+  annotationsGroup: Selection<Element, any, HTMLLineChartElement, any>;
   @Listen('lineChartRendered')
   lineChartRenderedHandle() {
     this.lineChartAreReady();
@@ -34,48 +34,56 @@ export class LineAnnotationsChart implements IGraph {
   }
 
   @Method()
-  updateGraphData(graphData: IGraphData) {
+  updateGraphData(graphData: IGraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
       graphData,
     );
+
     this.lineChartEl.updateGraphData(this.graphDataMerged);
+
     this.drawChart();
   }
 
-  lineChartAreReady() {
+  lineChartAreReady(): void {
     this.lineChartEl = this.lineAnnotationsChartEl.getElementsByTagName(
       'line-chart',
     )[0];
+
     this.svg = select(this.lineChartEl.getElementsByTagName('svg')[0]);
+
     this.height =
       this.svg.node().getBoundingClientRect().height -
       this.graphDataMerged.lineChartOptions.margin.top -
       this.graphDataMerged.lineChartOptions.margin.bottom;
+
     this.svg.style(
       'height',
       this.svg.node().getBoundingClientRect().height +
         this.graphDataMerged.lineAnnotationsChartOptions.increaseHeight,
     );
+
     this.drawChart();
   }
 
   @Resize()
-  drawChart() {
+  drawChart(): void {
     if (this.hasData()) {
       this.reSetRoot();
+
       this.width =
         this.svg.node().getBoundingClientRect().width -
         this.graphDataMerged.lineChartOptions.margin.left -
         this.graphDataMerged.lineChartOptions.margin.right;
 
-      const originalGraphData: any = this.graphDataMerged.data;
+      const originalGraphData = this.graphDataMerged.data;
+
       const allDataValues = originalGraphData.reduce(
-        (acc: number[], data: any[]) => (acc = [...acc, ...data]),
+        (acc: number[], data: number[]) => (acc = [...acc, ...data]),
         [],
       );
 
-      this.x = scaleOrdinal()
+      this.x = scaleOrdinal<number, number>()
         .domain(allDataValues)
         .range(
           allDataValues.map(
@@ -85,6 +93,7 @@ export class LineAnnotationsChart implements IGraph {
         );
 
       this.repositionXAxis();
+
       this.drawAnnotations();
     }
   }
@@ -95,7 +104,7 @@ export class LineAnnotationsChart implements IGraph {
     );
   }
 
-  reSetRoot() {
+  reSetRoot(): void {
     this.root = select(
       this.lineAnnotationsChartEl.getElementsByTagName('line-chart')[0]
         .children[0],
@@ -106,7 +115,7 @@ export class LineAnnotationsChart implements IGraph {
     }
   }
 
-  repositionXAxis() {
+  repositionXAxis(): void {
     this.root
       .selectAll('.x text')
       .attr(
@@ -117,7 +126,7 @@ export class LineAnnotationsChart implements IGraph {
     this.root.selectAll('.x.axis-label').attr('dy', '1em');
   }
 
-  drawAnnotations() {
+  drawAnnotations(): void {
     const range = this.x.range();
 
     this.annotationsGroup = this.root
@@ -151,12 +160,13 @@ export class LineAnnotationsChart implements IGraph {
               .imagePathSomeAnnotations,
       )
       .on('mouseover', () => this.strokedashAnnotations(true))
-      .on('mouseleave', () => this.strokedashAnnotations(false));
+      .on('mouseleave', () => this.strokedashAnnotations());
   }
 
-  strokedashAnnotations(isMouseOver: boolean = false) {
+  strokedashAnnotations(isMouseOver: boolean = false): void {
     const position = select(event.target).node().parentNode.attributes.data
       .nodeValue;
+
     const stylesGuideLineAnnotation = {
       style: ['style', 'stroke: #0283B0; stroke-width: 3'],
       strokeDasharray: ['stroke-dasharray', '5,5'],
