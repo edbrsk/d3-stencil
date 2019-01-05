@@ -1,3 +1,4 @@
+/*
 import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { select, event } from 'd3-selection';
@@ -276,7 +277,6 @@ export class BGCMatrixChart implements IGraph {
   }
 
   eventsLegend(data: { label: string; index: number }) {
-    /* tslint:disable-next-line no-console */
     console.log(data);
   }
 
@@ -294,3 +294,4 @@ export class BGCMatrixChart implements IGraph {
     );
   }
 }
+*/
