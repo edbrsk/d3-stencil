@@ -3,7 +3,7 @@ import { Formats } from '@d3-stencil/shared';
 
 export const formatter = (
   type: FORMATS,
-  data: number | string,
+  data: number | string | Date | { valueOf(): number },
   currency?: string,
-): string | number =>
+): string =>
   type === 'CURRENCY' ? Formats[type](data, currency) : Formats[type](data);
