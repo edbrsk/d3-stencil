@@ -1,4 +1,4 @@
-import { IBcgMatrix } from './data-types';
+// import { IBcgMatrix } from './data-types';
 import { Styles } from './options-types';
 import { HasDataStrategy } from './index';
 import {
@@ -10,7 +10,7 @@ import {
 } from './charts-options';
 
 export interface IGraphData {
-  data: number[][] | IBcgMatrix[];
+  data: number[][]; // | IBcgMatrix[]; TODO: Refactor in #15/interfaces.
   styles: Styles;
   hasDataMethod?: HasDataStrategy;
   labels?: string[] | number[];
