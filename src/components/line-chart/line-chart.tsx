@@ -12,7 +12,7 @@ import { max } from 'd3-array';
 import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { Line, line } from 'd3-shape';
-import { IGraph, IGraphMeta, IGraphData } from '@d3-stencil/interfaces';
+import { Graph, GraphMeta, GraphData } from '@d3-stencil/interfaces';
 import { Resize } from '@d3-stencil/decorators';
 import {
   initTooltipIfExists,
@@ -26,11 +26,11 @@ import { DEFAULT_GRAPH_DATA_LINE } from '@d3-stencil/shared';
   tag: 'line-chart',
   styleUrl: 'line-chart.scss',
 })
-export class LineChart implements IGraph {
-  @Prop() graphData: IGraphData;
+export class LineChart implements Graph {
+  @Prop() graphData: GraphData;
   @Element() lineChartEl: HTMLElement;
   @Event() lineChartRendered: EventEmitter;
-  graphDataMerged: IGraphData;
+  graphDataMerged: GraphData;
   svg: Selection<Element, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   line: Line<number>;
@@ -54,8 +54,8 @@ export class LineChart implements IGraph {
 
     this.height =
       this.svg.node().getBoundingClientRect().height -
-      this.graphDataMerged.lineChartOptions.margin.top -
-      this.graphDataMerged.lineChartOptions.margin.bottom;
+      this.graphDataMerged.lineChart.margin.top -
+      this.graphDataMerged.lineChart.margin.bottom;
 
     this.tooltipEl = initTooltipIfExists(this.lineChartEl);
 
@@ -69,7 +69,7 @@ export class LineChart implements IGraph {
   }
 
   @Method()
-  updateGraphData(graphData: IGraphData): void {
+  updateGraphData(graphData: GraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
       graphData,
@@ -84,20 +84,20 @@ export class LineChart implements IGraph {
   drawChart(axisXDataTruncated?: {
     labels: string[];
     range: number[];
-  }): IGraphMeta {
+  }): GraphMeta {
     this.reSetRoot();
 
     this.width =
       this.svg.node().getBoundingClientRect().width -
-      this.graphDataMerged.lineChartOptions.margin.left -
-      this.graphDataMerged.lineChartOptions.margin.right;
+      this.graphDataMerged.lineChart.margin.left -
+      this.graphDataMerged.lineChart.margin.right;
 
     if (this.hasData() && axisXDataTruncated) {
       this.x = scaleOrdinal()
         .domain(axisXDataTruncated.labels)
         .range(axisXDataTruncated.range);
 
-      const originalGraphData: number[][] = this.graphDataMerged.data;
+      const originalGraphData: number[][] = this.graphDataMerged.lineChart.data;
 
       const allDataValues: number[] = originalGraphData.reduce(
         (acc: number[], data: number[]) => [...acc, ...data],
@@ -134,8 +134,11 @@ export class LineChart implements IGraph {
     };
   }
 
-  hasData(): boolean | Error {
-    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
+  hasData(): Error | boolean {
+    return this.graphDataMerged.hasDataMethod(
+      this.graphDataMerged,
+      this.graphDataMerged.lineChart.data,
+    );
   }
 
   reSetRoot(): void {
@@ -147,14 +150,14 @@ export class LineChart implements IGraph {
       .append('g')
       .attr(
         'transform',
-        `translate(${this.graphDataMerged.lineChartOptions.margin.left}, ${
-          this.graphDataMerged.lineChartOptions.margin.top
+        `translate(${this.graphDataMerged.lineChart.margin.left}, ${
+          this.graphDataMerged.lineChart.margin.top
         })`,
       );
   }
 
   drawAxis(): void {
-    if (this.graphDataMerged.lineChartOptions.axis.x.visible) {
+    if (this.graphDataMerged.lineChart.axis.x.visible) {
       this.root
         .append('g')
         .attr('class', 'x axis')
@@ -162,24 +165,24 @@ export class LineChart implements IGraph {
         .call(
           axisBottom(this.x).tickFormat(domainValue =>
             formatter(
-              this.graphDataMerged.lineChartOptions.axis.x.format,
+              this.graphDataMerged.lineChart.axis.x.format,
               domainValue,
-              this.graphDataMerged.lineChartOptions.axis.x.currency,
+              this.graphDataMerged.lineChart.axis.x.currency,
             ),
           ),
         );
     }
 
-    if (this.graphDataMerged.lineChartOptions.axis.y.visible) {
+    if (this.graphDataMerged.lineChart.axis.y.visible) {
       this.root
         .append('g')
         .attr('class', 'y axis')
         .call(
           axisLeft(this.y).tickFormat(domainValue =>
             formatter(
-              this.graphDataMerged.lineChartOptions.axis.y.format,
+              this.graphDataMerged.lineChart.axis.y.format,
               domainValue,
-              this.graphDataMerged.lineChartOptions.axis.y.currency,
+              this.graphDataMerged.lineChart.axis.y.currency,
             ),
           ),
         );
@@ -187,32 +190,32 @@ export class LineChart implements IGraph {
   }
 
   drawAxisLabels(): void {
-    if (this.graphDataMerged.lineChartOptions.axis.x.label !== '') {
+    if (this.graphDataMerged.lineChart.axis.x.label !== '') {
       this.root
         .append('text')
         .attr('class', 'x axis-label')
         .attr(
           'transform',
           `translate(${this.width / 2}, ${this.height +
-            this.graphDataMerged.lineChartOptions.margin.top * 2})`,
+            this.graphDataMerged.lineChart.margin.top * 2})`,
         )
-        .text(this.graphData.lineChartOptions.axis.x.label);
+        .text(this.graphData.lineChart.axis.x.label);
     }
 
-    if (this.graphDataMerged.lineChartOptions.axis.y.label !== '') {
+    if (this.graphDataMerged.lineChart.axis.y.label !== '') {
       this.root
         .append('text')
         .attr('class', 'y axis-label')
         .attr('transform', `rotate(-90)`)
-        .attr('y', 0 - this.graphDataMerged.lineChartOptions.margin.left)
+        .attr('y', 0 - this.graphDataMerged.lineChart.margin.left)
         .attr('x', 0 - this.height / 2)
         .attr('dy', '1em')
-        .text(this.graphData.lineChartOptions.axis.y.label);
+        .text(this.graphData.lineChart.axis.y.label);
     }
   }
 
   drawGrid(): void {
-    if (this.graphDataMerged.lineChartOptions.axis.x.gridVisible) {
+    if (this.graphDataMerged.lineChart.axis.x.gridVisible) {
       this.root
         .append('g')
         .attr('class', 'grid')
@@ -223,7 +226,7 @@ export class LineChart implements IGraph {
         );
     }
 
-    if (this.graphDataMerged.lineChartOptions.axis.y.gridVisible) {
+    if (this.graphDataMerged.lineChart.axis.y.gridVisible) {
       this.root
         .append('g')
         .attr('class', 'grid')
@@ -240,7 +243,7 @@ export class LineChart implements IGraph {
       .append('g')
       .attr('class', 'lines')
       .selectAll('.line-group')
-      .data(this.graphDataMerged.data)
+      .data(this.graphDataMerged.lineChart.data)
       .enter()
       .append('g')
       .attr('class', (_, index) => `line-group line-group-${index}`)
@@ -261,7 +264,7 @@ export class LineChart implements IGraph {
         circularFind(this.graphDataMerged.colors, index),
       )
       .selectAll('.dots-group')
-      .data((_, index) => this.graphDataMerged.data[index])
+      .data((_, index) => this.graphDataMerged.lineChart.data[index])
       .enter()
       .append('circle')
       .attr('class', 'dot')
@@ -290,13 +293,13 @@ export class LineChart implements IGraph {
     const toShow = (): void => {
       this.tooltipEl.show(
         `${formatter(
-          this.graphDataMerged.lineChartOptions.axis.y.format,
+          this.graphDataMerged.lineChart.axis.y.format,
           data,
-          this.graphDataMerged.lineChartOptions.axis.y.currency,
+          this.graphDataMerged.lineChart.axis.y.currency,
         )} <br/> ${formatter(
-          this.graphDataMerged.lineChartOptions.axis.x.format,
+          this.graphDataMerged.lineChart.axis.x.format,
           this.graphDataMerged.labels[index],
-          this.graphDataMerged.lineChartOptions.axis.x.currency,
+          this.graphDataMerged.lineChart.axis.x.currency,
         )}`,
         [event.pageX, event.pageY],
       );

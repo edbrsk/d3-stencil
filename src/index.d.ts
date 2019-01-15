@@ -1,8 +1,8 @@
 export * from './components.d';
 export {
-  IGraph,
-  IGraphMeta,
-  IGraphData,
+  Graph,
+  GraphMeta,
+  GraphData,
   LegendData,
   Formats,
   HasDataStrategy,

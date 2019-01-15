@@ -29,7 +29,9 @@
       "@d3-stencil/shared",
       "@d3-stencil/utils"
     ],
-    "no-implicit-dependencies": false
+    "no-implicit-dependencies": false,
+    "interface-name": [true, "never-prefix"],
+    "interface-over-type-literal": false
   },
   "extends": ["tslint:latest", "tslint-config-prettier"]
 }
