@@ -1,25 +1,25 @@
-import { IGraphData, HasDataStrategy } from '@d3-stencil/interfaces';
+import { GraphData, HasDataStrategy } from '@d3-stencil/interfaces';
 
 const THROW_ERROR = (): Error => {
   throw new Error(`The data injected isn't valid.`);
 };
 
 export const hasDataIsNotempty: HasDataStrategy = (
-  graphDataMerged: IGraphData,
-): boolean | Error =>
-  graphDataMerged.data.length > 0 && graphDataMerged.labels.length >= 1
-    ? true
-    : THROW_ERROR();
+  graphData: GraphData,
+  data: any[],
+): Error | boolean =>
+  data.length > 0 && graphData.labels.length >= 1 ? true : THROW_ERROR();
 
-export const hasDataValidOnAnnotationsChart: HasDataStrategy = ({
-  lineAnnotationsChartOptions,
-}: IGraphData): boolean | Error => {
+export const hasDataValidOnAnnotationsChart: HasDataStrategy = (
+  graphData: GraphData,
+): Error | boolean => {
   if (
     !(
-      lineAnnotationsChartOptions.increaseHeight > 0 &&
-      lineAnnotationsChartOptions.tickSeparation !== '' &&
-      lineAnnotationsChartOptions.imagePathOneAnnotation !== '' &&
-      lineAnnotationsChartOptions.imagePathSomeAnnotations !== ''
+      graphData.lineChart.data.length > 0 &&
+      graphData.lineAnnotationsChart.increaseHeight > 0 &&
+      graphData.lineAnnotationsChart.tickSeparation !== '' &&
+      graphData.lineAnnotationsChart.imagePathOneAnnotation !== '' &&
+      graphData.lineAnnotationsChart.imagePathSomeAnnotations !== ''
     )
   ) {
     return THROW_ERROR();
@@ -29,5 +29,6 @@ export const hasDataValidOnAnnotationsChart: HasDataStrategy = ({
 };
 
 export const hasDataBCGMatrixIsNotEmpty: HasDataStrategy = (
-  graphDataMerged: IGraphData,
-): boolean | Error => (graphDataMerged.data.length > 0 ? true : THROW_ERROR());
+  graphData: GraphData,
+): Error | boolean =>
+  graphData.bcgMatrixChart.data.length > 0 ? true : THROW_ERROR();
