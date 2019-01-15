@@ -1,3 +1,3 @@
-import { IBcgMatrix } from './bcg-matrix';
+import { BcgMatrix } from './bcg-matrix';
 
-export { IBcgMatrix };
+export { BcgMatrix };
