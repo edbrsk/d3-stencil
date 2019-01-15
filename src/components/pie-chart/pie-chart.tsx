@@ -2,7 +2,7 @@ import { Component, Element, Prop, Method } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
-import { IGraph, IGraphData } from '@d3-stencil/interfaces';
+import { Graph, GraphData } from '@d3-stencil/interfaces';
 import { Resize } from '@d3-stencil/decorators';
 import {
   initTooltipIfExists,
@@ -16,10 +16,10 @@ import { DEFAULT_GRAPH_DATA_PIE } from '@d3-stencil/shared';
   tag: 'pie-chart',
   styleUrl: 'pie-chart.scss',
 })
-export class PieChart implements IGraph {
-  @Prop() graphData: IGraphData;
+export class PieChart implements Graph {
+  @Prop() graphData: GraphData;
   @Element() pieChartEl: HTMLElement;
-  graphDataMerged: IGraphData;
+  graphDataMerged: GraphData;
   svg: Selection<SVGElement, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
@@ -46,8 +46,10 @@ export class PieChart implements IGraph {
     this.svg = select<SVGElement, any>(
       this.pieChartEl.getElementsByTagName('svg')[0],
     );
+
     this.height = this.svg.node().getBoundingClientRect().height;
     this.tooltipEl = initTooltipIfExists(this.pieChartEl);
+
     this.legendEl = initLegendIfExists(
       this.pieChartEl,
       this.eventsLegend.bind(this),
@@ -57,7 +59,7 @@ export class PieChart implements IGraph {
   }
 
   @Method()
-  updateGraphData(graphData: IGraphData): void {
+  updateGraphData(graphData: GraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_PIE },
       graphData,
@@ -86,7 +88,9 @@ export class PieChart implements IGraph {
         .data(
           pie()
             .sort(null)
-            .value((data: number) => data)(this.graphDataMerged.data[0]),
+            .value((data: number) => data)(
+            this.graphDataMerged.pieChart.data[0],
+          ),
         )
         .enter()
         .append('g')
@@ -108,8 +112,11 @@ export class PieChart implements IGraph {
     }
   }
 
-  hasData(): boolean | Error {
-    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
+  hasData(): Error | boolean {
+    return this.graphDataMerged.hasDataMethod(
+      this.graphDataMerged,
+      this.graphDataMerged.pieChart.data,
+    );
   }
 
   reSetRoot(): void {
@@ -133,9 +140,9 @@ export class PieChart implements IGraph {
       .attr('dy', '0.35em')
       .text((_, index: number) =>
         formatter(
-          this.graphDataMerged.pieChartOptions.labelFormat,
+          this.graphDataMerged.pieChart.labelFormat,
           this.graphDataMerged.labels[index],
-          this.graphDataMerged.pieChartOptions.currency,
+          this.graphDataMerged.pieChart.currency,
         ),
       );
   }
@@ -150,14 +157,14 @@ export class PieChart implements IGraph {
     const toShow = (): void => {
       this.tooltipEl.show(
         `${formatter(
-          this.graphDataMerged.pieChartOptions.dataFormat,
+          this.graphDataMerged.pieChart.dataFormat,
           data.data,
-          this.graphDataMerged.pieChartOptions.currency,
+          this.graphDataMerged.pieChart.currency,
         )} <br/>
         ${formatter(
-          this.graphDataMerged.pieChartOptions.labelFormat,
+          this.graphDataMerged.pieChart.labelFormat,
           this.graphDataMerged.labels[data.index],
-          this.graphDataMerged.pieChartOptions.currency,
+          this.graphDataMerged.pieChart.currency,
         )}`,
         [event.pageX, event.pageY],
       );
@@ -172,19 +179,19 @@ export class PieChart implements IGraph {
 
   eventsLegend(data: { label: string | number; index: number }): void {
     const currentLabels: any[] = this.graphDataMerged.labels;
-    const currentData = this.graphDataMerged.data[0];
+    const currentData = this.graphDataMerged.pieChart.data[0];
     const tempLabels = currentLabels.filter(label => label !== data.label);
     const tempData = currentData.filter((_, index) => index !== data.index);
 
     if (currentLabels.length === tempLabels.length) {
       this.graphDataMerged.labels = this.graphData.labels;
-      this.graphDataMerged.data = this.graphData.data;
+      this.graphDataMerged.pieChart.data = this.graphData.pieChart.data;
       this.graphDataMerged.colors = this.graphData.colors;
 
       this.updateGraphData(this.graphDataMerged);
     } else {
       this.graphDataMerged.labels = tempLabels;
-      this.graphDataMerged.data[0] = tempData;
+      this.graphDataMerged.pieChart.data[0] = tempData;
       this.graphDataMerged.colors.splice(data.index, 1);
 
       this.updateGraphData(this.graphDataMerged);
