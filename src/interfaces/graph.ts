@@ -1,10 +1,10 @@
-import { IGraphData, IGraphMeta } from './index';
+import { GraphData, GraphMeta } from './index';
 
-export interface IGraph {
-  graphData: IGraphData;
-  graphDataMerged: IGraphData;
-  updateGraphData(graphData: IGraphData);
-  drawChart(): IGraphMeta | void;
-  hasData(): boolean | Error;
+export interface Graph {
+  graphData: GraphData;
+  graphDataMerged: GraphData;
+  updateGraphData(graphData: GraphData): void;
+  drawChart(): GraphMeta | void;
+  hasData(): Error | boolean;
   reSetRoot(): void;
 }
