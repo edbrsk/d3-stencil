@@ -1,16 +1,16 @@
 import { Component } from '@stencil/core';
-import { IGraphData, LegendData } from '@d3-stencil/interfaces';
+import { GraphData, LegendData } from '@d3-stencil/interfaces';
 
 @Component({
   tag: 'my-app',
   styleUrl: 'app.scss',
 })
 export class App {
-  GRAPH_DATA_PIE: IGraphData = {
-    labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
-    pieChartOptions: {
+  GRAPH_DATA_PIE: GraphData = {
+    pieChart: {
       labelFormat: 'ANY',
       dataFormat: 'GROUPED_THOUSANDS_TWO_DIGITS',
+      data: [[2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463]],
     },
     styles: {
       width: '100%',
@@ -26,7 +26,7 @@ export class App {
       '#d0743c',
       '#ff8c00',
     ],
-    data: [[2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463]],
+    labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
   };
 
   LEGEND_DATA_PIE: LegendData = {
@@ -46,9 +46,8 @@ export class App {
     type: 'vertical',
   };
 
-  GRAPH_DATA_BAR: IGraphData = {
-    labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
-    barChartOptions: {
+  GRAPH_DATA_BAR: GraphData = {
+    barChart: {
       axis: {
         x: {
           format: 'CURRENCY',
@@ -60,6 +59,7 @@ export class App {
         bottom: 20,
         left: 40,
       },
+      data: [[1250, 200, 20, 140, 600, 3002, 5985]],
     },
     styles: {
       width: '100%',
@@ -75,7 +75,7 @@ export class App {
       '#d0743c',
       '#ff8c00',
     ],
-    data: [[1250, 200, 20, 140, 600, 3002, 5985]],
+    labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
   };
 
   LEGEND_DATA_BAR: LegendData = {
@@ -95,9 +95,8 @@ export class App {
     type: 'vertical',
   };
 
-  GRAPH_DATA_PROGRESS_BAR: IGraphData = {
-    labels: ['<5'],
-    barChartOptions: {
+  GRAPH_DATA_PROGRESS_BAR: GraphData = {
+    barChart: {
       axis: {
         x: {
           visible: false,
@@ -111,26 +110,18 @@ export class App {
         top: 20,
         bottom: 20,
       },
+      data: [[45]],
     },
     styles: {
       width: '100%',
       height: '10px',
     },
     colors: ['#98abc5'],
-    data: [[45]],
+    labels: ['<5'],
   };
 
-  GRAPH_DATA_LINE: IGraphData = {
-    labels: [
-      1496354400,
-      1496440800,
-      1496527200,
-      1496613600,
-      1496700000,
-      1496786400,
-      1496872800,
-    ],
-    lineChartOptions: {
+  GRAPH_DATA_LINE: GraphData = {
+    lineChart: {
       axis: {
         x: {
           format: 'DAY_AND_MONTH',
@@ -147,6 +138,10 @@ export class App {
         bottom: 50,
         left: 60,
       },
+      data: [
+        [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
+        [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
+      ],
     },
     styles: {
       width: '100%',
@@ -154,13 +149,6 @@ export class App {
       margin: '20px 0',
     },
     colors: ['#98abc5', '#8a89a6'],
-    data: [
-      [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
-      [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
-    ],
-  };
-
-  GRAPH_DATA_LINE_ANNOTATION: IGraphData = {
     labels: [
       1496354400,
       1496440800,
@@ -170,23 +158,32 @@ export class App {
       1496786400,
       1496872800,
     ],
-    lineChartOptions: {
+  };
+
+  GRAPH_DATA_LINE_ANNOTATION: GraphData = {
+    lineChart: {
       axis: {
         x: {
           format: 'DAY_AND_MONTH',
+          label: 'Days',
         },
         y: {
           format: 'GROUPED_TWO_DIGITS',
+          label: 'Quantity',
         },
       },
       margin: {
         top: 20,
-        right: 40,
+        right: 30,
         bottom: 50,
-        left: 40,
+        left: 60,
       },
+      data: [
+        [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
+        [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
+      ],
     },
-    lineAnnotationsChartOptions: {
+    lineAnnotationsChart: {
       increaseHeight: 15,
       tickSeparation: '2.5em',
       annotations: [[1], [2], [], [], [4, 5], [], []],
@@ -197,9 +194,14 @@ export class App {
       margin: '40px 0',
     },
     colors: ['#98abc5', '#8a89a6'],
-    data: [
-      [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
-      [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
+    labels: [
+      1496354400,
+      1496440800,
+      1496527200,
+      1496613600,
+      1496700000,
+      1496786400,
+      1496872800,
     ],
   };
 
@@ -209,16 +211,12 @@ export class App {
     type: 'horizontal',
   };
 
-  /*
-  GRAPH_DATA_BCG: IGraphData = {
-    bcgMatrixChartOption: {
+  GRAPH_DATA_BCG: GraphData = {
+    bcgMatrixChart: {
       axis: {
         y: {
           format: 'PERCENTAGE',
         },
-      },
-      value: {
-        format: 'GROUPED_TWO_DIGITS',
       },
       margin: {
         top: 20,
@@ -226,72 +224,70 @@ export class App {
         bottom: 20,
         left: 40,
       },
+      value: {
+        format: 'GROUPED_TWO_DIGITS',
+      },
+      data: [
+        {
+          x_data: 0.43,
+          y_data: 0.65,
+          rel_size: 648860,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 0.16,
+          y_data: 0.34,
+          rel_size: 588399,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 0.33,
+          y_data: 0.22,
+          rel_size: 177443,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 1.66,
+          y_data: 0.72,
+          rel_size: 729405,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 1.5,
+          y_data: 0.22,
+          rel_size: 838025,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 1.21,
+          y_data: 0.85,
+          rel_size: 269605,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+        {
+          x_data: 1.21,
+          y_data: 0.57,
+          rel_size: 569985,
+          tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
+        },
+      ],
     },
     styles: {
       width: '100%',
       height: '500px',
       margin: '20px 0',
     },
-    data: [
-      {
-        x_data: 0.43,
-        y_data: 0.65,
-        rel_size: 648860,
-        label: '<5',
-        color: '#98abc5',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 0.16,
-        y_data: 0.34,
-        rel_size: 588399,
-        label: '5-13',
-        color: '#7b6888',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 0.33,
-        y_data: 0.22,
-        rel_size: 177443,
-        label: '14-17',
-        color: '#7b6888',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 1.66,
-        y_data: 0.72,
-        rel_size: 729405,
-        label: '18-24',
-        color: '#ff8c00',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 1.5,
-        y_data: 0.22,
-        rel_size: 838025,
-        label: '25-44',
-        color: '#d0743c',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 1.21,
-        y_data: 0.85,
-        rel_size: 269605,
-        label: '45-64',
-        color: '#ff8c00',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
-      {
-        x_data: 1.21,
-        y_data: 0.57,
-        rel_size: 569985,
-        label: '≥65',
-        color: '#ff8c00',
-        tooltipInfo: `<b>Current:</b><div class="square"></div> 3 weeks<br>Overview: <div class="square"></div> 4 weeks <div class="square"></div> 3 weeks <div class="square"></div> no`,
-      },
+    colors: [
+      '#98abc5',
+      '#7b6888',
+      '#7b6888',
+      '#ff8c00',
+      '#d0743c',
+      '#ff8c00',
+      '#ff8c00',
     ],
+    labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
   };
-  */
 
   render() {
     return (
@@ -360,6 +356,18 @@ export class App {
             <pre class="language-tsx">
               <code class="language-tsx">
                 {JSON.stringify(this.GRAPH_DATA_LINE_ANNOTATION, null, 2)}
+              </code>
+            </pre>
+          </div>
+
+          <h1>BCG Matrix Chart:</h1>
+          <bcg-matrix-chart graphData={this.GRAPH_DATA_BCG}>
+            <tooltip-chart slot="tooltip" align={'left'} />
+          </bcg-matrix-chart>
+          <div class="example">
+            <pre class="language-tsx">
+              <code class="language-tsx">
+                {JSON.stringify(this.GRAPH_DATA_BCG, null, 2)}
               </code>
             </pre>
           </div>

@@ -3,17 +3,17 @@ import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
 import { Resize } from '@d3-stencil/decorators';
-import { IGraph, IGraphData } from '@d3-stencil/interfaces';
-import { DEFAULT_GRAPH_DATA_LINE } from '@d3-stencil/shared';
+import { Graph, GraphData } from '@d3-stencil/interfaces';
+import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '@d3-stencil/shared';
 
 @Component({
   tag: 'line-annotations-chart',
   styleUrl: 'line-annotations-chart.scss',
 })
-export class LineAnnotationsChart implements IGraph {
-  @Prop() graphData: IGraphData;
+export class LineAnnotationsChart implements Graph {
+  @Prop() graphData: GraphData;
   @Element() lineAnnotationsChartEl: HTMLElement;
-  graphDataMerged: IGraphData;
+  graphDataMerged: GraphData;
   lineChartEl: HTMLLineChartElement;
   svg: Selection<Element, any, HTMLLineChartElement, any>;
   root: Selection<Element, any, HTMLLineChartElement, any>;
@@ -28,15 +28,15 @@ export class LineAnnotationsChart implements IGraph {
 
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
-      { ...DEFAULT_GRAPH_DATA_LINE },
+      { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
       this.graphData,
     );
   }
 
   @Method()
-  updateGraphData(graphData: IGraphData): void {
+  updateGraphData(graphData: GraphData): void {
     this.graphDataMerged = objectAssignDeep(
-      { ...DEFAULT_GRAPH_DATA_LINE },
+      { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
       graphData,
     );
 
@@ -54,13 +54,13 @@ export class LineAnnotationsChart implements IGraph {
 
     this.height =
       this.svg.node().getBoundingClientRect().height -
-      this.graphDataMerged.lineChartOptions.margin.top -
-      this.graphDataMerged.lineChartOptions.margin.bottom;
+      this.graphDataMerged.lineChart.margin.top -
+      this.graphDataMerged.lineChart.margin.bottom;
 
     this.svg.style(
       'height',
       this.svg.node().getBoundingClientRect().height +
-        this.graphDataMerged.lineAnnotationsChartOptions.increaseHeight,
+        this.graphDataMerged.lineAnnotationsChart.increaseHeight,
     );
 
     this.drawChart();
@@ -73,10 +73,10 @@ export class LineAnnotationsChart implements IGraph {
 
       this.width =
         this.svg.node().getBoundingClientRect().width -
-        this.graphDataMerged.lineChartOptions.margin.left -
-        this.graphDataMerged.lineChartOptions.margin.right;
+        this.graphDataMerged.lineChart.margin.left -
+        this.graphDataMerged.lineChart.margin.right;
 
-      const originalGraphData = this.graphDataMerged.data;
+      const originalGraphData = this.graphDataMerged.lineChart.data;
 
       const allDataValues = originalGraphData.reduce(
         (acc: number[], data: number[]) => (acc = [...acc, ...data]),
@@ -93,15 +93,12 @@ export class LineAnnotationsChart implements IGraph {
         );
 
       this.repositionXAxis();
-
       this.drawAnnotations();
     }
   }
 
-  hasData(): boolean | Error {
-    return this.graphDataMerged.lineAnnotationsChartOptions.hasDataMethod(
-      this.graphDataMerged,
-    );
+  hasData(): Error | boolean {
+    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
   }
 
   reSetRoot(): void {
@@ -118,10 +115,7 @@ export class LineAnnotationsChart implements IGraph {
   repositionXAxis(): void {
     this.root
       .selectAll('.x text')
-      .attr(
-        'dy',
-        this.graphDataMerged.lineAnnotationsChartOptions.tickSeparation,
-      );
+      .attr('dy', this.graphDataMerged.lineAnnotationsChart.tickSeparation);
 
     this.root.selectAll('.x.axis-label').attr('dy', '1em');
   }
@@ -138,7 +132,7 @@ export class LineAnnotationsChart implements IGraph {
     const annotations = this.root
       .select('.annotations-group')
       .selectAll('.annotation')
-      .data(this.graphDataMerged.lineAnnotationsChartOptions.annotations)
+      .data(this.graphDataMerged.lineAnnotationsChart.annotations)
       .enter()
       .append('g')
       .attr('transform', (_, index) => `translate(${range[index]}, 0)`)
@@ -150,14 +144,12 @@ export class LineAnnotationsChart implements IGraph {
       .append('svg:image')
       .attr('y', 7)
       .attr('x', -7)
-      .attr('width', data => (data.length > 1 ? 20 : 17))
-      .attr('height', data => (data.length > 1 ? 20 : 17))
-      .attr('xlink:href', data =>
+      .attr('width', (data: number[]) => (data.length > 1 ? 20 : 17))
+      .attr('height', (data: number[]) => (data.length > 1 ? 20 : 17))
+      .attr('xlink:href', (data: number[]) =>
         data.length > 1
-          ? this.graphDataMerged.lineAnnotationsChartOptions
-              .imagePathSomeAnnotations
-          : this.graphDataMerged.lineAnnotationsChartOptions
-              .imagePathSomeAnnotations,
+          ? this.graphDataMerged.lineAnnotationsChart.imagePathSomeAnnotations
+          : this.graphDataMerged.lineAnnotationsChart.imagePathSomeAnnotations,
       )
       .on('mouseover', () => this.strokedashAnnotations(true))
       .on('mouseleave', () => this.strokedashAnnotations());
