@@ -1,8 +1,8 @@
-import { IGraphMeta } from '@d3-stencil/interfaces';
+import { GraphMeta } from '@d3-stencil/interfaces';
 
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (
-    graphMeta: IGraphMeta,
+    graphMeta: GraphMeta,
   ): { labels: string[] | number[]; range: number[] } => {
     if (graph.axisData) {
       const labels = getResponsiveLabels(graphMeta);
@@ -17,7 +17,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   };
 
   const getResponsiveLabels = (
-    graphMeta: IGraphMeta,
+    graphMeta: GraphMeta,
     margin: number = 70,
   ): any[] => {
     const separations = Math.floor(graphMeta.width / margin);
@@ -47,7 +47,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
     descriptor: PropertyDescriptor,
   ) => {
     const originalMethod = descriptor.value;
-    let graphMeta: IGraphMeta;
+    let graphMeta: GraphMeta;
     let args: { labels: string[] | number[]; range: number[] };
 
     descriptor.value = function() {
