@@ -1,6 +1,6 @@
-import { IGraphData } from './index';
+import { GraphData } from './index';
 
-export interface IGraphMeta {
+export interface GraphMeta {
   width: number;
-  graphData: IGraphData;
+  graphData: GraphData;
 }
