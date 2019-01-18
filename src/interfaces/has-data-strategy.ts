@@ -1,6 +1,6 @@
 import { GraphData } from './../interfaces';
 
-export type HasDataStrategy = (
-  graphData: GraphData,
-  data?: any[],
+export type HasDataStrategy<T = number[][]> = (
+  graphData: GraphData<T>,
+  data?: T,
 ) => Error | boolean;
