@@ -1,3 +1,4 @@
+import { Data } from './data';
 import { BcgMatrix } from './bcg-matrix';
 
-export { BcgMatrix };
+export { Data, BcgMatrix };
