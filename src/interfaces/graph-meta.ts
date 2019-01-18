@@ -1,6 +1,6 @@
 import { GraphData } from './index';
 
-export interface GraphMeta {
+export interface GraphMeta<T = number[][]> {
   width: number;
-  graphData: GraphData;
+  graphData: GraphData<T>;
 }
