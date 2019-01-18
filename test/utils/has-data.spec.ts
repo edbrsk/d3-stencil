@@ -1,35 +1,35 @@
+import { GraphData } from '@d3-stencil/interfaces';
 import {
   hasDataIsNotempty,
   hasDataValidOnAnnotationsChart,
-  hasDataBCGMatrixIsNotEmpty
-} from './../../src/utils';
-import { IGraphData } from '../../src/interfaces';
+  hasDataBCGMatrixIsNotEmpty,
+} from '@d3-stencil/utils';
 
 describe('has-data:', () => {
   const errorMessage = /^The data injected isn't valid./;
-  const validGraphDataMerged: IGraphData = {
+  const validGraphDataMerged: GraphData<any[]> = {
     labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
     styles: null,
-    lineAnnotationsChartOptions: {
-      annotations: [],
+    lineAnnotationsChart: {
       increaseHeight: 100,
       tickSeparation: '2em',
+      annotations: [],
       imagePathOneAnnotation: 'one_annotation',
-      imagePathSomeAnnotations: 'some_annotations'
+      imagePathSomeAnnotations: 'some_annotations',
     },
-    data: [[2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463]]
+    data: [[2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463]],
   };
-  const invalidGraphDataMerged: IGraphData = {
+  const invalidGraphDataMerged: GraphData<any[]> = {
     labels: [],
     styles: null,
-    lineAnnotationsChartOptions: {
-      annotations: [],
+    lineAnnotationsChart: {
       increaseHeight: 0,
       tickSeparation: '',
+      annotations: [],
       imagePathOneAnnotation: '',
-      imagePathSomeAnnotations: ''
+      imagePathSomeAnnotations: '',
     },
-    data: []
+    data: [],
   };
 
   describe('hasDataIsNotempty', () => {
@@ -40,7 +40,7 @@ describe('has-data:', () => {
 
     it(`should throw an Error, because the data isn't valid`, () => {
       expect(() => hasDataIsNotempty(invalidGraphDataMerged)).toThrowError(
-        errorMessage
+        errorMessage,
       );
     });
   });
@@ -53,7 +53,7 @@ describe('has-data:', () => {
 
     it(`should throw an Error, because the data isn't valid`, () => {
       expect(() =>
-        hasDataValidOnAnnotationsChart(invalidGraphDataMerged)
+        hasDataValidOnAnnotationsChart(invalidGraphDataMerged),
       ).toThrowError(errorMessage);
     });
   });
@@ -66,7 +66,7 @@ describe('has-data:', () => {
 
     it(`should throw an Error, because the data isn't valid`, () => {
       expect(() =>
-        hasDataBCGMatrixIsNotEmpty(invalidGraphDataMerged)
+        hasDataBCGMatrixIsNotEmpty(invalidGraphDataMerged),
       ).toThrowError(errorMessage);
     });
   });
