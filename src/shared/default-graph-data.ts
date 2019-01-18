@@ -1,3 +1,4 @@
+import { BcgMatrix } from '@d3-stencil/interfaces/data-types';
 import { GraphData, LegendData } from '@d3-stencil/interfaces';
 import {
   hasDataIsNotempty,
@@ -10,7 +11,6 @@ export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
     labelFormat: 'ANY',
     dataFormat: 'ANY',
     currency: 'EUR',
-    data: [],
   },
   styles: {
     width: '0',
@@ -19,6 +19,7 @@ export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
   },
   labels: [],
   colors: [],
+  data: [],
   hasDataMethod: (graphData: GraphData, data: number[][]) =>
     hasDataIsNotempty(graphData, data),
 };
@@ -45,7 +46,6 @@ export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
       bottom: 0,
       left: 0,
     },
-    data: [],
   },
   styles: {
     width: '0',
@@ -54,6 +54,7 @@ export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
   },
   labels: [],
   colors: [],
+  data: [],
   hasDataMethod: (graphData: GraphData, data: number[][]) =>
     hasDataIsNotempty(graphData, data),
 };
@@ -82,7 +83,6 @@ export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
       bottom: 0,
       left: 0,
     },
-    data: [],
   },
   styles: {
     width: '0',
@@ -91,6 +91,7 @@ export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
   },
   labels: [],
   colors: [],
+  data: [],
   hasDataMethod: (graphData: GraphData, data: number[][]) =>
     hasDataIsNotempty(graphData, data),
 };
@@ -119,7 +120,6 @@ export const DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE: GraphData = {
       bottom: 0,
       left: 0,
     },
-    data: [],
   },
   lineAnnotationsChart: {
     increaseHeight: 100,
@@ -135,11 +135,12 @@ export const DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE: GraphData = {
   },
   labels: [],
   colors: [],
+  data: [],
   hasDataMethod: (graphData: GraphData) =>
     hasDataValidOnAnnotationsChart(graphData),
 };
 
-export const DEFAULT_GRAPH_DATA_BCG: GraphData = {
+export const DEFAULT_GRAPH_DATA_BCG: GraphData<BcgMatrix[]> = {
   bcgMatrixChart: {
     axis: {
       x: {
@@ -166,7 +167,6 @@ export const DEFAULT_GRAPH_DATA_BCG: GraphData = {
       left: 0,
     },
     quadrants: true,
-    data: [],
   },
   styles: {
     width: '0',
@@ -175,7 +175,8 @@ export const DEFAULT_GRAPH_DATA_BCG: GraphData = {
   },
   colors: [],
   labels: [],
-  hasDataMethod: (graphDataMerged: GraphData) =>
+  data: [],
+  hasDataMethod: (graphDataMerged: GraphData<BcgMatrix[]>) =>
     hasDataBCGMatrixIsNotEmpty(graphDataMerged),
 };
 
