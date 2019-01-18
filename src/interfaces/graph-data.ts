@@ -1,3 +1,4 @@
+import { Data } from './data-types';
 import { Styles } from './options-types';
 import { HasDataStrategy } from './index';
 import {
@@ -6,16 +7,17 @@ import {
   LineChart,
   LineAnnotationsChart,
   BcgMatrixChart,
-} from './charts';
+} from './charts-options';
 
-export type GraphData = Partial<{
-  styles: Styles;
+export type GraphData<T = number[][]> = Partial<{
   pieChart: PieChart;
   barChart: BarChart;
   lineChart: LineChart;
   lineAnnotationsChart: LineAnnotationsChart;
   bcgMatrixChart: BcgMatrixChart;
-  labels: string[] | number[];
+  styles: Styles;
   colors: string[];
-  hasDataMethod: HasDataStrategy;
+  labels: string[] | number[];
+  data: Data<T>;
+  hasDataMethod: HasDataStrategy<T>;
 }>;
