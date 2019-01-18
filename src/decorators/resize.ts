@@ -2,7 +2,7 @@ import { GraphMeta } from '@d3-stencil/interfaces';
 
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (
-    graphMeta: GraphMeta,
+    graphMeta: GraphMeta<any[]>,
   ): { labels: string[] | number[]; range: number[] } => {
     if (graph.axisData) {
       const labels = getResponsiveLabels(graphMeta);
@@ -17,7 +17,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   };
 
   const getResponsiveLabels = (
-    graphMeta: GraphMeta,
+    graphMeta: GraphMeta<any[]>,
     margin: number = 70,
   ): any[] => {
     const separations = Math.floor(graphMeta.width / margin);
@@ -47,7 +47,7 @@ const resize = (graph: { axisData: boolean } = { axisData: false }) => {
     descriptor: PropertyDescriptor,
   ) => {
     const originalMethod = descriptor.value;
-    let graphMeta: GraphMeta;
+    let graphMeta: GraphMeta<any[]>;
     let args: { labels: string[] | number[]; range: number[] };
 
     descriptor.value = function() {
