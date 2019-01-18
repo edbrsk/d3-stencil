@@ -14,6 +14,7 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "skipLibCheck": true,
     "paths": {
       "@d3-stencil/decorators": ["src/decorators/index"],
       "@d3-stencil/interfaces": ["src/interfaces/index"],

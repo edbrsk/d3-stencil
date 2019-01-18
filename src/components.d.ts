@@ -13,6 +13,9 @@ import {
   LegendData,
 } from '@d3-stencil/interfaces';
 import {
+  BcgMatrix,
+} from '@d3-stencil/interfaces/data-types';
+import {
   Element,
 } from '@stencil/core';
 
@@ -23,19 +26,19 @@ export namespace Components {
   interface MyAppAttributes extends StencilHTMLAttributes {}
 
   interface BcgMatrixChart {
-    'graphData': GraphData;
+    'graphData': GraphData<BcgMatrix[]>;
     'updateGraphData': (graphData: any) => void;
   }
   interface BcgMatrixChartAttributes extends StencilHTMLAttributes {
-    'graphData'?: GraphData;
+    'graphData'?: GraphData<BcgMatrix[]>;
   }
 
   interface HorizontalBarChart {
-    'graphData': GraphData;
+    'graphData': GraphData<number[]>;
     'updateGraphData': (graphData: any) => void;
   }
   interface HorizontalBarChartAttributes extends StencilHTMLAttributes {
-    'graphData'?: GraphData;
+    'graphData'?: GraphData<number[]>;
   }
 
   interface LegendChart {
@@ -64,11 +67,11 @@ export namespace Components {
   }
 
   interface PieChart {
-    'graphData': GraphData;
+    'graphData': GraphData<number[]>;
     'updateGraphData': (graphData: any) => void;
   }
   interface PieChartAttributes extends StencilHTMLAttributes {
-    'graphData'?: GraphData;
+    'graphData'?: GraphData<number[]>;
   }
 
   interface TooltipChart {
