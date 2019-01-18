@@ -97,7 +97,7 @@ export class LineChart implements Graph {
         .domain(axisXDataTruncated.labels)
         .range(axisXDataTruncated.range);
 
-      const originalGraphData: number[][] = this.graphDataMerged.lineChart.data;
+      const originalGraphData: number[][] = this.graphDataMerged.data;
 
       const allDataValues: number[] = originalGraphData.reduce(
         (acc: number[], data: number[]) => [...acc, ...data],
@@ -135,10 +135,7 @@ export class LineChart implements Graph {
   }
 
   hasData(): Error | boolean {
-    return this.graphDataMerged.hasDataMethod(
-      this.graphDataMerged,
-      this.graphDataMerged.lineChart.data,
-    );
+    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
   }
 
   reSetRoot(): void {
@@ -243,7 +240,7 @@ export class LineChart implements Graph {
       .append('g')
       .attr('class', 'lines')
       .selectAll('.line-group')
-      .data(this.graphDataMerged.lineChart.data)
+      .data(this.graphDataMerged.data)
       .enter()
       .append('g')
       .attr('class', (_, index) => `line-group line-group-${index}`)
@@ -264,7 +261,7 @@ export class LineChart implements Graph {
         circularFind(this.graphDataMerged.colors, index),
       )
       .selectAll('.dots-group')
-      .data((_, index) => this.graphDataMerged.lineChart.data[index])
+      .data((_, index) => this.graphDataMerged.data[index])
       .enter()
       .append('circle')
       .attr('class', 'dot')
