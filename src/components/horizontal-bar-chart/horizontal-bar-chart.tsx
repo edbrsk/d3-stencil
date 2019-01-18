@@ -18,10 +18,10 @@ import { DEFAULT_GRAPH_DATA_BAR } from '@d3-stencil/shared';
   tag: 'horizontal-bar-chart',
   styleUrl: 'horizontal-bar-chart.scss',
 })
-export class HorizontalBarChart implements Graph {
-  @Prop() graphData: GraphData;
+export class HorizontalBarChart implements Graph<number[]> {
+  @Prop() graphData: GraphData<number[]>;
   @Element() horizontalBarChartEl: HTMLElement;
-  graphDataMerged: GraphData;
+  graphDataMerged: GraphData<number[]>;
   svg: Selection<SVGElement, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
@@ -57,7 +57,7 @@ export class HorizontalBarChart implements Graph {
   }
 
   @Method()
-  updateGraphData(graphData: GraphData): void {
+  updateGraphData(graphData: GraphData<number[]>): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
       graphData,
@@ -76,7 +76,7 @@ export class HorizontalBarChart implements Graph {
         this.graphDataMerged.barChart.margin.left -
         this.graphDataMerged.barChart.margin.right;
 
-      const originalGraphData: number[] = this.graphDataMerged.barChart.data[0];
+      const originalGraphData: number[] = this.graphDataMerged.data;
 
       const maxValue = max<number, number>(originalGraphData, data => data);
 
@@ -100,10 +100,7 @@ export class HorizontalBarChart implements Graph {
   }
 
   hasData(): Error | boolean {
-    return this.graphDataMerged.hasDataMethod(
-      this.graphDataMerged,
-      this.graphDataMerged.barChart.data,
-    );
+    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
   }
 
   reSetRoot(): void {
@@ -175,7 +172,7 @@ export class HorizontalBarChart implements Graph {
       .append('g')
       .attr('class', 'bar-group')
       .selectAll('.bar')
-      .data(this.graphDataMerged.barChart.data[0])
+      .data(this.graphDataMerged.data)
       .enter()
       .filter(data => this.x(data) > 0)
       .append('rect')

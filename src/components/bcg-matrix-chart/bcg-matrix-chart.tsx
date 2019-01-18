@@ -4,7 +4,7 @@ import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { pack, hierarchy } from 'd3-hierarchy';
+import { pack, hierarchy, HierarchyCircularNode } from 'd3-hierarchy';
 import { BcgMatrix } from '@d3-stencil/interfaces/data-types';
 import { Graph, GraphData } from '@d3-stencil/interfaces';
 import { Resize } from '@d3-stencil/decorators';
@@ -20,10 +20,10 @@ import { DEFAULT_GRAPH_DATA_BCG } from '@d3-stencil/shared';
   tag: 'bcg-matrix-chart',
   styleUrl: 'bcg-matrix-chart.scss',
 })
-export class BGCMatrixChart implements Graph {
-  @Prop() graphData: GraphData;
+export class BGCMatrixChart implements Graph<BcgMatrix[]> {
+  @Prop() graphData: GraphData<BcgMatrix[]>;
   @Element() bgcMatrixChartEl: HTMLElement;
-  graphDataMerged: GraphData;
+  graphDataMerged: GraphData<BcgMatrix[]>;
   svg: Selection<Element, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
@@ -62,13 +62,13 @@ export class BGCMatrixChart implements Graph {
       this.eventsLegend.bind(this),
     );
 
-    this.dataSet.children = this.graphDataMerged.bcgMatrixChart.data;
+    this.dataSet.children = this.graphDataMerged.data;
 
     this.drawChart();
   }
 
   @Method()
-  updateGraphData(graphData: GraphData) {
+  updateGraphData(graphData: GraphData<BcgMatrix[]>) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BCG },
       graphData,
@@ -91,10 +91,7 @@ export class BGCMatrixChart implements Graph {
         .domain([
           0,
           Math.round(
-            max(
-              this.graphDataMerged.bcgMatrixChart.data,
-              (data: BcgMatrix) => data.x_data,
-            ),
+            max(this.graphDataMerged.data, (data: BcgMatrix) => data.x_data),
           ),
         ])
         .range([0, this.width]);
@@ -102,10 +99,7 @@ export class BGCMatrixChart implements Graph {
       this.y = scaleLinear()
         .domain([
           0,
-          max(
-            this.graphDataMerged.bcgMatrixChart.data,
-            (data: BcgMatrix) => data.y_data,
-          ),
+          max(this.graphDataMerged.data, (data: BcgMatrix) => data.y_data),
         ])
         .range([this.height, 0]);
 
@@ -241,22 +235,30 @@ export class BGCMatrixChart implements Graph {
     node
       .filter(data => data.r > 0)
       .append('circle')
-      .attr('cx', ({ data }: any) => this.x(data.x_data))
-      .attr('cy', ({ data }: any) => this.y(data.y_data))
-      .attr('r', data => data.r)
+      .attr('cx', ({ data }: HierarchyCircularNode<BcgMatrix>) =>
+        this.x(data.x_data),
+      )
+      .attr('cy', ({ data }: HierarchyCircularNode<BcgMatrix>) =>
+        this.y(data.y_data),
+      )
+      .attr('r', (data: HierarchyCircularNode<BcgMatrix>) => data.r)
       .style('fill', (_, index: number) =>
         circularFind(this.graphData.colors, index),
       )
       .style('opacity', this.bubbleOptions.opacity);
 
     node
-      .filter(data => data.r > 0)
+      .filter((data: HierarchyCircularNode<BcgMatrix>) => data.r > 0)
       .append('rect')
-      .attr('width', data => data.r * 2 + this.bubbleOptions.padding)
+      .attr(
+        'width',
+        (data: HierarchyCircularNode<BcgMatrix>) =>
+          data.r * 2 + this.bubbleOptions.padding,
+      )
       .attr('height', this.bubbleOptions.height)
       .attr(
         'x',
-        (data: any) =>
+        (data: HierarchyCircularNode<BcgMatrix>) =>
           this.x(data.data.x_data) - data.r - this.bubbleOptions.padding / 2,
       )
       .attr(
@@ -270,10 +272,14 @@ export class BGCMatrixChart implements Graph {
       .attr('fill', '#FFFFFF');
 
     node
-      .filter(data => data.r > 0)
+      .filter((data: HierarchyCircularNode<BcgMatrix>) => data.r > 0)
       .append('text')
-      .attr('dx', ({ data }: any) => this.x(data.x_data))
-      .attr('dy', ({ data }: any) => this.y(data.y_data))
+      .attr('dx', ({ data }: HierarchyCircularNode<BcgMatrix>) =>
+        this.x(data.x_data),
+      )
+      .attr('dy', ({ data }: HierarchyCircularNode<BcgMatrix>) =>
+        this.y(data.y_data),
+      )
       .style('text-anchor', 'middle')
       .text((_, index: number) => this.graphData.labels[index])
       .attr('font-size', this.bubbleOptions.fontSize)

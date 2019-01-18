@@ -76,7 +76,7 @@ export class LineAnnotationsChart implements Graph {
         this.graphDataMerged.lineChart.margin.left -
         this.graphDataMerged.lineChart.margin.right;
 
-      const originalGraphData = this.graphDataMerged.lineChart.data;
+      const originalGraphData = this.graphDataMerged.data;
 
       const allDataValues = originalGraphData.reduce(
         (acc: number[], data: number[]) => (acc = [...acc, ...data]),
