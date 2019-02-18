@@ -13,20 +13,15 @@ const users = [
 const siteConfig = {
   title: 'D3-Stencil',
   tagline: 'Framework-agnostic, simple.',
-  url: 'https://edgarordonez.github.io', // Your website URL
-  baseUrl: '/', // Base URL for your project */
-  // For github.io type URLs, you would set the url and baseUrl like:
-  //   url: 'https://facebook.github.io',
-  //   baseUrl: '/test-site/',
-
-  // Used for publishing and more
+  url: 'https://edgarordonez.github.io',
+  baseUrl: '/d3-stencil',
   projectName: 'D3-Stencil',
   organizationName: 'Edgar Ordóñez',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
     { doc: 'basics/basics-install', label: 'Getting Started' },
-    { doc: 'api/api-types', label: 'API Reference' },
+    { doc: 'api/api-introduction', label: 'API Reference' },
     { page: 'help', label: 'Help' },
     { blog: false },
   ],
@@ -56,6 +51,8 @@ const siteConfig = {
     theme: 'atom-one-dark',
     defaultLang: 'typescript',
   },
+
+  usePrism: ['jsx'],
 
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js'],

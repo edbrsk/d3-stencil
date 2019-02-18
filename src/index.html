@@ -16,11 +16,6 @@
     <link rel="apple-touch-icon" href="/assets/icon/icon.png" />
     <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
-  </head>
-
-  <body>
-    <my-app></my-app>
-
     <style>
       html {
         box-sizing: border-box;
@@ -37,6 +32,302 @@
         padding: 0px;
         font-family: sans-serif;
       }
+
+      .square {
+        display: inline-block;
+        width: 0.625rem;
+        height: 0.625rem;
+        margin: 0 0.3125rem;
+      }
+
+      .question-mark {
+        background-color: rgb(255, 140, 0);
+      }
+
+      .stars {
+        background-color: rgb(152, 171, 197)
+      }
+
+      .dogs {
+        background-color:rgb(208, 116, 60);
+      }
+
+      .cash_cows {
+        background-color: rgb(123, 104, 136);
+      }
     </style>
+  </head>
+
+  <body>
+    <pie-chart>
+      <tooltip-chart slot="tooltip"/>
+      <legend-chart slot="legend"/>
+    </pie-chart>
+
+    <horizontal-bar-chart>
+      <tooltip-chart slot="tooltip" />
+    </horizontal-bar-chart>
+
+    <line-chart>
+      <tooltip-chart slot="tooltip" />
+    </line-chart>
+
+    <line-annotations-chart>
+      <tooltip-chart slot="tooltip" />
+    </line-annotations-chart>
+
+
+    <bcg-matrix-chart>
+      <tooltip-chart slot="tooltip" />
+    </bcg-matrix-chart>
+
+    <script>
+      const PIE_CHART_DATA = {
+        pieChart: {
+          labelFormat: 'ANY',
+          dataFormat: 'GROUPED_TWO_DIGITS',
+        },
+        styles: {
+          width: '100%',
+          height: '500px',
+          margin: '20px 0',
+        },
+        colors: [
+          '#98abc5',
+          '#8a89a6',
+          '#7b6888',
+          '#6b486b',
+          '#a05d56',
+          '#d0743c',
+          '#ff8c00',
+        ],
+        labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
+        data: [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
+      };
+      const LEGEND_PIE_CHART_DATA_ = {
+        labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
+        colors: [
+          '#98abc5',
+          '#8a89a6',
+          '#7b6888',
+          '#6b486b',
+          '#a05d56',
+          '#d0743c',
+          '#ff8c00'
+        ],
+        styles: {
+          height: '160px'
+        },
+        type: 'vertical'
+      };
+
+      const pieChartEl = document.querySelector('pie-chart');
+      pieChartEl.graphData = PIE_CHART_DATA;
+      const legendPieChartEl = document.querySelector('legend-chart');
+      legendPieChartEl.legendData = LEGEND_PIE_CHART_DATA_;
+
+      const HORIZONTAL_BAR_CHART_DATA = {
+        barChart: {
+          axis: {
+            x: {
+              format: 'CURRENCY',
+            },
+          },
+          margin: {
+            top: 20,
+            right: 30,
+            bottom: 50,
+            left: 60,
+          },
+        },
+        styles: {
+          width: '100%',
+          height: '500px',
+          margin: '20px 0',
+        },
+        colors: [
+          '#98abc5',
+          '#8a89a6',
+          '#7b6888',
+          '#6b486b',
+          '#a05d56',
+          '#d0743c',
+          '#ff8c00',
+        ],
+        labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
+        data: [1250, 200, 20, 140, 600, 3002, 5985],
+      };
+      const horizontalBarChartEl = document.querySelector('horizontal-bar-chart');
+      horizontalBarChartEl.graphData = HORIZONTAL_BAR_CHART_DATA;
+
+      const LINE_CHART_DATA = {
+        lineChart: {
+          axis: {
+            x: {
+              format: 'DAY_AND_MONTH',
+              label: 'Days',
+            },
+            y: {
+              format: 'GROUPED_TWO_DIGITS',
+              label: 'Quantity',
+            },
+          },
+          margin: {
+            top: 20,
+            right: 30,
+            bottom: 50,
+            left: 60,
+          },
+        },
+        styles: {
+          width: '100%',
+          height: '500px',
+          margin: '20px 0',
+        },
+        colors: ['#98abc5', '#8a89a6'],
+        labels: [
+          1496354400,
+          1496440800,
+          1496527200,
+          1496613600,
+          1496700000,
+          1496786400,
+          1496872800,
+        ],
+        data: [
+          [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
+          [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
+        ],
+      };
+      const lineChartEl = document.querySelector('line-chart');
+      lineChartEl.graphData = LINE_CHART_DATA;
+
+      const LINE_ANNOTATIONS_CHART_DATA = {
+        lineChart: {
+          axis: {
+            x: {
+              format: 'DAY_AND_MONTH',
+              label: 'Days',
+            },
+            y: {
+              format: 'GROUPED_TWO_DIGITS',
+              label: 'Quantity',
+            },
+          },
+          margin: {
+            top: 20,
+            right: 30,
+            bottom: 50,
+            left: 60,
+          },
+        },
+        lineAnnotationsChart: {
+          increaseHeight: 15,
+          tickSeparation: '2em',
+          annotations: [[34], [15], [], [], [67, 90], [], []],
+        },
+        styles: {
+          width: '100%',
+          height: '500px',
+          margin: '20px 0',
+        },
+        colors: ['#98abc5', '#8a89a6'],
+        labels: [
+          1496354400,
+          1496440800,
+          1496527200,
+          1496613600,
+          1496700000,
+          1496786400,
+          1496872800,
+        ],
+        data: [
+          [2704659, 4499890, 2159981, 3853788, 16106543, 8819342, 612463],
+          [1004659, 2499890, 1159981, 2853788, 14106543, 6819342, 412463],
+        ],
+      };
+      const lineAnnotationsChartEl = document.querySelector('line-annotations-chart');
+      lineAnnotationsChartEl.graphData = LINE_ANNOTATIONS_CHART_DATA;
+
+      const BCG_MATRIX_CHART_DATA = {
+        bcgMatrixChart: {
+          axis: {
+            y: {
+              format: 'PERCENTAGE',
+            },
+          },
+          value: {
+            format: 'GROUPED_TWO_DIGITS',
+          },
+          margin: {
+            top: 20,
+            right: 40,
+            bottom: 20,
+            left: 40,
+          },
+        },
+        styles: {
+          width: '100%',
+          height: '500px',
+          margin: '20px 0',
+        },
+        colors: [
+          '#98abc5',
+          '#7b6888',
+          '#7b6888',
+          '#ff8c00',
+          '#d0743c',
+          '#ff8c00',
+          '#ff8c00',
+        ],
+        labels: ['<5', '5-13', '14-17', '18-24', '25-44', '45-64', '≥65'],
+        data: [
+          {
+            x_data: 0.43,
+            y_data: 0.65,
+            rel_size: 648860,
+            tooltipInfo: `<b>Current:</b><div class="square stars"></div> 5 weeks<br>Overview: <div class="square stars"></div> 10 weeks <div class="square question-mark"></div> 30 weeks`,
+          },
+          {
+            x_data: 0.16,
+            y_data: 0.34,
+            rel_size: 588399,
+            tooltipInfo: `<b>Current:</b><div class="square cash_cows"></div> 5 weeks<br>Overview: <div class="square cash_cows"></div> 10 weeks <div class="square dogs"></div> 30 weeks`,
+          },
+          {
+            x_data: 0.33,
+            y_data: 0.22,
+            rel_size: 177443,
+            tooltipInfo: `<b>Current:</b><div class="square cash_cows"></div> 5 weeks<br>Overview: <div class="square cash_cows"></div> 10 weeks <div class="square dogs"></div> 30 weeks`,
+          },
+          {
+            x_data: 1.66,
+            y_data: 0.72,
+            rel_size: 729405,
+            tooltipInfo: `<b>Current:</b><div class="square question-mark"></div> 5 weeks<br>Overview: <div class="square question-mark"></div> 10 weeks <div class="square stars"></div> 30 weeks`,
+          },
+          {
+            x_data: 1.5,
+            y_data: 0.22,
+            rel_size: 838025,
+            tooltipInfo: `<b>Current:</b><div class="square dogs"></div> 5 weeks<br>Overview: <div class="square dogs"></div> 10 weeks <div class="square dogs"></div> 30 weeks`,
+          },
+          {
+            x_data: 1.21,
+            y_data: 0.85,
+            rel_size: 269605,
+            tooltipInfo: `<b>Current:</b><div class="square question-mark"></div> 5 weeks<br>Overview: <div class="square question-mark"></div> 10 weeks <div class="square dogs"></div> 30 weeks`,
+          },
+          {
+            x_data: 1.21,
+            y_data: 0.57,
+            rel_size: 569985,
+            tooltipInfo: `<b>Current:</b><div class="square question-mark"></div> 5 weeks<br>Overview: <div class="square question-mark"></div> 10 weeks <div class="square question-mark"></div> 30 weeks`,
+          },
+        ],
+      };
+      const bcgMatrixChartEl = document.querySelector('bcg-matrix-chart');
+      bcgMatrixChartEl.graphData = BCG_MATRIX_CHART_DATA;
+    </script>
   </body>
 </html>

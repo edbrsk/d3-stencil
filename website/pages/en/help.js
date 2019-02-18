@@ -21,14 +21,16 @@ function Help(props) {
          'basics/basics-install.html',
        )})
 
-       \n- Look at the full [API Reference](${docUrl('api/api-types.html')}).
+       \n- Look at the full [API Reference](${docUrl(
+         'api/api-introduction.html',
+       )}).
       `,
     },
     {
       title: 'Join the community',
       content: `Ask questions and find answers from other D3-Stencil users like you.
 
-      \n- Join to the [D3-Stencil Slack channel](https://slack.com)
+      \n- Join to [D3-Stencil](https://d3-stencil.slack.com/) Slack channel.
 
       \n- Many members of the D3-Stencil use [Github](https://github.com/edgarordonez/d3-stencil). Read through the existing issues or ask your own!
       `,
@@ -37,7 +39,7 @@ function Help(props) {
       title: 'Stay up to date',
       content: `Find out what's new with D3-Stencil
 
-      \n- Follow [D3-Stencil](https://twitter.com/edbrsk) on Twitter.
+      \n- Follow [D3-Stencil](https://twitter.com/edbrsk) news on Twitter.
       `,
     },
   ];
