@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method } from '@stencil/core';
+import { Component, Element, Prop, Method, State } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
@@ -32,8 +32,8 @@ export class PieChart implements Graph<number[]> {
     SVGElement,
     {}
   >;
-  tooltipEl: HTMLTooltipChartElement;
-  legendEl: HTMLLegendChartElement;
+  @State() tooltipEl: HTMLTooltipChartElement;
+  @State() legendEl: HTMLLegendChartElement;
 
   componentWillLoad(): void {
     this.graphDataMerged = objectAssignDeep(
@@ -48,13 +48,8 @@ export class PieChart implements Graph<number[]> {
     );
 
     this.height = this.svg.node().getBoundingClientRect().height;
-    this.tooltipEl = initTooltipIfExists(this.pieChartEl);
 
-    this.legendEl = initLegendIfExists(
-      this.pieChartEl,
-      this.eventsLegend.bind(this),
-    );
-
+    this.initSlots();
     this.drawChart();
   }
 
@@ -122,6 +117,15 @@ export class PieChart implements Graph<number[]> {
     this.root = this.svg
       .append('g')
       .attr('transform', `translate(${this.width / 2}, ${this.height / 2})`);
+  }
+
+  initSlots() {
+    this.tooltipEl = initTooltipIfExists(this.pieChartEl);
+
+    this.legendEl = initLegendIfExists(
+      this.pieChartEl,
+      this.eventsLegend.bind(this),
+    );
   }
 
   createLabels(): void {
@@ -195,7 +199,7 @@ export class PieChart implements Graph<number[]> {
 
   render() {
     return (
-      <div class="o-layout is--vertical">
+      <div class={this.legendEl ? 'o-layout is--vertical' : 'o-layout'}>
         <div class="o-layout--chart">
           <svg style={this.graphDataMerged.styles} />
         </div>
