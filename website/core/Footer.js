@@ -41,7 +41,7 @@ class Footer extends React.Component {
           </a>
 
           <a
-            href="https://slack.com/"
+            href="https://d3-stencil.slack.com"
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -50,7 +50,7 @@ class Footer extends React.Component {
 
           <a href="https://npmjs.com/package/d3-stencil">NPM Package</a>
 
-          <a href={this.docUrl('dev-intro.html', this.props.language)}>
+          <a href={this.docUrl('dev/dev-intro.html')}>
             Contribute to D3-Stencil
           </a>
 

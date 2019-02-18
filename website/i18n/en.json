@@ -5,14 +5,14 @@
     "previous": "Previous",
     "tagline": "Framework-agnostic, simple.",
     "docs": {
+      "api/api-introduction": {
+        "title": "API Introduction"
+      },
       "api/api-types": {
         "title": "Types"
       },
       "basics/basics-install": {
-        "title": "Install"
-      },
-      "basics/basics-usage": {
-        "title": "Usage"
+        "title": "Getting Started"
       },
       "dev/dev-intro": {
         "title": "Developing D3-Stencil"
