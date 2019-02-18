@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method } from '@stencil/core';
+import { Component, Element, Prop, Method, State } from '@stencil/core';
 import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
@@ -28,8 +28,8 @@ export class HorizontalBarChart implements Graph<number[]> {
   height: number;
   x: ScaleLinear<number, number>;
   y: ScaleBand<string>;
-  tooltipEl: HTMLTooltipChartElement;
-  legendEl: HTMLLegendChartElement;
+  @State() tooltipEl: HTMLTooltipChartElement;
+  @State() legendEl: HTMLLegendChartElement;
 
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
@@ -46,13 +46,7 @@ export class HorizontalBarChart implements Graph<number[]> {
       this.graphDataMerged.barChart.margin.top -
       this.graphDataMerged.barChart.margin.bottom;
 
-    this.tooltipEl = initTooltipIfExists(this.horizontalBarChartEl);
-
-    this.legendEl = initLegendIfExists(
-      this.horizontalBarChartEl,
-      this.eventsLegend.bind(this),
-    );
-
+    this.initSlots();
     this.drawChart();
   }
 
@@ -116,6 +110,15 @@ export class HorizontalBarChart implements Graph<number[]> {
           this.graphDataMerged.barChart.margin.top
         })`,
       );
+  }
+
+  initSlots() {
+    this.tooltipEl = initTooltipIfExists(this.horizontalBarChartEl);
+
+    this.legendEl = initLegendIfExists(
+      this.horizontalBarChartEl,
+      this.eventsLegend.bind(this),
+    );
   }
 
   drawAxis(): void {
@@ -224,7 +227,7 @@ export class HorizontalBarChart implements Graph<number[]> {
 
   render() {
     return (
-      <div class="o-layout is--vertical">
+      <div class={this.legendEl ? 'o-layout is--vertical' : 'o-layout'}>
         <div class="o-layout--chart">
           <svg style={this.graphDataMerged.styles} />
         </div>

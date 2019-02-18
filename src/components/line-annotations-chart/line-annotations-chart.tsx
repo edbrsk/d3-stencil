@@ -149,7 +149,7 @@ export class LineAnnotationsChart implements Graph {
       .attr('xlink:href', (data: number[]) =>
         data.length > 1
           ? this.graphDataMerged.lineAnnotationsChart.imagePathSomeAnnotations
-          : this.graphDataMerged.lineAnnotationsChart.imagePathSomeAnnotations,
+          : this.graphDataMerged.lineAnnotationsChart.imagePathOneAnnotation,
       )
       .on('mouseover', () => this.strokedashAnnotations(true))
       .on('mouseleave', () => this.strokedashAnnotations());
