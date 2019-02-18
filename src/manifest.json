@@ -1,13 +1,15 @@
 {
-  "name": "Stencil Starter",
-  "short_name": "Stencil",
+  "name": "D3-Stencil",
+  "short_name": "d3-stencil",
   "start_url": "/",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/icon/icon.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
-  "background_color": "#16161d",
-  "theme_color": "#16161d"
+  "icons": [
+    {
+      "src": "assets/icon/icon.png",
+      "sizes": "1920x500",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#ffffff",
+  "theme_color": "#e48e21"
 }

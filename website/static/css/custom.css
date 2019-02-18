@@ -1,5 +1,10 @@
 /* your custom css */
 
+img[alt='happy'] {
+  width: 20px;
+  display: inline-block;
+}
+
 .homeContainer .homeWrapper .projectLogo {
   position: relative;
   display: flex;
