@@ -2,13 +2,14 @@
   "name": "d3-stencil",
   "private": false,
   "version": "0.0.2",
-  "description": "Components of Graphs build with StencilJS & D3.js",
+  "description": "Charts built with D3 and Stencil. Framework-agnostic, simple.",
   "homepage": "https://github.com/edgarordonez/d3-stencil",
   "keywords": [
     "Stencil",
     "D3.js",
     "Web Components",
-    "Graphs"
+    "Graphs",
+    "Charts"
   ],
   "author": "Edgar Ordóñez Rodríguez",
   "license": "MIT",
@@ -26,33 +27,32 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "lint": "yarn tslint --project tsconfig.json --fix",
     "sonar": "node sonar-properties.js",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
-    "docs.data": "stencil build --docs-json path/to/docs.json"
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "dependencies": {
-    "d3": "^5.7.0",
+    "d3": "^5.9.1",
     "object-assign-deep": "^0.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^7.3.2",
-    "@commitlint/config-conventional": "^7.3.1",
+    "@commitlint/cli": "^7.5.2",
+    "@commitlint/config-conventional": "^7.5.0",
     "@stencil/core": "latest",
-    "@stencil/router": "^0.3.2",
+    "@stencil/router": "^0.3.3",
     "@stencil/sass": "^0.1.1",
     "@stencil/utils": "latest",
-    "@types/d3": "^5.7.0",
-    "@types/jest": "^23.3.12",
-    "@types/puppeteer": "1.11.1",
+    "@types/d3": "^5.7.1",
+    "@types/jest": "^24.0.6",
+    "@types/puppeteer": "1.12.1",
     "coveralls": "^3.0.2",
     "cz-conventional-changelog": "^2.1.0",
-    "docusaurus": "^1.6.2",
+    "docusaurus": "^1.7.2",
     "husky": "^1.3.1",
-    "jest": "^23.6.0",
-    "prettier": "^1.15.3",
-    "puppeteer": "1.8.0",
-    "sonarqube-scanner": "^2.1.2",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4",
+    "puppeteer": "1.12.2",
+    "sonarqube-scanner": "^2.2.0",
     "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.17.0"
+    "tslint-config-prettier": "^1.18.0"
   },
   "repository": {
     "type": "git",
