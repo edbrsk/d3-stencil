@@ -22,9 +22,6 @@ import {
 
 export namespace Components {
 
-  interface MyApp {}
-  interface MyAppAttributes extends StencilHTMLAttributes {}
-
   interface BcgMatrixChart {
     'graphData': GraphData<BcgMatrix[]>;
     'updateGraphData': (graphData: any) => void;
@@ -87,7 +84,6 @@ export namespace Components {
 
 declare global {
   interface StencilElementInterfaces {
-    'MyApp': Components.MyApp;
     'BcgMatrixChart': Components.BcgMatrixChart;
     'HorizontalBarChart': Components.HorizontalBarChart;
     'LegendChart': Components.LegendChart;
@@ -98,7 +94,6 @@ declare global {
   }
 
   interface StencilIntrinsicElements {
-    'my-app': Components.MyAppAttributes;
     'bcg-matrix-chart': Components.BcgMatrixChartAttributes;
     'horizontal-bar-chart': Components.HorizontalBarChartAttributes;
     'legend-chart': Components.LegendChartAttributes;
@@ -108,12 +103,6 @@ declare global {
     'tooltip-chart': Components.TooltipChartAttributes;
   }
 
-
-  interface HTMLMyAppElement extends Components.MyApp, HTMLStencilElement {}
-  var HTMLMyAppElement: {
-    prototype: HTMLMyAppElement;
-    new (): HTMLMyAppElement;
-  };
 
   interface HTMLBcgMatrixChartElement extends Components.BcgMatrixChart, HTMLStencilElement {}
   var HTMLBcgMatrixChartElement: {
@@ -158,7 +147,6 @@ declare global {
   };
 
   interface HTMLElementTagNameMap {
-    'my-app': HTMLMyAppElement
     'bcg-matrix-chart': HTMLBcgMatrixChartElement
     'horizontal-bar-chart': HTMLHorizontalBarChartElement
     'legend-chart': HTMLLegendChartElement
@@ -169,7 +157,6 @@ declare global {
   }
 
   interface ElementTagNameMap {
-    'my-app': HTMLMyAppElement;
     'bcg-matrix-chart': HTMLBcgMatrixChartElement;
     'horizontal-bar-chart': HTMLHorizontalBarChartElement;
     'legend-chart': HTMLLegendChartElement;
