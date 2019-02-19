@@ -15,8 +15,8 @@ const siteConfig = {
   tagline: 'Framework-agnostic, simple.',
   url: 'https://edgarordonez.github.io',
   baseUrl: '/d3-stencil',
-  projectName: 'D3-Stencil',
-  organizationName: 'Edgar Ordóñez',
+  projectName: 'd3-stencil',
+  organizationName: 'edgarordonez',
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
