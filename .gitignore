@@ -6,7 +6,7 @@ coverage/
 *~
 *.sw[mnpcod]
 *.log
-*.lock
+website/*.lock
 *.tmp
 *.tmp.*
 log.txt
