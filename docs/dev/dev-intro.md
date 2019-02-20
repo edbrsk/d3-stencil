@@ -3,7 +3,7 @@ id: dev-intro
 title: Developing D3-Stencil
 ---
 
-I would like to make contributing to this project as easy and transparent as possible.
+The intention is to make contributions to this project as easy and as transparent as possible.
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ $ yarn start
 
 ## Pull Requests
 
-I actively welcome your pull requests.
+Pull requests are welcome.
 
 1. If you've added code that should be tested, add unit tests.
 2. If you've changed APIs, update the documentation.

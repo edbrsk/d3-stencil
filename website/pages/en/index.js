@@ -112,14 +112,14 @@ class Index extends React.Component {
         {[
           {
             content:
-              'Chose the right chart. Put your data in d3-stencil, and visualise it.',
+              'Choose the right chart. Put your data into d3-stencil, and visualise it.',
             image: `${baseUrl}img/clock-emoji.png`,
             imageAlign: 'top',
             title: 'Simple',
           },
           {
             content:
-              'D3.js is an incredibly successful library, and Stencil, as they said, are just Web Components, so they work with any major framework or no framework at all. Nothing more to say. Powerful.',
+              'D3.js is an incredible library, and Stencil, as they said, are just Web Components, so they work with any major framework or no framework at all.',
             image: `${baseUrl}img/fire-emoji.png`,
             imageAlign: 'top',
             title: 'D3 - Stencil',

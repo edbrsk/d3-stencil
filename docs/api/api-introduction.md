@@ -28,7 +28,7 @@ If you have been using TypeScript for a while, you may have noticed that we are 
 - [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
 - [Generics](https://www.typescriptlang.org/docs/handbook/generics.html)
 
-If you are not familiar with TypeScript, don't worry, I'm going to explain the reason behind this.
+If you are not familiar with TypeScript, don't worry, you can read the reason behind this below.
 
 Let's start with `Partial<{}>`. In this case `Partial<{}>` means that all the properties in `GraphData` are optional, so we can create our `GraphData` object just with the properties we want to change. It is because the expected type is optional and all of D3-Stencil components have an internal copy with the default values.
 
@@ -38,11 +38,11 @@ If you are not using TypeScript, don't worry about that, but if you are using it
 
 To explain it in a nutshell, this brings to us the opportunity to be more strict in the implementation of each component, and a little bit more flexible with the types & interfaces.
 
-I don't want to be heavy explaining all the types & interfaces, and how these are related, etc. I prefer you go to read the [API Reference - Types](/docs/api/api-types) and there you can grasp the concepts more in-depth, but now let's going to see how to works with `GraphData` object, components, and check some examples.
+Don't focus grasp all the types & interfaces, and how these are related, etc. You can go to read the [API Reference - Types](/docs/api/api-types) and there you can grasp the concepts more in-depth, but now let's going to see how to works with `GraphData` object, components, and check some examples.
 
 ## Components
 
-The examples below implements the specific attribute which I didn't mention yet, and it depends on the chart we are using. Don't focus too much on the `Styles, Axis, Formats, Margin`. You'll be able to go further reading the [API Reference - Types](/docs/api/api-types).
+The examples below implements the specific attributes about you haven't read yet, and those depend on the charts we are using. Don't focus too much on the Styles, Axis, Formats, Margin. You'll be able to go further reading the [API Reference - Types](/docs/api/api-types).
 
 ### Pie Chart
 
