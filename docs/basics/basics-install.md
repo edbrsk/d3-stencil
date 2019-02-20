@@ -5,11 +5,11 @@ title: Getting Started
 
 ## The beginnings
 
-This project began in [Barcelona](https://es.wikipedia.org/wiki/Barcelona) when I was working in a company which they use graphs in many of their products.
+This project began in [Barcelona](https://es.wikipedia.org/wiki/Barcelona), to be accurate, in the journeys to a company which use graphs in many of their products.
 
-I read about Stencil, and I thought that would be helpful in our case to use a small library of components with some benefits like framework-agnostic, follow a set of rules, have a suite of tests, TypeScript, etc. However, due that Stencil was in beta yet (if I recall correctly), this library didn't exist.
+Major blogs were talking about Stencil, and use it would be helpful in our case to create a small library of components with some benefits like web-components, framework-agnostic, a set of rules, have a suite of tests, etc. However, due that Stencil was in beta yet, this library none was available at that moment.
 
-For that reason, in my journeys, I started to develop D3-Stencil. I tried to find a way to simplify the process to create new charts, a simple way to use them as well, and the journeys are still ongoing, so I'll make more improvements, for now, let's going to see how to install D3-Stencil.
+For that reason, a few months later was launched D3-Stencil. The main intention was to find a way to simplify the process to create new charts, a simple way to use them as well, and the journeys are still ongoing, so more improvements are coming, for now, let's going to see how to install D3-Stencil.
 
 ## Install
 
