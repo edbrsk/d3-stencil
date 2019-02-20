@@ -47,16 +47,16 @@
 <li><a href="https://www.typescriptlang.org/docs/handbook/advanced-types.html">Advanced Types</a></li>
 <li><a href="https://www.typescriptlang.org/docs/handbook/generics.html">Generics</a></li>
 </ul>
-<p>If you are not familiar with TypeScript, don't worry, I'm going to explain the reason behind this.</p>
+<p>If you are not familiar with TypeScript, don't worry, you can read the reason behind this below.</p>
 <p>Let's start with <code>Partial&lt;{}&gt;</code>. In this case <code>Partial&lt;{}&gt;</code> means that all the properties in <code>GraphData</code> are optional, so we can create our <code>GraphData</code> object just with the properties we want to change. It is because the expected type is optional and all of D3-Stencil components have an internal copy with the default values.</p>
 <p>Regarding the Generic types, we need to focus on the main intention, which it was to create a kind of object the most flexible as possible, but not all the data that you need to manage has the same structure to fit in a bidimensional array of numbers, this was the primary cause to use Generics.</p>
 <p>If you are not using TypeScript, don't worry about that, but if you are using it is interesting because you can specify the type of your data when you will be making your <code>GraphData</code> object. For example, the default value is <code>GraphData&lt;number[][]&gt;</code> and it works for the <code>chart-line</code>, but in the BCGMatrix the component specify the kind of object expected, which should be <code>Graph&lt;BcgMatrix[]&gt;</code>.</p>
 <p>To explain it in a nutshell, this brings to us the opportunity to be more strict in the implementation of each component, and a little bit more flexible with the types &amp; interfaces.</p>
-<p>I don't want to be heavy explaining all the types &amp; interfaces, and how these are related, etc. I prefer you go to read the <a href="/docs/api/api-types">API Reference - Types</a> and there you can grasp the concepts more in-depth, but now let's going to see how to works with <code>GraphData</code> object, components, and check some examples.</p>
+<p>Don't focus grasp all the types &amp; interfaces, and how these are related, etc. You can go to read the <a href="/docs/api/api-types">API Reference - Types</a> and there you can grasp the concepts more in-depth, but now let's going to see how to works with <code>GraphData</code> object, components, and check some examples.</p>
 <h2><a class="anchor" aria-hidden="true" id="components"></a><a href="#components" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Components</h2>
-<p>The examples below implements the specific attribute which I didn't mention yet, and it depends on the chart we are using. Don't focus too much on the <code>Styles, Axis, Formats, Margin</code>. You'll be able to go further reading the <a href="/docs/api/api-types">API Reference - Types</a>.</p>
+<p>The examples below implements the specific attributes about you haven't read yet, and those depend on the charts we are using. Don't focus too much on the Styles, Axis, Formats, Margin. You'll be able to go further reading the <a href="/docs/api/api-types">API Reference - Types</a>.</p>
 <h3><a class="anchor" aria-hidden="true" id="pie-chart"></a><a href="#pie-chart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pie Chart</h3>
-<p><img src="/img/charts/pie-chart.png" alt="pie-chart"></p>
+<p><img src="/d3-stencil/img/charts/pie-chart.png" alt="pie-chart"></p>
 <p>Tag:</p>
 <pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>pie-chart</span> <span class="token attr-name">graphData</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token constant">GRAPH_DATA</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
@@ -85,7 +85,7 @@
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="horizontal-bar-chart"></a><a href="#horizontal-bar-chart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Horizontal Bar Chart</h3>
-<p><img src="/img/charts/horizontal-bar-chart.png" alt="horizontal-bar-chart"></p>
+<p><img src="/d3-stencil/img/charts/horizontal-bar-chart.png" alt="horizontal-bar-chart"></p>
 <p>Tag:</p>
 <pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>horizontal-bar-chart</span> <span class="token attr-name">graphData</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token constant">GRAPH_DATA</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
@@ -122,7 +122,7 @@
 };
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="style-tip-progress-bar"></a><a href="#style-tip-progress-bar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Style tip: Progress bar</h4>
-<p><img src="/img/charts/horizontal-bar-chart-progress-bar.png" alt="horizontal-bar-chart-progress-bar"></p>
+<p><img src="/d3-stencil/img/charts/horizontal-bar-chart-progress-bar.png" alt="horizontal-bar-chart-progress-bar"></p>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> GRAPH_DATA: GraphData&lt;<span class="hljs-built_in">number</span>[]&gt; = {
   barChart: {
     axis: {
@@ -149,7 +149,7 @@
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="line-chart"></a><a href="#line-chart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Line Chart</h3>
-<p><img src="/img/charts/line-chart.png" alt="line-chart"></p>
+<p><img src="/d3-stencil/img/charts/line-chart.png" alt="line-chart"></p>
 <p>Tag:</p>
 <pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>line-chart</span> <span class="token attr-name">graphData</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token constant">GRAPH_DATA</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
@@ -194,7 +194,7 @@
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="line-annotations-chart"></a><a href="#line-annotations-chart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Line Annotations Chart</h3>
-<p><img src="/img/charts/line-annotations-chart.png" alt="line-annotations-chart"></p>
+<p><img src="/d3-stencil/img/charts/line-annotations-chart.png" alt="line-annotations-chart"></p>
 <pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>line-annotations-chart</span> <span class="token attr-name">graphData</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token constant">GRAPH_DATA</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> GRAPH_DATA: GraphData = {
@@ -243,7 +243,7 @@
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="bcg-matrix-chart"></a><a href="#bcg-matrix-chart" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BCG Matrix Chart</h3>
-<p><img src="/img/charts/bcg-matrix-chart.png" alt="bcg-matrix-chart"></p>
+<p><img src="/d3-stencil/img/charts/bcg-matrix-chart.png" alt="bcg-matrix-chart"></p>
 <pre><code class="hljs css language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bcg-matrix-chart</span> <span class="token attr-name">graphData</span><span class="token script language-javascript"><span class="token script-punctuation punctuation">=</span><span class="token punctuation">{</span><span class="token constant">GRAPH_DATA</span><span class="token punctuation">}</span></span> <span class="token punctuation">/></span></span>
 </code></pre>
 <pre><code class="hljs css language-typescript"><span class="hljs-keyword">const</span> GRAPH_DATA: GraphData&lt;BcgMatrix[]&gt; = {
