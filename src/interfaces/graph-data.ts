@@ -1,6 +1,6 @@
 import { Data } from './data-types';
 import { Styles } from './options-types';
-import { HasDataStrategy } from './index';
+import { HasData } from './has-data';
 import {
   PieChart,
   BarChart,
@@ -19,5 +19,5 @@ export type GraphData<T = number[][]> = Partial<{
   colors: string[];
   labels: string[] | number[];
   data: Data<T>;
-  hasDataMethod: HasDataStrategy<T>;
+  hasData: HasData;
 }>;

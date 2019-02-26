@@ -1,4 +1,5 @@
-import { GraphData, GraphMeta } from './index';
+import { GraphData } from './graph-data';
+import { GraphMeta } from './graph-meta';
 
 export interface Graph<T = number[][]> {
   graphData: GraphData<T>;

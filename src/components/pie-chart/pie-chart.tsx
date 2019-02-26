@@ -106,7 +106,7 @@ export class PieChart implements Graph<number[]> {
   }
 
   hasData(): Error | boolean {
-    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
+    return this.graphDataMerged.hasData(this.graphDataMerged);
   }
 
   reSetRoot(): void {

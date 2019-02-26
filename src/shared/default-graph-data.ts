@@ -20,8 +20,7 @@ export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasDataMethod: (graphData: GraphData, data: number[][]) =>
-    hasDataIsNotempty(graphData, data),
+  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
@@ -55,8 +54,7 @@ export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasDataMethod: (graphData: GraphData, data: number[][]) =>
-    hasDataIsNotempty(graphData, data),
+  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
@@ -92,8 +90,7 @@ export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasDataMethod: (graphData: GraphData, data: number[][]) =>
-    hasDataIsNotempty(graphData, data),
+  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE: GraphData = {
@@ -136,8 +133,7 @@ export const DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasDataMethod: (graphData: GraphData) =>
-    hasDataValidOnAnnotationsChart(graphData),
+  hasData: (graphData: GraphData) => hasDataValidOnAnnotationsChart(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_BCG: GraphData<BcgMatrix[]> = {
@@ -176,7 +172,7 @@ export const DEFAULT_GRAPH_DATA_BCG: GraphData<BcgMatrix[]> = {
   colors: [],
   labels: [],
   data: [],
-  hasDataMethod: (graphDataMerged: GraphData<BcgMatrix[]>) =>
+  hasData: (graphDataMerged: GraphData<BcgMatrix[]>) =>
     hasDataBCGMatrixIsNotEmpty(graphDataMerged),
 };
 

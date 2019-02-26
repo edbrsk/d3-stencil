@@ -1,5 +1,6 @@
-import { formatter } from './formatter';
 import { currencyFormatter } from './currency-formatter';
+import { Formats } from './formats';
+import { formatter } from './formatter';
 import { circularFind } from './circular-find';
 import { initTooltipIfExists, initLegendIfExists } from './init-slots';
 import {
@@ -9,8 +10,9 @@ import {
 } from './has-data';
 
 export {
-  formatter,
   currencyFormatter,
+  Formats,
+  formatter,
   circularFind,
   initTooltipIfExists,
   initLegendIfExists,

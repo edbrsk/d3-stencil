@@ -3,6 +3,6 @@ import { GraphMeta } from './graph-meta';
 import { GraphData } from './graph-data';
 import { LegendData } from './legend-data';
 import { Formats } from './formats';
-import { HasDataStrategy } from './has-data-strategy';
+import { HasData } from './has-data';
 
-export { Graph, GraphMeta, GraphData, LegendData, Formats, HasDataStrategy };
+export { Graph, GraphMeta, GraphData, LegendData, Formats, HasData };
