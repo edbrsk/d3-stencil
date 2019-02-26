@@ -1,7 +1,7 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
 import { Formats } from '@d3-stencil/interfaces';
-import { currencyFormatter } from '@d3-stencil/utils';
+import { currencyFormatter } from './currency-formatter';
 
 const formats: {
   [format in Formats]: (

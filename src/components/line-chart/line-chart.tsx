@@ -135,7 +135,7 @@ export class LineChart implements Graph {
   }
 
   hasData(): Error | boolean {
-    return this.graphDataMerged.hasDataMethod(this.graphDataMerged);
+    return this.graphDataMerged.hasData(this.graphDataMerged);
   }
 
   reSetRoot(): void {
