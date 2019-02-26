@@ -1,4 +1,4 @@
-import { circularFind } from './../../src/utils';
+import { circularFind } from './../circular-find';
 
 describe('circular-find', () => {
   const mock: string[] = ['position_1', 'position_2'];

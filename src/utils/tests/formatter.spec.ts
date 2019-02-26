@@ -1,4 +1,4 @@
-import { formatter } from './../../src/utils';
+import { formatter } from './../formatter';
 
 describe('formatter', () => {
   const inputs = {
