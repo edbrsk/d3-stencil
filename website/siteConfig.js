@@ -13,8 +13,8 @@ const users = [
 const siteConfig = {
   title: 'D3-Stencil',
   tagline: 'Framework-agnostic, simple.',
-  url: 'https://edgarordonez.github.io',
-  baseUrl: '/d3-stencil/',
+  url: 'https://d3-stencil.dev',
+  baseUrl: '/',
   projectName: 'd3-stencil',
   organizationName: 'edgarordonez',
 
