@@ -32,7 +32,7 @@ $ yarn start
 
 ## Conventions
 
-- Please, use [commitizen](https://github.com/commitizen/cz-cli). This allows us to follow a structure and generate the CHANGELOG using [cz-conventional-changelog](https://github.com/commitizen/cz-conventional-changelog).
+- Please, use [commitizen](https://github.com/commitizen/cz-cli). This allows us to follow a structure and generate the CHANGELOG using [conventional-changelog-cli](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-cli).
 
 - Follow whenever possible the rules and the styles defined at `.editorconfig`, `.tslint.json`, etc. Would be nice if you have installed Prettier, TSlint/ESlint, and if you are using VSCode, you may find this [extension](https://marketplace.visualstudio.com/items?itemName=KnisterPeter.vscode-commitizen) useful.
 
