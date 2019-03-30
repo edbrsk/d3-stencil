@@ -31,7 +31,9 @@
     ],
     "no-implicit-dependencies": false,
     "interface-name": [true, "never-prefix"],
-    "interface-over-type-literal": false
+    "interface-over-type-literal": false,
+    "semicolon": [true, "always"],
+    "quotemark": [true, "single", "jsx-double"]
   },
   "extends": ["tslint:latest", "tslint-config-prettier"]
 }
