@@ -46,7 +46,7 @@ The examples below implements the specific attributes about you haven't read yet
 
 ### Pie Chart
 
-![pie-chart](/d3-stencil/img/charts/pie-chart.png)
+![pie-chart](/img/charts/pie-chart.png)
 
 Tag:
 
@@ -83,7 +83,7 @@ const GRAPH_DATA: GraphData<number[]> = {
 
 ### Horizontal Bar Chart
 
-![horizontal-bar-chart](/d3-stencil/img/charts/horizontal-bar-chart.png)
+![horizontal-bar-chart](/img/charts/horizontal-bar-chart.png)
 
 Tag:
 
@@ -127,7 +127,7 @@ const GRAPH_DATA: GraphData<number[]> = {
 
 #### Style tip: Progress bar
 
-![horizontal-bar-chart-progress-bar](/d3-stencil/img/charts/horizontal-bar-chart-progress-bar.png)
+![horizontal-bar-chart-progress-bar](/img/charts/horizontal-bar-chart-progress-bar.png)
 
 ```typescript
 const GRAPH_DATA: GraphData<number[]> = {
@@ -158,7 +158,7 @@ const GRAPH_DATA: GraphData<number[]> = {
 
 ### Line Chart
 
-![line-chart](/d3-stencil/img/charts/line-chart.png)
+![line-chart](/img/charts/line-chart.png)
 
 Tag:
 
@@ -210,7 +210,7 @@ const GRAPH_DATA: GraphData = {
 
 ### Line Annotations Chart
 
-![line-annotations-chart](/d3-stencil/img/charts/line-annotations-chart.png)
+![line-annotations-chart](/img/charts/line-annotations-chart.png)
 
 ```jsx
 <line-annotations-chart graphData={GRAPH_DATA} />
@@ -265,7 +265,7 @@ const GRAPH_DATA: GraphData = {
 
 ### BCG Matrix Chart
 
-![bcg-matrix-chart](/d3-stencil/img/charts/bcg-matrix-chart.png)
+![bcg-matrix-chart](/img/charts/bcg-matrix-chart.png)
 
 ```jsx
 <bcg-matrix-chart graphData={GRAPH_DATA} />
