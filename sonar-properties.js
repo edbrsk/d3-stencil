@@ -11,7 +11,6 @@ sonarqubeScanner(
       'sonar.login': process.env.SONAR_TOKEN,
       'sonar.sources': 'src/',
       'sonar.exclusions': 'src/*.d.ts',
-      'sonar.tests': 'test/',
       'sonar.typescript.lcov.reportPaths': 'coverage/lcov.info'
     },
   },
