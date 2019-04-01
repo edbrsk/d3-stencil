@@ -55,7 +55,8 @@
     "puppeteer": "1.8.0",
     "sonarqube-scanner": "^2.4.0",
     "tslint": "^5.14.0",
-    "tslint-config-prettier": "^1.18.0"
+    "tslint-config-prettier": "^1.18.0",
+    "workbox-build": "3.4.1"
   },
   "repository": {
     "type": "git",
