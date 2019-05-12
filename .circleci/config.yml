@@ -33,18 +33,18 @@ jobs:
 
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: npm i
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
+          key: v1-dependencies-{{ checksum "package-lock.json" }}
 
       - persist_to_workspace:
           root: ~/d3-stencil
@@ -59,7 +59,7 @@ jobs:
 
       - run:
           name: Lint
-          command: yarn lint
+          command: npm run lint
 
   test:
     <<: *defaults
@@ -70,7 +70,7 @@ jobs:
 
       - run:
           name: test
-          command: yarn test --coverage
+          command: npm run test --coverage
 
       - persist_to_workspace:
           root: ~/d3-stencil
@@ -85,7 +85,7 @@ jobs:
 
       - run:
           name: Submit coverage report to Coveralls.io
-          command: yarn coveralls
+          command: npm run coveralls
 
   build:
     <<: *defaults
@@ -96,7 +96,7 @@ jobs:
 
       - run:
           name: Build D3-Stencil
-          command: yarn build
+          command: npm run build
 
       - persist_to_workspace:
           root: ~/d3-stencil
@@ -119,7 +119,7 @@ jobs:
 
       - run:
           name: Write version to package.json
-          command: $(yarn bin)/dot-json package.json version ${CIRCLE_TAG:1}
+          command: $(npm bin)/dot-json package.json version ${CIRCLE_TAG:1}
 
       - run:
           name: Publish to NPM
