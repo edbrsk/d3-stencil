@@ -1,4 +1,4 @@
-import { Formats as FORMATS } from '@d3-stencil/interfaces';
+import { Formats as FORMATS } from '../interfaces';
 import { Formats } from './formats';
 
 export const formatter = (

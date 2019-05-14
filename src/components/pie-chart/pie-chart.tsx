@@ -1,16 +1,16 @@
 import { Component, Element, Prop, Method, State } from '@stencil/core';
-import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
-import { Graph, GraphData } from '@d3-stencil/interfaces';
-import { Resize } from '@d3-stencil/decorators';
+import { Graph, GraphData } from '../../interfaces';
+import { Resize } from '../../decorators';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
-} from '@d3-stencil/utils';
-import { DEFAULT_GRAPH_DATA_PIE } from '@d3-stencil/shared';
+  objectAssignDeep,
+} from '../../utils';
+import { DEFAULT_GRAPH_DATA_PIE } from '../../shared';
 
 @Component({
   tag: 'pie-chart',

@@ -4,10 +4,11 @@ import { formatter } from './formatter';
 import { circularFind } from './circular-find';
 import { initTooltipIfExists, initLegendIfExists } from './init-slots';
 import {
-  hasDataIsNotempty,
+  hasDataIsNotEmpty,
   hasDataValidOnAnnotationsChart,
   hasDataBCGMatrixIsNotEmpty,
 } from './has-data';
+import objectAssignDeep from './object-assign-deep';
 
 export {
   currencyFormatter,
@@ -16,7 +17,8 @@ export {
   circularFind,
   initTooltipIfExists,
   initLegendIfExists,
-  hasDataIsNotempty,
+  hasDataIsNotEmpty,
   hasDataValidOnAnnotationsChart,
   hasDataBCGMatrixIsNotEmpty,
+  objectAssignDeep
 };

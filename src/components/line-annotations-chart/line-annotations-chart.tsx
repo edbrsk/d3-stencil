@@ -1,10 +1,10 @@
 import { Component, Element, Prop, Method, Listen } from '@stencil/core';
-import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
-import { Resize } from '@d3-stencil/decorators';
-import { Graph, GraphData } from '@d3-stencil/interfaces';
-import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '@d3-stencil/shared';
+import { Resize } from '../../decorators';
+import { objectAssignDeep } from '../../utils';
+import { Graph, GraphData } from '../../interfaces';
+import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '../../shared';
 
 @Component({
   tag: 'line-annotations-chart',
@@ -15,12 +15,12 @@ export class LineAnnotationsChart implements Graph {
   @Element() lineAnnotationsChartEl: HTMLElement;
   graphDataMerged: GraphData;
   lineChartEl: HTMLLineChartElement;
-  svg: Selection<Element, any, HTMLLineChartElement, any>;
-  root: Selection<Element, any, HTMLLineChartElement, any>;
+  svg: Selection<any, any, HTMLLineChartElement, any>;
+  root: Selection<any, any, HTMLLineChartElement, any>;
   x: ScaleOrdinal<number, number>;
   width: number;
   height: number;
-  annotationsGroup: Selection<Element, any, HTMLLineChartElement, any>;
+  annotationsGroup: Selection<any, any, HTMLLineChartElement, any>;
   @Listen('lineChartRendered')
   lineChartRenderedHandle() {
     this.lineChartAreReady();

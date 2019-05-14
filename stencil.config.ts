@@ -13,11 +13,5 @@ export const config: Config = {
     testEnvironmentOptions: {
       userAgent: 'Agent/007',
     },
-    moduleNameMapper: {
-      '@d3-stencil/decorators': '<rootDir>/src/decorators/index.ts',
-      '@d3-stencil/interfaces': '<rootDir>/src/interfaces/index.ts',
-      '@d3-stencil/shared': '<rootDir>/src/shared/index.ts',
-      '@d3-stencil/utils': '<rootDir>/src/utils/index.ts',
-    },
   },
 };

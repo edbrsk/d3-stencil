@@ -1,4 +1,4 @@
-import { GraphMeta } from '@d3-stencil/interfaces';
+import { GraphMeta } from '../interfaces';
 
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (

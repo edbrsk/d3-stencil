@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method } from '@stencil/core';
+import { Component, Prop, Element, Method } from '@stencil/core';
 import { Selection, select } from 'd3-selection';
 import { transition } from 'd3-transition';
 
@@ -9,10 +9,10 @@ import { transition } from 'd3-transition';
 export class TooltipChart {
   @Prop() align: string = 'center';
   @Element() tooltipEl: HTMLElement;
-  _tooltip: Selection<Element, any, any, any>;
+  _tooltip: Selection<any, any, any, any>;
 
   @Method()
-  tooltip(tooltip: Element): void {
+  tooltip(tooltip: any): void {
     this._tooltip = select(tooltip);
     this._tooltip.style('text-align', this.align);
   }

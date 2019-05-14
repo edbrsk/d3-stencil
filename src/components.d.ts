@@ -11,20 +11,17 @@ import '@stencil/core';
 import {
   GraphData,
   LegendData,
-} from '@d3-stencil/interfaces';
+} from './interfaces';
 import {
   BcgMatrix,
-} from '@d3-stencil/interfaces/data-types';
-import {
-  Element,
-} from '@stencil/core';
+} from './interfaces/data-types';
 
 
 export namespace Components {
 
   interface BcgMatrixChart {
     'graphData': GraphData<BcgMatrix[]>;
-    'updateGraphData': (graphData: any) => void;
+    'updateGraphData': (graphData: Partial<{ pieChart: Partial<{ labelFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; dataFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; barChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineAnnotationsChart: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/charts-options/line-annotations-chart").LineAnnotationsChart; bcgMatrixChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; value: Partial<{ format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; quadrants: boolean; }>; styles: Partial<{ width: string; height: string; margin: string; padding: string; }>; colors: string[]; labels: number[] | string[]; data: BcgMatrix[]; hasData: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/has-data").HasData<unknown>; }>) => void;
   }
   interface BcgMatrixChartAttributes extends StencilHTMLAttributes {
     'graphData'?: GraphData<BcgMatrix[]>;
@@ -32,7 +29,7 @@ export namespace Components {
 
   interface HorizontalBarChart {
     'graphData': GraphData<number[]>;
-    'updateGraphData': (graphData: any) => void;
+    'updateGraphData': (graphData: Partial<{ pieChart: Partial<{ labelFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; dataFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; barChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineAnnotationsChart: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/charts-options/line-annotations-chart").LineAnnotationsChart; bcgMatrixChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; value: Partial<{ format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; quadrants: boolean; }>; styles: Partial<{ width: string; height: string; margin: string; padding: string; }>; colors: string[]; labels: number[] | string[]; data: number[]; hasData: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/has-data").HasData<unknown>; }>) => void;
   }
   interface HorizontalBarChartAttributes extends StencilHTMLAttributes {
     'graphData'?: GraphData<number[]>;
@@ -48,7 +45,7 @@ export namespace Components {
 
   interface LineAnnotationsChart {
     'graphData': GraphData;
-    'updateGraphData': (graphData: any) => void;
+    'updateGraphData': (graphData: Partial<{ pieChart: Partial<{ labelFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; dataFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; barChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineAnnotationsChart: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/charts-options/line-annotations-chart").LineAnnotationsChart; bcgMatrixChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; value: Partial<{ format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; quadrants: boolean; }>; styles: Partial<{ width: string; height: string; margin: string; padding: string; }>; colors: string[]; labels: number[] | string[]; data: number[][]; hasData: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/has-data").HasData<unknown>; }>) => void;
   }
   interface LineAnnotationsChartAttributes extends StencilHTMLAttributes {
     'graphData'?: GraphData;
@@ -56,7 +53,7 @@ export namespace Components {
 
   interface LineChart {
     'graphData': GraphData;
-    'updateGraphData': (graphData: any) => void;
+    'updateGraphData': (graphData: Partial<{ pieChart: Partial<{ labelFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; dataFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; barChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineAnnotationsChart: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/charts-options/line-annotations-chart").LineAnnotationsChart; bcgMatrixChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; value: Partial<{ format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; quadrants: boolean; }>; styles: Partial<{ width: string; height: string; margin: string; padding: string; }>; colors: string[]; labels: number[] | string[]; data: number[][]; hasData: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/has-data").HasData<unknown>; }>) => void;
   }
   interface LineChartAttributes extends StencilHTMLAttributes {
     'graphData'?: GraphData;
@@ -65,7 +62,7 @@ export namespace Components {
 
   interface PieChart {
     'graphData': GraphData<number[]>;
-    'updateGraphData': (graphData: any) => void;
+    'updateGraphData': (graphData: Partial<{ pieChart: Partial<{ labelFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; dataFormat: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; barChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; }>; lineAnnotationsChart: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/charts-options/line-annotations-chart").LineAnnotationsChart; bcgMatrixChart: Partial<{ axis: Partial<{ x: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; y: Partial<{ visible: boolean; gridVisible: boolean; format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; label: string; currency: string; }>; }>; margin: Partial<{ top: number; right: number; bottom: number; left: number; }>; value: Partial<{ format: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/index").Formats; currency: string; }>; quadrants: boolean; }>; styles: Partial<{ width: string; height: string; margin: string; padding: string; }>; colors: string[]; labels: number[] | string[]; data: number[]; hasData: import("/Users/edgar/Projects/pet-projects/d3-stencil/src/interfaces/has-data").HasData<unknown>; }>) => void;
   }
   interface PieChartAttributes extends StencilHTMLAttributes {
     'graphData'?: GraphData<number[]>;
@@ -75,7 +72,7 @@ export namespace Components {
     'align': string;
     'hide': () => void;
     'show': (message: string, positions: number[]) => void;
-    'tooltip': (tooltip: Element) => void;
+    'tooltip': (tooltip: any) => void;
   }
   interface TooltipChartAttributes extends StencilHTMLAttributes {
     'align'?: string;
