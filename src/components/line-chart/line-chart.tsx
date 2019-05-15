@@ -6,21 +6,21 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { Line, line } from 'd3-shape';
-import { Graph, GraphMeta, GraphData } from '@d3-stencil/interfaces';
-import { Resize } from '@d3-stencil/decorators';
+import { Graph, GraphMeta, GraphData } from '../../interfaces';
+import { Resize } from '../../decorators';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
-} from '@d3-stencil/utils';
-import { DEFAULT_GRAPH_DATA_LINE } from '@d3-stencil/shared';
+  objectAssignDeep,
+} from '../../utils';
+import { DEFAULT_GRAPH_DATA_LINE } from '../../shared';
 
 @Component({
   tag: 'line-chart',
@@ -31,7 +31,7 @@ export class LineChart implements Graph {
   @Element() lineChartEl: HTMLElement;
   @Event() lineChartRendered: EventEmitter;
   graphDataMerged: GraphData;
-  svg: Selection<Element, any, HTMLElement, any>;
+  svg: Selection<any, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   line: Line<number>;
   data: any;

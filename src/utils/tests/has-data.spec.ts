@@ -1,9 +1,9 @@
-import { GraphData } from '@d3-stencil/interfaces';
+import { GraphData } from '../../interfaces';
 import {
-  hasDataIsNotempty,
+  hasDataIsNotEmpty,
   hasDataValidOnAnnotationsChart,
   hasDataBCGMatrixIsNotEmpty,
-} from '@d3-stencil/utils';
+} from '../';
 
 describe('has-data:', () => {
   const errorMessage = /^The data injected isn't valid./;
@@ -32,14 +32,14 @@ describe('has-data:', () => {
     data: [],
   };
 
-  describe('hasDataIsNotempty', () => {
+  describe('hasDataIsNotEmpty', () => {
     it('should return true with correct parameters', () => {
-      const result = hasDataIsNotempty(validGraphDataMerged);
+      const result = hasDataIsNotEmpty(validGraphDataMerged);
       expect(result).toBeTruthy();
     });
 
     it(`should throw an Error, because the data isn't valid`, () => {
-      expect(() => hasDataIsNotempty(invalidGraphDataMerged)).toThrowError(
+      expect(() => hasDataIsNotEmpty(invalidGraphDataMerged)).toThrowError(
         errorMessage,
       );
     });

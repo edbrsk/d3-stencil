@@ -1,9 +1,8 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
-import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
-import { LegendData } from '@d3-stencil/interfaces';
-import { circularFind } from '@d3-stencil/utils';
-import { DEFAULT_LEGEND_DATA } from '@d3-stencil/shared';
+import { LegendData } from '../../interfaces';
+import { objectAssignDeep, circularFind } from '../../utils';
+import { DEFAULT_LEGEND_DATA } from '../../shared';
 
 @Component({
   tag: 'legend-chart',
@@ -12,7 +11,7 @@ import { DEFAULT_LEGEND_DATA } from '@d3-stencil/shared';
 export class LegendChart {
   @Prop() legendData: LegendData;
   @Element() legendEl: HTMLElement;
-  svg: Selection<Element, any, HTMLElement, any>;
+  svg: Selection<any, any, HTMLElement, any>;
   legendDataMerged: LegendData;
   labelLegendPosition: number = 0;
   _callOnClick: (data: { label: string; index: number }) => any;

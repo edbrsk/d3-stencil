@@ -1,20 +1,20 @@
 import { Component, Element, Prop, Method } from '@stencil/core';
-import objectAssignDeep from 'object-assign-deep';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { pack, hierarchy, HierarchyCircularNode } from 'd3-hierarchy';
-import { BcgMatrix } from '@d3-stencil/interfaces/data-types';
-import { Graph, GraphData } from '@d3-stencil/interfaces';
-import { Resize } from '@d3-stencil/decorators';
+import { BcgMatrix } from '../../interfaces/data-types';
+import { Graph, GraphData } from '../../interfaces';
+import { Resize } from '../../decorators';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
-} from '@d3-stencil/utils';
-import { DEFAULT_GRAPH_DATA_BCG } from '@d3-stencil/shared';
+  objectAssignDeep,
+} from '../../utils';
+import { DEFAULT_GRAPH_DATA_BCG } from '../../shared';
 
 @Component({
   tag: 'bcg-matrix-chart',
@@ -24,7 +24,7 @@ export class BGCMatrixChart implements Graph<BcgMatrix[]> {
   @Prop() graphData: GraphData<BcgMatrix[]>;
   @Element() bgcMatrixChartEl: HTMLElement;
   graphDataMerged: GraphData<BcgMatrix[]>;
-  svg: Selection<Element, any, HTMLElement, any>;
+  svg: Selection<any, any, HTMLElement, any>;
   root: Selection<SVGElement, any, HTMLElement, any>;
   width: number;
   height: number;

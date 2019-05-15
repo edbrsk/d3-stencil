@@ -14,14 +14,7 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "skipLibCheck": true,
-    "paths": {
-      "@d3-stencil/decorators": ["src/decorators/index"],
-      "@d3-stencil/interfaces": ["src/interfaces/index"],
-      "@d3-stencil/interfaces/*": ["src/interfaces/*"],
-      "@d3-stencil/shared": ["src/shared/index"],
-      "@d3-stencil/utils": ["src/utils/index"]
-    }
+    "skipLibCheck": true
   },
   "include": ["./**/*", "types/jsx.d.ts"],
   "exclude": ["docs", "node_modules"]

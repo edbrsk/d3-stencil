@@ -1,11 +1,11 @@
-import { GraphData, HasData } from '@d3-stencil/interfaces';
-import { BcgMatrix } from '@d3-stencil/interfaces/data-types';
+import { GraphData, HasData } from '../interfaces';
+import { BcgMatrix } from '../interfaces/data-types';
 
 const THROW_ERROR = (): Error => {
   throw new Error(`The data injected isn't valid.`);
 };
 
-export const hasDataIsNotempty: HasData<GraphData> = ({
+export const hasDataIsNotEmpty: HasData<GraphData> = ({
   data,
   labels,
 }): Error | boolean =>

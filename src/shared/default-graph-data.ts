@@ -1,10 +1,10 @@
-import { BcgMatrix } from '@d3-stencil/interfaces/data-types';
-import { GraphData, LegendData } from '@d3-stencil/interfaces';
+import { BcgMatrix } from '../interfaces/data-types';
+import { GraphData, LegendData } from '../interfaces';
 import {
-  hasDataIsNotempty,
+  hasDataIsNotEmpty,
   hasDataBCGMatrixIsNotEmpty,
   hasDataValidOnAnnotationsChart,
-} from '@d3-stencil/utils';
+} from '../utils';
 
 export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
   pieChart: {
@@ -20,7 +20,7 @@ export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
+  hasData: (graphData: GraphData) => hasDataIsNotEmpty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
@@ -54,7 +54,7 @@ export const DEFAULT_GRAPH_DATA_BAR: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
+  hasData: (graphData: GraphData) => hasDataIsNotEmpty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
@@ -90,7 +90,7 @@ export const DEFAULT_GRAPH_DATA_LINE: GraphData = {
   labels: [],
   colors: [],
   data: [],
-  hasData: (graphData: GraphData) => hasDataIsNotempty(graphData),
+  hasData: (graphData: GraphData) => hasDataIsNotEmpty(graphData),
 };
 
 export const DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE: GraphData = {

@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/edgarordonez/d3-stencil/tree/master.svg?style=svg)](https://circleci.com/gh/edgarordonez/d3-stencil/tree/master)
 
-[![CircleCI](website/static/img/d3-stencil_logo_main.png)](https://d3-stencil.dev)
+[![D3-Stencil](https://d3-stencil.dev/img/d3-stencil_logo_main.png)](https://d3-stencil.dev)
 
 # Welcome to [D3-Stencil.](https://d3-stencil.dev)
 

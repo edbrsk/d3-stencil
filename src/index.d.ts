@@ -5,5 +5,8 @@ export {
   GraphData,
   LegendData,
   Formats,
-  HasDataStrategy,
+  HasData,
 } from './interfaces';
+export {
+  BcgMatrix,
+} from './interfaces/data-types';
