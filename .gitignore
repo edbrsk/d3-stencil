@@ -2,6 +2,7 @@ dist/
 !www/favicon.ico
 www/
 coverage/
+src/components.d.ts
 
 *~
 *.sw[mnpcod]
