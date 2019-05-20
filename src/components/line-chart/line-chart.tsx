@@ -1,30 +1,31 @@
 import {
   Component,
+  h,
   Element,
   Prop,
   Method,
   Event,
-  EventEmitter,
-} from '@stencil/core';
-import { Selection, select, event } from 'd3-selection';
-import { max } from 'd3-array';
-import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from 'd3-scale';
-import { axisBottom, axisLeft } from 'd3-axis';
-import { Line, line } from 'd3-shape';
-import { Graph, GraphMeta, GraphData } from '../../interfaces';
-import { Resize } from '../../decorators';
+  EventEmitter
+} from "@stencil/core";
+import { Selection, select, event } from "d3-selection";
+import { max } from "d3-array";
+import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from "d3-scale";
+import { axisBottom, axisLeft } from "d3-axis";
+import { Line, line } from "d3-shape";
+import { Graph, GraphMeta, GraphData } from "../../interfaces";
+import { Resize } from "../../decorators";
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
-  objectAssignDeep,
-} from '../../utils';
-import { DEFAULT_GRAPH_DATA_LINE } from '../../shared';
+  objectAssignDeep
+} from "../../utils";
+import { DEFAULT_GRAPH_DATA_LINE } from "../../shared";
 
 @Component({
-  tag: 'line-chart',
-  styleUrl: 'line-chart.scss',
+  tag: "line-chart",
+  styleUrl: "line-chart.scss"
 })
 export class LineChart implements Graph {
   @Prop() graphData: GraphData;
@@ -45,12 +46,12 @@ export class LineChart implements Graph {
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      this.graphData,
+      this.graphData
     );
   }
 
   componentDidLoad() {
-    this.svg = select(this.lineChartEl.getElementsByClassName('line-chart')[0]);
+    this.svg = select(this.lineChartEl.getElementsByClassName("line-chart")[0]);
 
     this.height =
       this.svg.node().getBoundingClientRect().height -
@@ -61,7 +62,7 @@ export class LineChart implements Graph {
 
     this.legendEl = initLegendIfExists(
       this.lineChartEl,
-      this.eventsLegend.bind(this),
+      this.eventsLegend.bind(this)
     );
 
     this.drawChart();
@@ -72,14 +73,14 @@ export class LineChart implements Graph {
   updateGraphData(graphData: GraphData): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      graphData,
+      graphData
     );
 
     this.drawChart();
   }
 
   @Resize({
-    axisData: true,
+    axisData: true
   })
   drawChart(axisXDataTruncated?: {
     labels: string[];
@@ -101,7 +102,7 @@ export class LineChart implements Graph {
 
       const allDataValues: number[] = originalGraphData.reduce(
         (acc: number[], data: number[]) => [...acc, ...data],
-        [],
+        []
       );
 
       this.y = scaleLinear<number, number>()
@@ -113,8 +114,8 @@ export class LineChart implements Graph {
         .range(
           allDataValues.map(
             (_, index: number) =>
-              index * (this.width / (originalGraphData[0].length - 1)),
-          ),
+              index * (this.width / (originalGraphData[0].length - 1))
+          )
         );
 
       this.line = line<number>()
@@ -130,7 +131,7 @@ export class LineChart implements Graph {
 
     return {
       width: this.width,
-      graphData: this.graphDataMerged,
+      graphData: this.graphDataMerged
     };
   }
 
@@ -144,69 +145,69 @@ export class LineChart implements Graph {
     }
 
     this.root = this.svg
-      .append('g')
+      .append("g")
       .attr(
-        'transform',
+        "transform",
         `translate(${this.graphDataMerged.lineChart.margin.left}, ${
           this.graphDataMerged.lineChart.margin.top
-        })`,
+        })`
       );
   }
 
   drawAxis(): void {
     if (this.graphDataMerged.lineChart.axis.x.visible) {
       this.root
-        .append('g')
-        .attr('class', 'x axis')
-        .attr('transform', `translate(0, ${this.height})`)
+        .append("g")
+        .attr("class", "x axis")
+        .attr("transform", `translate(0, ${this.height})`)
         .call(
           axisBottom(this.x).tickFormat(domainValue =>
             formatter(
               this.graphDataMerged.lineChart.axis.x.format,
               domainValue,
-              this.graphDataMerged.lineChart.axis.x.currency,
-            ),
-          ),
+              this.graphDataMerged.lineChart.axis.x.currency
+            )
+          )
         );
     }
 
     if (this.graphDataMerged.lineChart.axis.y.visible) {
       this.root
-        .append('g')
-        .attr('class', 'y axis')
+        .append("g")
+        .attr("class", "y axis")
         .call(
           axisLeft(this.y).tickFormat(domainValue =>
             formatter(
               this.graphDataMerged.lineChart.axis.y.format,
               domainValue,
-              this.graphDataMerged.lineChart.axis.y.currency,
-            ),
-          ),
+              this.graphDataMerged.lineChart.axis.y.currency
+            )
+          )
         );
     }
   }
 
   drawAxisLabels(): void {
-    if (this.graphDataMerged.lineChart.axis.x.label !== '') {
+    if (this.graphDataMerged.lineChart.axis.x.label !== "") {
       this.root
-        .append('text')
-        .attr('class', 'x axis-label')
+        .append("text")
+        .attr("class", "x axis-label")
         .attr(
-          'transform',
+          "transform",
           `translate(${this.width / 2}, ${this.height +
-            this.graphDataMerged.lineChart.margin.top * 2})`,
+            this.graphDataMerged.lineChart.margin.top * 2})`
         )
         .text(this.graphData.lineChart.axis.x.label);
     }
 
-    if (this.graphDataMerged.lineChart.axis.y.label !== '') {
+    if (this.graphDataMerged.lineChart.axis.y.label !== "") {
       this.root
-        .append('text')
-        .attr('class', 'y axis-label')
-        .attr('transform', `rotate(-90)`)
-        .attr('y', 0 - this.graphDataMerged.lineChart.margin.left)
-        .attr('x', 0 - this.height / 2)
-        .attr('dy', '1em')
+        .append("text")
+        .attr("class", "y axis-label")
+        .attr("transform", `rotate(-90)`)
+        .attr("y", 0 - this.graphDataMerged.lineChart.margin.left)
+        .attr("x", 0 - this.height / 2)
+        .attr("dy", "1em")
         .text(this.graphData.lineChart.axis.y.label);
     }
   }
@@ -214,64 +215,64 @@ export class LineChart implements Graph {
   drawGrid(): void {
     if (this.graphDataMerged.lineChart.axis.x.gridVisible) {
       this.root
-        .append('g')
-        .attr('class', 'grid')
+        .append("g")
+        .attr("class", "grid")
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat(() => ''),
+            .tickFormat(() => "")
         );
     }
 
     if (this.graphDataMerged.lineChart.axis.y.gridVisible) {
       this.root
-        .append('g')
-        .attr('class', 'grid')
+        .append("g")
+        .attr("class", "grid")
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat(() => ''),
+            .tickFormat(() => "")
         );
     }
   }
 
   drawLines(): void {
     this.root
-      .append('g')
-      .attr('class', 'lines')
-      .selectAll('.line-group')
+      .append("g")
+      .attr("class", "lines")
+      .selectAll(".line-group")
       .data(this.graphDataMerged.data)
       .enter()
-      .append('g')
-      .attr('class', (_, index) => `line-group line-group-${index}`)
-      .append('path')
-      .attr('class', 'line')
-      .style('stroke', (_, index) =>
-        circularFind(this.graphDataMerged.colors, index),
+      .append("g")
+      .attr("class", (_, index) => `line-group line-group-${index}`)
+      .append("path")
+      .attr("class", "line")
+      .style("stroke", (_, index) =>
+        circularFind(this.graphDataMerged.colors, index)
       )
-      .attr('d', this.line);
+      .attr("d", this.line);
   }
 
   drawDots(axisXWithAllRange: ScaleOrdinal<number, number>): void {
     this.root
-      .selectAll('.line-group')
-      .append('g')
-      .attr('class', 'dots-group')
-      .style('fill', (_, index) =>
-        circularFind(this.graphDataMerged.colors, index),
+      .selectAll(".line-group")
+      .append("g")
+      .attr("class", "dots-group")
+      .style("fill", (_, index) =>
+        circularFind(this.graphDataMerged.colors, index)
       )
-      .selectAll('.dots-group')
+      .selectAll(".dots-group")
       .data((_, index) => this.graphDataMerged.data[index])
       .enter()
-      .append('circle')
-      .attr('class', 'dot')
-      .attr('cx', (_, index) => axisXWithAllRange(index))
-      .attr('cy', data => this.y(data))
-      .attr('r', 5)
-      .on('mouseover', (data, index) =>
-        this.eventsTooltip({ data, index, isToShow: true }),
+      .append("circle")
+      .attr("class", "dot")
+      .attr("cx", (_, index) => axisXWithAllRange(index))
+      .attr("cy", data => this.y(data))
+      .attr("r", 5)
+      .on("mouseover", (data, index) =>
+        this.eventsTooltip({ data, index, isToShow: true })
       )
-      .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
+      .on("mouseout", () => this.eventsTooltip({ isToShow: false }));
   }
 
   handleOnRenderized(): void {
@@ -281,7 +282,7 @@ export class LineChart implements Graph {
   eventsTooltip({
     data,
     index,
-    isToShow,
+    isToShow
   }: {
     data?: string | number;
     index?: number;
@@ -292,13 +293,13 @@ export class LineChart implements Graph {
         `${formatter(
           this.graphDataMerged.lineChart.axis.y.format,
           data,
-          this.graphDataMerged.lineChart.axis.y.currency,
+          this.graphDataMerged.lineChart.axis.y.currency
         )} <br/> ${formatter(
           this.graphDataMerged.lineChart.axis.x.format,
           this.graphDataMerged.labels[index],
-          this.graphDataMerged.lineChart.axis.x.currency,
+          this.graphDataMerged.lineChart.axis.x.currency
         )}`,
-        [event.pageX, event.pageY],
+        [event.pageX, event.pageY]
       );
     };
 
@@ -313,8 +314,8 @@ export class LineChart implements Graph {
     const element = select(`.line-group-${data.index}`);
 
     element.classed(
-      'line-group__inactive',
-      !element.classed('line-group__inactive'),
+      "line-group__inactive",
+      !element.classed("line-group__inactive")
     );
   }
 

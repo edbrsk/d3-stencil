@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Method } from '@stencil/core';
+import { Component, h, Prop, Element, Method } from '@stencil/core';
 import { Selection, select } from 'd3-selection';
 import { transition } from 'd3-transition';
 

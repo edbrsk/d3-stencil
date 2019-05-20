@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method, State } from '@stencil/core';
+import { Component, h, Element, Prop, Method, State } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleBand, scaleBand, ScaleLinear, scaleLinear } from 'd3-scale';

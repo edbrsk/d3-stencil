@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method, State } from '@stencil/core';
+import { Component, h, Element, Prop, Method, State } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
 import { Graph, GraphData } from '../../interfaces';
