@@ -6,26 +6,26 @@ import {
   Method,
   Event,
   EventEmitter
-} from "@stencil/core";
-import { Selection, select, event } from "d3-selection";
-import { max } from "d3-array";
-import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from "d3-scale";
-import { axisBottom, axisLeft } from "d3-axis";
-import { Line, line } from "d3-shape";
-import { Graph, GraphMeta, GraphData } from "../../interfaces";
-import { Resize } from "../../decorators";
+} from '@stencil/core';
+import { Selection, select, event } from 'd3-selection';
+import { max } from 'd3-array';
+import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from 'd3-scale';
+import { axisBottom, axisLeft } from 'd3-axis';
+import { Line, line } from 'd3-shape';
+import { Graph, GraphMeta, GraphData } from '../../interfaces';
+import { Resize } from '../../decorators';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
   objectAssignDeep
-} from "../../utils";
-import { DEFAULT_GRAPH_DATA_LINE } from "../../shared";
+} from '../../utils';
+import { DEFAULT_GRAPH_DATA_LINE } from '../../shared';
 
 @Component({
-  tag: "line-chart",
-  styleUrl: "line-chart.scss"
+  tag: 'line-chart',
+  styleUrl: 'line-chart.scss'
 })
 export class LineChart implements Graph {
   @Prop() graphData: GraphData;
@@ -51,7 +51,7 @@ export class LineChart implements Graph {
   }
 
   componentDidLoad() {
-    this.svg = select(this.lineChartEl.getElementsByClassName("line-chart")[0]);
+    this.svg = select(this.lineChartEl.getElementsByClassName('line-chart')[0]);
 
     this.height =
       this.svg.node().getBoundingClientRect().height -
@@ -145,9 +145,9 @@ export class LineChart implements Graph {
     }
 
     this.root = this.svg
-      .append("g")
+      .append('g')
       .attr(
-        "transform",
+        'transform',
         `translate(${this.graphDataMerged.lineChart.margin.left}, ${
           this.graphDataMerged.lineChart.margin.top
         })`
@@ -157,9 +157,9 @@ export class LineChart implements Graph {
   drawAxis(): void {
     if (this.graphDataMerged.lineChart.axis.x.visible) {
       this.root
-        .append("g")
-        .attr("class", "x axis")
-        .attr("transform", `translate(0, ${this.height})`)
+        .append('g')
+        .attr('class', 'x axis')
+        .attr('transform', `translate(0, ${this.height})`)
         .call(
           axisBottom(this.x).tickFormat(domainValue =>
             formatter(
@@ -173,8 +173,8 @@ export class LineChart implements Graph {
 
     if (this.graphDataMerged.lineChart.axis.y.visible) {
       this.root
-        .append("g")
-        .attr("class", "y axis")
+        .append('g')
+        .attr('class', 'y axis')
         .call(
           axisLeft(this.y).tickFormat(domainValue =>
             formatter(
@@ -188,26 +188,26 @@ export class LineChart implements Graph {
   }
 
   drawAxisLabels(): void {
-    if (this.graphDataMerged.lineChart.axis.x.label !== "") {
+    if (this.graphDataMerged.lineChart.axis.x.label !== '') {
       this.root
-        .append("text")
-        .attr("class", "x axis-label")
+        .append('text')
+        .attr('class', 'x axis-label')
         .attr(
-          "transform",
+          'transform',
           `translate(${this.width / 2}, ${this.height +
             this.graphDataMerged.lineChart.margin.top * 2})`
         )
         .text(this.graphData.lineChart.axis.x.label);
     }
 
-    if (this.graphDataMerged.lineChart.axis.y.label !== "") {
+    if (this.graphDataMerged.lineChart.axis.y.label !== '') {
       this.root
-        .append("text")
-        .attr("class", "y axis-label")
-        .attr("transform", `rotate(-90)`)
-        .attr("y", 0 - this.graphDataMerged.lineChart.margin.left)
-        .attr("x", 0 - this.height / 2)
-        .attr("dy", "1em")
+        .append('text')
+        .attr('class', 'y axis-label')
+        .attr('transform', `rotate(-90)`)
+        .attr('y', 0 - this.graphDataMerged.lineChart.margin.left)
+        .attr('x', 0 - this.height / 2)
+        .attr('dy', '1em')
         .text(this.graphData.lineChart.axis.y.label);
     }
   }
@@ -215,64 +215,64 @@ export class LineChart implements Graph {
   drawGrid(): void {
     if (this.graphDataMerged.lineChart.axis.x.gridVisible) {
       this.root
-        .append("g")
-        .attr("class", "grid")
+        .append('g')
+        .attr('class', 'grid')
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat(() => "")
+            .tickFormat(() => '')
         );
     }
 
     if (this.graphDataMerged.lineChart.axis.y.gridVisible) {
       this.root
-        .append("g")
-        .attr("class", "grid")
+        .append('g')
+        .attr('class', 'grid')
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat(() => "")
+            .tickFormat(() => '')
         );
     }
   }
 
   drawLines(): void {
     this.root
-      .append("g")
-      .attr("class", "lines")
-      .selectAll(".line-group")
+      .append('g')
+      .attr('class', 'lines')
+      .selectAll('.line-group')
       .data(this.graphDataMerged.data)
       .enter()
-      .append("g")
-      .attr("class", (_, index) => `line-group line-group-${index}`)
-      .append("path")
-      .attr("class", "line")
-      .style("stroke", (_, index) =>
+      .append('g')
+      .attr('class', (_, index) => `line-group line-group-${index}`)
+      .append('path')
+      .attr('class', 'line')
+      .style('stroke', (_, index) =>
         circularFind(this.graphDataMerged.colors, index)
       )
-      .attr("d", this.line);
+      .attr('d', this.line);
   }
 
   drawDots(axisXWithAllRange: ScaleOrdinal<number, number>): void {
     this.root
-      .selectAll(".line-group")
-      .append("g")
-      .attr("class", "dots-group")
-      .style("fill", (_, index) =>
+      .selectAll('.line-group')
+      .append('g')
+      .attr('class', 'dots-group')
+      .style('fill', (_, index) =>
         circularFind(this.graphDataMerged.colors, index)
       )
-      .selectAll(".dots-group")
+      .selectAll('.dots-group')
       .data((_, index) => this.graphDataMerged.data[index])
       .enter()
-      .append("circle")
-      .attr("class", "dot")
-      .attr("cx", (_, index) => axisXWithAllRange(index))
-      .attr("cy", data => this.y(data))
-      .attr("r", 5)
-      .on("mouseover", (data, index) =>
+      .append('circle')
+      .attr('class', 'dot')
+      .attr('cx', (_, index) => axisXWithAllRange(index))
+      .attr('cy', data => this.y(data))
+      .attr('r', 5)
+      .on('mouseover', (data, index) =>
         this.eventsTooltip({ data, index, isToShow: true })
       )
-      .on("mouseout", () => this.eventsTooltip({ isToShow: false }));
+      .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
   }
 
   handleOnRenderized(): void {
@@ -314,8 +314,8 @@ export class LineChart implements Graph {
     const element = select(`.line-group-${data.index}`);
 
     element.classed(
-      "line-group__inactive",
-      !element.classed("line-group__inactive")
+      'line-group__inactive',
+      !element.classed('line-group__inactive')
     );
   }
 
