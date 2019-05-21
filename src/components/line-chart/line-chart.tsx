@@ -5,7 +5,7 @@ import {
   Prop,
   Method,
   Event,
-  EventEmitter
+  EventEmitter,
 } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
@@ -19,13 +19,13 @@ import {
   initLegendIfExists,
   formatter,
   circularFind,
-  objectAssignDeep
+  objectAssignDeep,
 } from '../../utils';
 import { DEFAULT_GRAPH_DATA_LINE } from '../../shared';
 
 @Component({
   tag: 'line-chart',
-  styleUrl: 'line-chart.scss'
+  styleUrl: 'line-chart.scss',
 })
 export class LineChart implements Graph {
   @Prop() graphData: GraphData;
@@ -46,7 +46,7 @@ export class LineChart implements Graph {
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      this.graphData
+      this.graphData,
     );
   }
 
@@ -62,25 +62,24 @@ export class LineChart implements Graph {
 
     this.legendEl = initLegendIfExists(
       this.lineChartEl,
-      this.eventsLegend.bind(this)
+      this.eventsLegend.bind(this),
     );
 
     this.drawChart();
     this.handleOnRenderized();
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData): void {
+  @Method() async updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      graphData
+      graphData,
     );
 
     this.drawChart();
   }
 
   @Resize({
-    axisData: true
+    axisData: true,
   })
   drawChart(axisXDataTruncated?: {
     labels: string[];
@@ -102,7 +101,7 @@ export class LineChart implements Graph {
 
       const allDataValues: number[] = originalGraphData.reduce(
         (acc: number[], data: number[]) => [...acc, ...data],
-        []
+        [],
       );
 
       this.y = scaleLinear<number, number>()
@@ -114,8 +113,8 @@ export class LineChart implements Graph {
         .range(
           allDataValues.map(
             (_, index: number) =>
-              index * (this.width / (originalGraphData[0].length - 1))
-          )
+              index * (this.width / (originalGraphData[0].length - 1)),
+          ),
         );
 
       this.line = line<number>()
@@ -131,7 +130,7 @@ export class LineChart implements Graph {
 
     return {
       width: this.width,
-      graphData: this.graphDataMerged
+      graphData: this.graphDataMerged,
     };
   }
 
@@ -149,8 +148,8 @@ export class LineChart implements Graph {
       .attr(
         'transform',
         `translate(${this.graphDataMerged.lineChart.margin.left}, ${
-        this.graphDataMerged.lineChart.margin.top
-        })`
+          this.graphDataMerged.lineChart.margin.top
+        })`,
       );
   }
 
@@ -165,9 +164,9 @@ export class LineChart implements Graph {
             formatter(
               this.graphDataMerged.lineChart.axis.x.format,
               domainValue,
-              this.graphDataMerged.lineChart.axis.x.currency
-            )
-          )
+              this.graphDataMerged.lineChart.axis.x.currency,
+            ),
+          ),
         );
     }
 
@@ -180,9 +179,9 @@ export class LineChart implements Graph {
             formatter(
               this.graphDataMerged.lineChart.axis.y.format,
               domainValue,
-              this.graphDataMerged.lineChart.axis.y.currency
-            )
-          )
+              this.graphDataMerged.lineChart.axis.y.currency,
+            ),
+          ),
         );
     }
   }
@@ -195,7 +194,7 @@ export class LineChart implements Graph {
         .attr(
           'transform',
           `translate(${this.width / 2}, ${this.height +
-          this.graphDataMerged.lineChart.margin.top * 2})`
+            this.graphDataMerged.lineChart.margin.top * 2})`,
         )
         .text(this.graphData.lineChart.axis.x.label);
     }
@@ -220,7 +219,7 @@ export class LineChart implements Graph {
         .call(
           axisBottom(this.x)
             .tickSize(this.height)
-            .tickFormat(() => '')
+            .tickFormat(() => ''),
         );
     }
 
@@ -231,7 +230,7 @@ export class LineChart implements Graph {
         .call(
           axisLeft(this.y)
             .tickSize(-this.width)
-            .tickFormat(() => '')
+            .tickFormat(() => ''),
         );
     }
   }
@@ -248,7 +247,7 @@ export class LineChart implements Graph {
       .append('path')
       .attr('class', 'line')
       .style('stroke', (_, index) =>
-        circularFind(this.graphDataMerged.colors, index)
+        circularFind(this.graphDataMerged.colors, index),
       )
       .attr('d', this.line);
   }
@@ -259,7 +258,7 @@ export class LineChart implements Graph {
       .append('g')
       .attr('class', 'dots-group')
       .style('fill', (_, index) =>
-        circularFind(this.graphDataMerged.colors, index)
+        circularFind(this.graphDataMerged.colors, index),
       )
       .selectAll('.dots-group')
       .data((_, index) => this.graphDataMerged.data[index])
@@ -270,7 +269,7 @@ export class LineChart implements Graph {
       .attr('cy', data => this.y(data))
       .attr('r', 5)
       .on('mouseover', (data, index) =>
-        this.eventsTooltip({ data, index, isToShow: true })
+        this.eventsTooltip({ data, index, isToShow: true }),
       )
       .on('mouseout', () => this.eventsTooltip({ isToShow: false }));
   }
@@ -282,7 +281,7 @@ export class LineChart implements Graph {
   eventsTooltip({
     data,
     index,
-    isToShow
+    isToShow,
   }: {
     data?: string | number;
     index?: number;
@@ -293,13 +292,13 @@ export class LineChart implements Graph {
         `${formatter(
           this.graphDataMerged.lineChart.axis.y.format,
           data,
-          this.graphDataMerged.lineChart.axis.y.currency
+          this.graphDataMerged.lineChart.axis.y.currency,
         )} <br/> ${formatter(
           this.graphDataMerged.lineChart.axis.x.format,
           this.graphDataMerged.labels[index],
-          this.graphDataMerged.lineChart.axis.x.currency
+          this.graphDataMerged.lineChart.axis.x.currency,
         )}`,
-        [event.pageX, event.pageY]
+        [event.pageX, event.pageY],
       );
     };
 
@@ -315,7 +314,7 @@ export class LineChart implements Graph {
 
     element.classed(
       'line-group__inactive',
-      !element.classed('line-group__inactive')
+      !element.classed('line-group__inactive'),
     );
   }
 
