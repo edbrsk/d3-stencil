@@ -169,7 +169,7 @@ export class PieChart implements Graph<number[]> {
       );
     };
 
-    const toHide = (): void => this.tooltipEl.hide();
+    const toHide = (): any => this.tooltipEl.hide();
 
     if (this.tooltipEl) {
       isToShow ? toShow() : toHide();

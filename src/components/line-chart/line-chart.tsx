@@ -149,7 +149,7 @@ export class LineChart implements Graph {
       .attr(
         'transform',
         `translate(${this.graphDataMerged.lineChart.margin.left}, ${
-          this.graphDataMerged.lineChart.margin.top
+        this.graphDataMerged.lineChart.margin.top
         })`
       );
   }
@@ -195,7 +195,7 @@ export class LineChart implements Graph {
         .attr(
           'transform',
           `translate(${this.width / 2}, ${this.height +
-            this.graphDataMerged.lineChart.margin.top * 2})`
+          this.graphDataMerged.lineChart.margin.top * 2})`
         )
         .text(this.graphData.lineChart.axis.x.label);
     }
@@ -303,7 +303,7 @@ export class LineChart implements Graph {
       );
     };
 
-    const toHide = (): void => this.tooltipEl.hide();
+    const toHide = (): any => this.tooltipEl.hide();
 
     if (this.tooltipEl) {
       isToShow ? toShow() : toHide();
