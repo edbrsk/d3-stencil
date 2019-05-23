@@ -31,10 +31,7 @@ export class LegendChart {
       : this.drawVerticalLegend();
   }
 
-  @Method()
-  callOnClick(
-    callOnClickChild: (data: { label: string; index: number }) => any,
-  ): void {
+  @Method() async callOnClick(callOnClickChild: (data: { label: string; index: number }) => any, ): Promise<any> {
     this._callOnClick = callOnClickChild;
   }
 

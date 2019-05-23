@@ -53,8 +53,7 @@ export class PieChart implements Graph<number[]> {
     this.drawChart();
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData<number[]>): void {
+  @Method() async updateGraphData(graphData: GraphData<number[]>): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_PIE },
       graphData,

@@ -33,8 +33,7 @@ export class LineAnnotationsChart implements Graph {
     );
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData): void {
+  @Method() async   updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
       graphData
@@ -60,7 +59,7 @@ export class LineAnnotationsChart implements Graph {
     this.svg.style(
       'height',
       this.svg.node().getBoundingClientRect().height +
-        this.graphDataMerged.lineAnnotationsChart.increaseHeight
+      this.graphDataMerged.lineAnnotationsChart.increaseHeight
     );
 
     this.drawChart();
