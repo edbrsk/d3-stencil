@@ -37,9 +37,9 @@
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
-    "@stencil/core": "1.0.0-beta.5",
+    "@stencil/core": "1.0.0-beta.8",
     "@stencil/router": "^0.3.3",
-    "@stencil/sass": "^0.2.1",
+    "@stencil/sass": "^0.2.3",
     "@stencil/utils": "0.0.5",
     "@types/d3": "^5.7.2",
     "@types/jest": "23.3.14",
