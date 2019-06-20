@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method } from '@stencil/core';
+import { Component, h, Element, Prop, Method } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { LegendData } from '../../interfaces';
 import { objectAssignDeep, circularFind } from '../../utils';
@@ -31,10 +31,7 @@ export class LegendChart {
       : this.drawVerticalLegend();
   }
 
-  @Method()
-  callOnClick(
-    callOnClickChild: (data: { label: string; index: number }) => any,
-  ): void {
+  @Method() async callOnClick(callOnClickChild: (data: { label: string; index: number }) => any, ): Promise<any> {
     this._callOnClick = callOnClickChild;
   }
 

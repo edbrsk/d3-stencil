@@ -1,4 +1,4 @@
-import { Component, Prop, Element, Method } from '@stencil/core';
+import { Component, h, Prop, Element, Method } from '@stencil/core';
 import { Selection, select } from 'd3-selection';
 import { transition } from 'd3-transition';
 
@@ -11,14 +11,12 @@ export class TooltipChart {
   @Element() tooltipEl: HTMLElement;
   _tooltip: Selection<any, any, any, any>;
 
-  @Method()
-  tooltip(tooltip: any): void {
+  @Method() async tooltip(tooltip: any): Promise<any> {
     this._tooltip = select(tooltip);
     this._tooltip.style('text-align', this.align);
   }
 
-  @Method()
-  show(message: string, positions: number[]): void {
+  @Method() async show(message: string, positions: number[]): Promise<any> {
     this._tooltip.transition(transition().duration(200)).style('opacity', 0.9);
     this._tooltip
       .html(message)
@@ -26,8 +24,7 @@ export class TooltipChart {
       .style('top', `${positions[1] - 38}px`);
   }
 
-  @Method()
-  hide(): void {
+  @Method() async hide(): Promise<any> {
     this._tooltip.transition(transition().duration(500)).style('opacity', 0);
   }
 

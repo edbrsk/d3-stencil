@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method, State } from '@stencil/core';
+import { Component, h, Element, Prop, Method, State } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleBand, scaleBand, ScaleLinear, scaleLinear } from 'd3-scale';
@@ -50,8 +50,7 @@ export class HorizontalBarChart implements Graph<number[]> {
     this.drawChart();
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData<number[]>): void {
+  @Method() async updateGraphData(graphData: GraphData<number[]>): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
       graphData,
@@ -107,7 +106,7 @@ export class HorizontalBarChart implements Graph<number[]> {
       .attr(
         'transform',
         `translate(${this.graphDataMerged.barChart.margin.left}, ${
-          this.graphDataMerged.barChart.margin.top
+        this.graphDataMerged.barChart.margin.top
         })`,
       );
   }

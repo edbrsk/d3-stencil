@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method, Listen } from '@stencil/core';
+import { Component, h, Element, Prop, Method, Listen } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
 import { Resize } from '../../decorators';
@@ -8,7 +8,7 @@ import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '../../shared';
 
 @Component({
   tag: 'line-annotations-chart',
-  styleUrl: 'line-annotations-chart.scss',
+  styleUrl: 'line-annotations-chart.scss'
 })
 export class LineAnnotationsChart implements Graph {
   @Prop() graphData: GraphData;
@@ -29,15 +29,14 @@ export class LineAnnotationsChart implements Graph {
   componentWillLoad() {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
-      this.graphData,
+      this.graphData
     );
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData): void {
+  @Method() async   updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
-      graphData,
+      graphData
     );
 
     this.lineChartEl.updateGraphData(this.graphDataMerged);
@@ -47,7 +46,7 @@ export class LineAnnotationsChart implements Graph {
 
   lineChartAreReady(): void {
     this.lineChartEl = this.lineAnnotationsChartEl.getElementsByTagName(
-      'line-chart',
+      'line-chart'
     )[0];
 
     this.svg = select(this.lineChartEl.getElementsByTagName('svg')[0]);
@@ -60,7 +59,7 @@ export class LineAnnotationsChart implements Graph {
     this.svg.style(
       'height',
       this.svg.node().getBoundingClientRect().height +
-        this.graphDataMerged.lineAnnotationsChart.increaseHeight,
+      this.graphDataMerged.lineAnnotationsChart.increaseHeight
     );
 
     this.drawChart();
@@ -80,7 +79,7 @@ export class LineAnnotationsChart implements Graph {
 
       const allDataValues = originalGraphData.reduce(
         (acc: number[], data: number[]) => (acc = [...acc, ...data]),
-        [],
+        []
       );
 
       this.x = scaleOrdinal<number, number>()
@@ -88,8 +87,8 @@ export class LineAnnotationsChart implements Graph {
         .range(
           allDataValues.map(
             (_, index) =>
-              index * (this.width / (originalGraphData[0].length - 1)),
-          ),
+              index * (this.width / (originalGraphData[0].length - 1))
+          )
         );
 
       this.repositionXAxis();
@@ -104,7 +103,7 @@ export class LineAnnotationsChart implements Graph {
   reSetRoot(): void {
     this.root = select(
       this.lineAnnotationsChartEl.getElementsByTagName('line-chart')[0]
-        .children[0],
+        .children[0]
     );
 
     if (this.annotationsGroup) {
@@ -149,7 +148,7 @@ export class LineAnnotationsChart implements Graph {
       .attr('xlink:href', (data: number[]) =>
         data.length > 1
           ? this.graphDataMerged.lineAnnotationsChart.imagePathSomeAnnotations
-          : this.graphDataMerged.lineAnnotationsChart.imagePathOneAnnotation,
+          : this.graphDataMerged.lineAnnotationsChart.imagePathOneAnnotation
       )
       .on('mouseover', () => this.strokedashAnnotations(true))
       .on('mouseleave', () => this.strokedashAnnotations());
@@ -161,7 +160,7 @@ export class LineAnnotationsChart implements Graph {
 
     const stylesGuideLineAnnotation = {
       style: ['style', 'stroke: #0283B0; stroke-width: 3'],
-      strokeDasharray: ['stroke-dasharray', '5,5'],
+      strokeDasharray: ['stroke-dasharray', '5,5']
     };
 
     if (isMouseOver) {
@@ -175,11 +174,11 @@ export class LineAnnotationsChart implements Graph {
         .attr('y2', this.height)
         .attr(
           stylesGuideLineAnnotation.style[0],
-          stylesGuideLineAnnotation.style[1],
+          stylesGuideLineAnnotation.style[1]
         )
         .attr(
           stylesGuideLineAnnotation.strokeDasharray[0],
-          stylesGuideLineAnnotation.strokeDasharray[1],
+          stylesGuideLineAnnotation.strokeDasharray[1]
         );
     } else {
       this.root.select('.strokedash').remove();

@@ -1,5 +1,6 @@
 import {
   Component,
+  h,
   Element,
   Prop,
   Method,
@@ -68,8 +69,7 @@ export class LineChart implements Graph {
     this.handleOnRenderized();
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData): void {
+  @Method() async updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
       graphData,
@@ -302,7 +302,7 @@ export class LineChart implements Graph {
       );
     };
 
-    const toHide = (): void => this.tooltipEl.hide();
+    const toHide = (): any => this.tooltipEl.hide();
 
     if (this.tooltipEl) {
       isToShow ? toShow() : toHide();

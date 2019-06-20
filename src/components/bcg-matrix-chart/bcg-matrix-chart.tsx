@@ -1,4 +1,4 @@
-import { Component, Element, Prop, Method } from '@stencil/core';
+import { Component, h, Element, Prop, Method } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleLinear, scaleLinear } from 'd3-scale';
@@ -67,8 +67,7 @@ export class BGCMatrixChart implements Graph<BcgMatrix[]> {
     this.drawChart();
   }
 
-  @Method()
-  updateGraphData(graphData: GraphData<BcgMatrix[]>) {
+  @Method() async updateGraphData(graphData: GraphData<BcgMatrix[]>) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BCG },
       graphData,
@@ -124,7 +123,7 @@ export class BGCMatrixChart implements Graph<BcgMatrix[]> {
       .attr(
         'transform',
         `translate(${this.graphDataMerged.bcgMatrixChart.margin.left}, ${
-          this.graphDataMerged.bcgMatrixChart.margin.top
+        this.graphDataMerged.bcgMatrixChart.margin.top
         })`,
       );
   }
@@ -204,13 +203,13 @@ export class BGCMatrixChart implements Graph<BcgMatrix[]> {
     const bubble = pack()
       .size([
         this.width -
-          (this.graphDataMerged.bcgMatrixChart.margin.left +
-            this.graphDataMerged.bcgMatrixChart.margin.right) *
-            2,
+        (this.graphDataMerged.bcgMatrixChart.margin.left +
+          this.graphDataMerged.bcgMatrixChart.margin.right) *
+        2,
         this.height -
-          (this.graphDataMerged.bcgMatrixChart.margin.top +
-            this.graphDataMerged.bcgMatrixChart.margin.bottom) *
-            2,
+        (this.graphDataMerged.bcgMatrixChart.margin.top +
+          this.graphDataMerged.bcgMatrixChart.margin.bottom) *
+        2,
       ])
       .padding(1.5);
 
