@@ -37,7 +37,7 @@
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
-    "@stencil/core": "^1.1.1",
+    "@stencil/core": "^1.1.2",
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.0.1",
     "@stencil/utils": "0.0.5",
@@ -46,7 +46,7 @@
     "@types/puppeteer": "1.12.4",
     "coveralls": "^3.0.4",
     "cz-conventional-changelog": "^2.1.0",
-    "husky": "^2.5.0",
+    "husky": "^2.6.0",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
     "madge": "^3.4.4",
