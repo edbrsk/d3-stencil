@@ -1,7 +1,7 @@
 {
   "name": "d3-stencil",
   "private": false,
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Charts built with D3 and Stencil. Framework-agnostic, simple.",
   "homepage": "https://github.com/edgarordonez/d3-stencil",
   "keywords": [
@@ -31,13 +31,13 @@
     "circular": "npx madge -c --extensions ts ./src --ts-config ./tsconfig.json"
   },
   "dependencies": {
-    "d3": "^5.9.2",
+    "d3": "^5.9.7",
     "object-assign-deep": "^0.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.6.1",
     "@commitlint/config-conventional": "^7.6.0",
-    "@stencil/core": "^1.1.2",
+    "@stencil/core": "^1.1.4",
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.0.1",
     "@stencil/utils": "0.0.5",
