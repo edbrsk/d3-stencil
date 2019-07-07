@@ -26,7 +26,6 @@
     "test": "stencil test --spec --e2e --coverage",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "lint": "npx tslint --project tsconfig.json --fix",
-    "sonar": "node sonar-properties.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "circular": "npx madge -c --extensions ts ./src --ts-config ./tsconfig.json"
   },
