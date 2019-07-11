@@ -50,7 +50,7 @@
     "jest-cli": "^24.8.0",
     "madge": "^3.4.4",
     "prettier": "^1.18.2",
-    "puppeteer": "1.17.0",
+    "puppeteer": "1.18.1",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
     "workbox-build": "4.3.1"
