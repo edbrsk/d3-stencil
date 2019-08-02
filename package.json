@@ -1,7 +1,7 @@
 {
   "name": "d3-stencil",
   "private": false,
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Charts built with D3 and Stencil. Framework-agnostic, simple.",
   "homepage": "https://github.com/edgarordonez/d3-stencil",
   "keywords": [
