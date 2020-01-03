@@ -1,4 +1,3 @@
-[![CircleCI](https://circleci.com/gh/edgarordonez/d3-stencil/tree/master.svg?style=svg)](https://circleci.com/gh/edgarordonez/d3-stencil/tree/master)
 [![Coverage Status](https://coveralls.io/repos/github/edgarordonez/d3-stencil/badge.svg?branch=master)](https://coveralls.io/github/edgarordonez/d3-stencil?branch=master)
 
 [![D3-Stencil](https://d3-stencil.dev/img/d3-stencil_logo_main.png)](https://d3-stencil.dev)
