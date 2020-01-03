@@ -1,7 +1,7 @@
 {
   "name": "d3-stencil",
   "private": false,
-  "version": "2.2.2",
+  "version": "2.2.1",
   "description": "Charts built with D3 and Stencil. Framework-agnostic, simple.",
   "homepage": "https://github.com/edgarordonez/d3-stencil",
   "keywords": [
@@ -42,7 +42,7 @@
     "@stencil/utils": "0.0.5",
     "@types/d3": "^5.7.2",
     "@types/jest": "24.0.25",
-    "@types/puppeteer": "2.0.0",
+    "@types/puppeteer": "1.20.3",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
     "husky": "^3.1.0",
