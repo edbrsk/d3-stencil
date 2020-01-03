@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "src",
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "declaration": false,
@@ -14,7 +13,14 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@decorators/*": ["src/decorators/*"],
+      "@interfaces/*": ["src/interfaces/*"],
+      "@shared/*": ["src/shared/*"],
+      "@utils/*": ["src/utils/*"]
+    }
   },
   "include": ["./**/*", "types/jsx.d.ts"],
   "exclude": ["docs", "node_modules"]

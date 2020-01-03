@@ -3,16 +3,16 @@ import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleBand, scaleBand, ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { Graph, GraphData } from '../../interfaces';
-import { Resize } from '../../decorators';
+import { Graph, GraphData } from '@interfaces/index';
+import { Resize } from '@decorators/index';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
   objectAssignDeep
-} from '../../utils';
-import { DEFAULT_GRAPH_DATA_BAR } from '../../shared';
+} from '@utils/index';
+import { DEFAULT_GRAPH_DATA_BAR } from '@shared/index';
 
 @Component({
   tag: 'horizontal-bar-chart',
@@ -50,7 +50,8 @@ export class HorizontalBarChart implements Graph<number[]> {
     this.drawChart();
   }
 
-  @Method() async updateGraphData(graphData: GraphData<number[]>): Promise<any> {
+  @Method()
+  async updateGraphData(graphData: GraphData<number[]>): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BAR },
       graphData,

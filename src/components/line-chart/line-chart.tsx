@@ -12,16 +12,16 @@ import { max } from 'd3-array';
 import { ScaleOrdinal, scaleOrdinal, ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { Line, line } from 'd3-shape';
-import { Graph, GraphMeta, GraphData } from '../../interfaces';
-import { Resize } from '../../decorators';
+import { Graph, GraphMeta, GraphData } from '@interfaces/index';
+import { Resize } from '@decorators/index';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
   objectAssignDeep,
-} from '../../utils';
-import { DEFAULT_GRAPH_DATA_LINE } from '../../shared';
+} from '@utils/index';
+import { DEFAULT_GRAPH_DATA_LINE } from '@shared/index';
 
 @Component({
   tag: 'line-chart',
@@ -69,7 +69,8 @@ export class LineChart implements Graph {
     this.handleOnRenderized();
   }
 
-  @Method() async updateGraphData(graphData: GraphData): Promise<any> {
+  @Method()
+  async updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
       graphData,

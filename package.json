@@ -30,19 +30,19 @@
     "circular": "npx madge -c --extensions ts ./src --ts-config ./tsconfig.json"
   },
   "dependencies": {
-    "d3": "^5.14.2",
+    "d3": "^5.15.0",
     "object-assign-deep": "^0.4.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.2.0",
-    "@commitlint/config-conventional": "^8.2.0",
-    "@stencil/core": "^1.8.1",
+    "@commitlint/cli": "^8.3.3",
+    "@commitlint/config-conventional": "^8.3.3",
+    "@stencil/core": "^1.8.3",
     "@stencil/router": "1.0.1",
     "@stencil/sass": "^1.1.1",
     "@stencil/utils": "0.0.5",
     "@types/d3": "^5.7.2",
-    "@types/jest": "24.0.23",
-    "@types/puppeteer": "1.20.3",
+    "@types/jest": "24.0.25",
+    "@types/puppeteer": "2.0.0",
     "coveralls": "^3.0.9",
     "cz-conventional-changelog": "^3.0.2",
     "husky": "^3.1.0",

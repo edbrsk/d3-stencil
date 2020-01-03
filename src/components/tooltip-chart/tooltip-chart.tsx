@@ -11,12 +11,14 @@ export class TooltipChart {
   @Element() tooltipEl: HTMLElement;
   _tooltip: Selection<any, any, any, any>;
 
-  @Method() async tooltip(tooltip: any): Promise<any> {
+  @Method()
+  async tooltip(tooltip: any): Promise<any> {
     this._tooltip = select(tooltip);
     this._tooltip.style('text-align', this.align);
   }
 
-  @Method() async show(message: string, positions: number[]): Promise<any> {
+  @Method()
+  async show(message: string, positions: number[]): Promise<any> {
     this._tooltip.transition(transition().duration(200)).style('opacity', 0.9);
     this._tooltip
       .html(message)
@@ -24,7 +26,8 @@ export class TooltipChart {
       .style('top', `${positions[1] - 38}px`);
   }
 
-  @Method() async hide(): Promise<any> {
+  @Method()
+  async hide(): Promise<any> {
     this._tooltip.transition(transition().duration(500)).style('opacity', 0);
   }
 
