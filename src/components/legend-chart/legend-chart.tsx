@@ -1,8 +1,8 @@
 import { Component, h, Element, Prop, Method } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
-import { LegendData } from '../../interfaces';
-import { objectAssignDeep, circularFind } from '../../utils';
-import { DEFAULT_LEGEND_DATA } from '../../shared';
+import { LegendData } from '@interfaces/index';
+import { objectAssignDeep, circularFind } from '@utils/index';
+import { DEFAULT_LEGEND_DATA } from '@shared/index';
 
 @Component({
   tag: 'legend-chart',
@@ -31,7 +31,8 @@ export class LegendChart {
       : this.drawVerticalLegend();
   }
 
-  @Method() async callOnClick(callOnClickChild: (data: { label: string; index: number }) => any, ): Promise<any> {
+  @Method()
+  async callOnClick(callOnClickChild: (data: { label: string; index: number }) => any, ): Promise<any> {
     this._callOnClick = callOnClickChild;
   }
 

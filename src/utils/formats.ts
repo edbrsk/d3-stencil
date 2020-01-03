@@ -1,6 +1,6 @@
 import { format } from 'd3-format';
 import { timeFormat } from 'd3-time-format';
-import { Formats } from '../interfaces';
+import { Formats } from '@interfaces/index';
 import { currencyFormatter } from './currency-formatter';
 
 const formats: {

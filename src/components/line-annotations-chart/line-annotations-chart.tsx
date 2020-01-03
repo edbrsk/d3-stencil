@@ -1,10 +1,10 @@
 import { Component, h, Element, Prop, Method, Listen } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
-import { Resize } from '../../decorators';
-import { objectAssignDeep } from '../../utils';
-import { Graph, GraphData } from '../../interfaces';
-import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '../../shared';
+import { Resize } from '@decorators/index';
+import { objectAssignDeep } from '@utils/index';
+import { Graph, GraphData } from '@interfaces/index';
+import { DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE } from '@shared/index';
 
 @Component({
   tag: 'line-annotations-chart',
@@ -33,7 +33,8 @@ export class LineAnnotationsChart implements Graph {
     );
   }
 
-  @Method() async   updateGraphData(graphData: GraphData): Promise<any> {
+  @Method()
+  async updateGraphData(graphData: GraphData): Promise<any> {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
       graphData
