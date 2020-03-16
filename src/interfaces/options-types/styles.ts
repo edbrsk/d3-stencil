@@ -1,6 +1,6 @@
-export type Styles = Partial<{
-  width: string;
-  height: string;
-  margin: string;
-  padding: string;
-}>;
+export type Styles = {
+  width?: string;
+  height?: string;
+  margin?: string;
+  padding?: string;
+};

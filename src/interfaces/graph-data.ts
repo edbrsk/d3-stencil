@@ -9,15 +9,15 @@ import {
   BcgMatrixChart,
 } from '@interfaces/charts-options';
 
-export type GraphData<T = number[][]> = Partial<{
-  pieChart: PieChart;
-  barChart: BarChart;
-  lineChart: LineChart;
-  lineAnnotationsChart: LineAnnotationsChart;
-  bcgMatrixChart: BcgMatrixChart;
-  styles: Styles;
-  colors: string[];
-  labels: string[] | number[];
-  data: Data<T>;
-  hasData: HasData;
-}>;
+export type GraphData<T = number[][]> = {
+  pieChart?: PieChart;
+  barChart?: BarChart;
+  lineChart?: LineChart;
+  lineAnnotationsChart?: LineAnnotationsChart;
+  bcgMatrixChart?: BcgMatrixChart;
+  styles?: Styles;
+  colors?: string[];
+  labels?: string[] | number[];
+  data?: Data<T>;
+  hasData?: HasData;
+};

@@ -1,6 +1,6 @@
 import { Axis, Margin } from './../options-types';
 
-export type LineChart = Partial<{
-  axis: Axis;
-  margin: Margin;
-}>;
+export type LineChart = {
+  axis?: Axis;
+  margin?: Margin;
+};
