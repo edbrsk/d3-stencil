@@ -6,7 +6,7 @@ export {
   LegendData,
   Formats,
   HasData,
-} from '@interfaces/index';
+} from './interfaces/index';
 export {
   BcgMatrix,
-} from '@interfaces/data-types';
+} from './interfaces/data-types';

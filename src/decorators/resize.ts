@@ -1,4 +1,4 @@
-import { GraphMeta } from '@interfaces/index';
+import { GraphMeta } from '../interfaces/index';
 
 const resize = (graph: { axisData: boolean } = { axisData: false }) => {
   const getAxisData = (

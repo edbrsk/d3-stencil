@@ -1,10 +1,10 @@
-import { GraphData, LegendData } from '@interfaces/index';
-import { BcgMatrix } from '@interfaces/data-types';
+import { GraphData, LegendData } from '../interfaces/index';
+import { BcgMatrix } from '../interfaces/data-types';
 import {
   hasDataIsNotEmpty,
   hasDataBCGMatrixIsNotEmpty,
   hasDataValidOnAnnotationsChart,
-} from '@utils/index';
+} from '../utils/index';
 
 export const DEFAULT_GRAPH_DATA_PIE: GraphData = {
   pieChart: {

@@ -1,13 +1,13 @@
-import { Data } from '@interfaces/data-types';
-import { Styles } from '@interfaces/options-types';
-import { HasData } from '@interfaces/has-data';
+import { Data } from '../interfaces/data-types';
+import { Styles } from '../interfaces/options-types';
+import { HasData } from '../interfaces/has-data';
 import {
   PieChart,
   BarChart,
   LineChart,
   LineAnnotationsChart,
   BcgMatrixChart,
-} from '@interfaces/charts-options';
+} from '../interfaces/charts-options';
 
 export type GraphData<T = number[][]> = {
   pieChart?: PieChart;

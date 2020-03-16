@@ -12,15 +12,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
-    "jsxFactory": "h",
-    "skipLibCheck": true,
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@decorators/*": ["src/decorators/*"],
-      "@interfaces/*": ["src/interfaces/*"],
-      "@shared/*": ["src/shared/*"],
-      "@utils/*": ["src/utils/*"]
-    }
+    "jsxFactory": "h"
   },
   "include": ["./**/*", "types/jsx.d.ts"],
   "exclude": ["docs", "node_modules"]

@@ -1,5 +1,5 @@
-import { GraphData, HasData } from '@interfaces/index';
-import { BcgMatrix } from '@interfaces/data-types';
+import { GraphData, HasData } from '../interfaces/index';
+import { BcgMatrix } from '../interfaces/data-types';
 
 const THROW_ERROR = (): Error => {
   throw new Error(`The data injected isn't valid.`);

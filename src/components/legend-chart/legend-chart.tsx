@@ -1,8 +1,8 @@
 import { Component, h, Element, Prop, Method } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
-import { LegendData } from '@interfaces/index';
-import { objectAssignDeep, circularFind } from '@utils/index';
-import { DEFAULT_LEGEND_DATA } from '@shared/index';
+import { LegendData } from '../../interfaces/index';
+import { objectAssignDeep, circularFind } from '../../utils/index';
+import { DEFAULT_LEGEND_DATA } from '../../shared/index';
 
 @Component({
   tag: 'legend-chart',

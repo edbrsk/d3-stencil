@@ -1,4 +1,4 @@
-import { Formats as FORMATS } from '@interfaces/index';
+import { Formats as FORMATS } from '../interfaces/index';
 import { Formats } from './formats';
 
 export const formatter = (

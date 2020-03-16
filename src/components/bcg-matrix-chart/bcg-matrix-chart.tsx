@@ -4,17 +4,17 @@ import { max } from 'd3-array';
 import { ScaleLinear, scaleLinear } from 'd3-scale';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { pack, hierarchy, HierarchyCircularNode } from 'd3-hierarchy';
-import { Graph, GraphData } from '@interfaces/index';
-import { BcgMatrix } from '@interfaces/data-types';
-import { Resize } from '@decorators/index';
+import { Graph, GraphData } from '../../interfaces/index';
+import { BcgMatrix } from '../../interfaces/data-types';
+import { Resize } from '../../decorators/index';
 import {
   initTooltipIfExists,
   initLegendIfExists,
   formatter,
   circularFind,
   objectAssignDeep,
-} from '@utils/index';
-import { DEFAULT_GRAPH_DATA_BCG } from '@shared/index';
+} from '../../utils/index';
+import { DEFAULT_GRAPH_DATA_BCG } from '../../shared/index';
 
 @Component({
   tag: 'bcg-matrix-chart',
