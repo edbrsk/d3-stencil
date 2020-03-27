@@ -4,7 +4,7 @@ import { GraphMeta } from './graph-meta';
 export interface Graph<T = number[][]> {
   graphData: GraphData<T>;
   graphDataMerged: GraphData<T>;
-  updateGraphData(graphData: GraphData<T>): void;
+  updateGraphData(newGraphData: GraphData<T>): void;
   drawChart(): GraphMeta<T> | void;
   hasData(): Error | boolean;
   reSetRoot(): void;

@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop, Method, State } from '@stencil/core';
+import { Component, h, Element, Prop, Watch, State } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { Arc, arc, PieArcDatum, pie } from 'd3-shape';
 import { Graph, GraphData } from '@interfaces/index';
@@ -53,11 +53,11 @@ export class PieChart implements Graph<number[]> {
     this.drawChart();
   }
 
-  @Method()
-  async updateGraphData(graphData: GraphData<number[]>): Promise<any> {
+  @Watch('graphData')
+  updateGraphData(newGraphData: GraphData<number[]>) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_PIE },
-      graphData,
+      newGraphData,
     );
 
     this.drawChart();

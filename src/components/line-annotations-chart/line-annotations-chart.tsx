@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop, Method, Listen } from '@stencil/core';
+import {Component, h, Element, Prop, Listen, Watch} from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { ScaleOrdinal, scaleOrdinal } from 'd3-scale';
 import { Resize } from '@decorators/index';
@@ -33,14 +33,14 @@ export class LineAnnotationsChart implements Graph {
     );
   }
 
-  @Method()
-  async updateGraphData(graphData: GraphData): Promise<any> {
+  @Watch('graphData')
+  updateGraphData(newGraphData: GraphData) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_ANNOTATIONS_LINE },
-      graphData
+      newGraphData
     );
 
-    this.lineChartEl.updateGraphData(this.graphDataMerged);
+    this.lineChartEl.graphData = this.graphDataMerged;
 
     this.drawChart();
   }

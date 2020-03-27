@@ -3,7 +3,7 @@ import {
   h,
   Element,
   Prop,
-  Method,
+  Watch,
   Event,
   EventEmitter,
 } from '@stencil/core';
@@ -69,11 +69,11 @@ export class LineChart implements Graph {
     this.handleOnRenderized();
   }
 
-  @Method()
-  async updateGraphData(graphData: GraphData): Promise<any> {
+  @Watch('graphData')
+  updateGraphData(newGraphData: GraphData) {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_LINE },
-      graphData,
+      newGraphData,
     );
 
     this.drawChart();

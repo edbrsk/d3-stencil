@@ -1,4 +1,4 @@
-import { Component, h, Element, Prop, Method } from '@stencil/core';
+import { Component, h, Element, Prop, Watch } from '@stencil/core';
 import { Selection, select, event } from 'd3-selection';
 import { max } from 'd3-array';
 import { ScaleLinear, scaleLinear } from 'd3-scale';
@@ -67,11 +67,11 @@ export class BGCMatrixChart implements Graph<BcgMatrix[]> {
     this.drawChart();
   }
 
-  @Method()
-  async updateGraphData(graphData: GraphData<BcgMatrix[]>) {
+  @Watch('graphData')
+  updateGraphData(newGraphData: GraphData<BcgMatrix[]>): void {
     this.graphDataMerged = objectAssignDeep(
       { ...DEFAULT_GRAPH_DATA_BCG },
-      graphData,
+      newGraphData,
     );
 
     this.drawChart();
