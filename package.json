@@ -50,7 +50,7 @@
     "husky": "^4.2.3",
     "jest": "24.9.0",
     "jest-cli": "24.9.0",
-    "madge": "^3.8.0",
+    "madge": "^4.0.1",
     "prettier": "^2.0.2",
     "puppeteer": "2.1.1",
     "tslint": "^6.1.0",
