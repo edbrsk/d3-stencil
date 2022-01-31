@@ -1,3 +1,5 @@
+# This repository is archived, and not longer maintained. Contact with me if you want to take the ownership, thanks.
+
 [![Coverage Status](https://coveralls.io/repos/github/edgarordonez/d3-stencil/badge.svg?branch=master)](https://coveralls.io/github/edgarordonez/d3-stencil?branch=master)
 
 [![D3-Stencil](https://d3-stencil.dev/img/d3-stencil_logo_main.png)](https://d3-stencil.dev)
